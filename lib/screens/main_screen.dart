@@ -14,25 +14,37 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        height: 200,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              buildCard(),
-              SizedBox(width: 12),
-              buildCard(),
-              SizedBox(width: 12),
-              buildCard(),
-              SizedBox(width: 12),
-              buildCard(),
-              SizedBox(width: 12),
-            ],
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.list_rounded),
+            ),
+            Text(widget.title),
+          ],
         ),
+      ),
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Lançamentos',
+              style: TextStyle(),
+              textScaleFactor: 3.0,
+            ),
+          ),
+          SizedBox(
+            height: 200,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [buildCarrosel()],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -41,5 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 150,
         height: 200,
         color: Colors.red,
+      );
+  Widget buildCarrosel() => Row(
+        children: [
+          buildCard(),
+          const SizedBox(width: 12),
+          buildCard(),
+          const SizedBox(width: 12),
+          buildCard(),
+          const SizedBox(width: 12),
+          buildCard(),
+          const SizedBox(width: 12),
+          buildCard(),
+          const SizedBox(width: 12),
+        ],
       );
 }
