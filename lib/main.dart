@@ -1,8 +1,9 @@
 import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:cinegraw_app/components/search_film_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const SearchFilmScreen());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'GRAW'),
     );
