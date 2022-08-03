@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/components/film_carousel.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -10,6 +11,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void _gotoSearchFilm(BuildContext context) {
+    Navigator.pushNamed(context, '/buscar');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +29,18 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(widget.title),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              _gotoSearchFilm(context);
+            },
+          )
+        ],
       ),
       body: Column(
-        children: [
-          const Padding(
+        children: const [
+          Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               'Lançamentos',
@@ -39,33 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 200,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [buildCarrosel()],
-              ),
+              child: FilmCarousel(),
             ),
           ),
         ],
       ),
     );
   }
-
-  Widget buildCard() => Container(
-        width: 150,
-        height: 200,
-        color: Colors.red,
-      );
-  Widget buildCarrosel() => Row(
-        children: [
-          buildCard(),
-          const SizedBox(width: 12),
-          buildCard(),
-          const SizedBox(width: 12),
-          buildCard(),
-          const SizedBox(width: 12),
-          buildCard(),
-          const SizedBox(width: 12),
-          buildCard(),
-          const SizedBox(width: 12),
-        ],
-      );
 }

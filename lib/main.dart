@@ -1,9 +1,9 @@
 import 'package:cinegraw_app/screens/main_screen.dart';
+import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cinegraw_app/components/search_film_screen.dart';
 
 void main() {
-  runApp(const SearchFilmScreen());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'GRAW'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(title: "GRAW"),
+        '/buscar': (context) => const SearchFilmScreen(title: "Search a film")
+      },
     );
   }
 }

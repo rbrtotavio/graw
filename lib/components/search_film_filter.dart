@@ -25,7 +25,13 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
     "2022",
     "2021",
     "2020",
-    "2019"
+    "2019",
+    "2017",
+    "2016",
+    "2015",
+    "2014",
+    "2013",
+    "2012"
   ];
 
   String diretor = "Diretor";
@@ -55,10 +61,10 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
 
   void buscar_filme() {
     var filtroFilme = {
-      "nomefilme": nomeFilme,
-      "genero": genero,
-      "lancamento": lancamento,
-      "diretor": diretor
+      "nomefilme": nomeFilme != "" ? nomeFilme : null,
+      "genero": genero != "Gênero" ? genero : null,
+      "lancamento": lancamento != "Lançamento" ? lancamento : null,
+      "diretor": diretor != "Diretor" ? diretor : null
     };
     print(filtroFilme);
   }
@@ -99,7 +105,7 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
 
   Widget filtroMenu(String holder, String categoria, List<String> opcoes) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         vertical: 10,
         horizontal: 3,
       ),
