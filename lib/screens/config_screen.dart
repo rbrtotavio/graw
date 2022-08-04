@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cinegraw_app/screens/main_screen.dart';
 
 class ConfigPage extends StatefulWidget {
   const ConfigPage({Key? key}) : super(key: key);
@@ -68,7 +67,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       children: [
                         const Text(
                           "Modo noturno",
-                          style: const TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 20),
                         ),
                         Switch(
                           value: switchButton,

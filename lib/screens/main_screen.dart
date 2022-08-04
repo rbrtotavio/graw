@@ -1,4 +1,3 @@
-import 'package:cinegraw_app/components/film_carousel.dart';
 import 'package:flutter/material.dart';
 
 import '../components/carousel_sector.dart';
