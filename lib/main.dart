@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),
-        '/buscar': (context) => const SearchFilmScreen(title: "Search a film"),
+        '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
         '/config': (context) => const ConfigPage(),
       },
     );
