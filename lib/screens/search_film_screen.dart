@@ -18,10 +18,6 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        // TODO: a discutir
-        primarySwatch: Colors.blueGrey,
-      ),
       home: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -38,7 +34,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
         ),
         body: Column(
           children: const [
-            SearchFilmFilter(),
+            SearchFilmFilters(),
           ],
         ),
       ),

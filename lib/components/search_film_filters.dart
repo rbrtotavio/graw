@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SearchFilmFilter extends StatefulWidget {
-  const SearchFilmFilter({Key? key}) : super(key: key);
+class SearchFilmFilters extends StatefulWidget {
+  const SearchFilmFilters({Key? key}) : super(key: key);
 
   @override
-  State<SearchFilmFilter> createState() => _SearchFilmFilterState();
+  State<SearchFilmFilters> createState() => _SearchFilmFiltersState();
 }
 
-class _SearchFilmFilterState extends State<SearchFilmFilter> {
+class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   String nomeFilme = "";
 
   String genero = "Gênero";
