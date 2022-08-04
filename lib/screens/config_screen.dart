@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cinegraw_app/screens/main_screen.dart';
 
 class ConfigPage extends StatefulWidget {
   const ConfigPage({Key? key}) : super(key: key);
@@ -8,28 +9,47 @@ class ConfigPage extends StatefulWidget {
 }
 
 class _ConfigPageState extends State<ConfigPage> {
+  void _gotoReturn(BuildContext context) {
+    Navigator.pop(context);
+  }
+  //void _gotoMainScreen(BuildContext context) {
+  //  Navigator.pushNamed(context, '/');
+  //}
+
   bool switchButton = false;
   var idiomas = ["português", 'inglês', "espanhol"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Column(
         children: [
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(10),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                _gotoReturn(context);
+              },
+            ),
+          ),
           Expanded(
             flex: 1,
             child: Container(
               alignment: Alignment.bottomLeft,
               padding: const EdgeInsets.all(20),
               color: Colors.grey,
-              child: Text(
+              child: const Text(
                 "Configurações",
                 style: TextStyle(fontSize: 25, color: Colors.white),
               ),
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
+              color: Colors.white,
               padding: const EdgeInsets.all(20),
               child: Expanded(
                 child: Column(

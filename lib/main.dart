@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:cinegraw_app/screens/search_film_screen.dart';
+import 'package:cinegraw_app/screens/config_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),
-        '/buscar': (context) => const SearchFilmScreen(title: "Search a film")
+        '/buscar': (context) => const SearchFilmScreen(title: "Search a film"),
+        '/config': (context) => const ConfigPage(),
       },
     );
   }
