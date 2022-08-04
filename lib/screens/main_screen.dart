@@ -1,6 +1,8 @@
 import 'package:cinegraw_app/components/film_carousel.dart';
 import 'package:flutter/material.dart';
 
+import '../components/carousel_sector.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -85,23 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Column(
+      body: ListView(
         children: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Lançamentos',
-              style: TextStyle(),
-              textScaleFactor: 3.0,
-            ),
-          ),
-          SizedBox(
-            height: 200,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: FilmCarousel(),
-            ),
-          ),
+          CarouselSector(sectorTitle: "Lançamentos"),
+          CarouselSector(sectorTitle: "Populares"),
+          CarouselSector(sectorTitle: "Ranking de Filmes"),
+          CarouselSector(sectorTitle: "Filmes por Gênero"),
         ],
       ),
     );

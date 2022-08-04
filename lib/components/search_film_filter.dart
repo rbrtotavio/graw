@@ -66,7 +66,6 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
       "lancamento": lancamento != "Lançamento" ? lancamento : null,
       "diretor": diretor != "Diretor" ? diretor : null
     };
-    print(filtroFilme);
   }
 
   Widget searchField() {
@@ -117,8 +116,8 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
         value: holder,
         isExpanded: true,
         elevation: 16,
-        underline: SizedBox(),
-        icon: SizedBox(),
+        underline: const SizedBox(),
+        icon: const SizedBox(),
         onChanged: (String? newValue) {
           setState(() {
             switch (categoria) {
@@ -147,22 +146,20 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            searchField(),
-            Row(
-              children: [
-                Expanded(flex: 10, child: filtroMenu(genero, "G", generos)),
-                Expanded(
-                    flex: 9, child: filtroMenu(lancamento, "L", lancamentos)),
-                Expanded(flex: 11, child: filtroMenu(diretor, "D", diretores)),
-              ],
-            )
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          searchField(),
+          Row(
+            children: [
+              Expanded(flex: 10, child: filtroMenu(genero, "G", generos)),
+              Expanded(
+                  flex: 9, child: filtroMenu(lancamento, "L", lancamentos)),
+              Expanded(flex: 11, child: filtroMenu(diretor, "D", diretores)),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -5,10 +5,18 @@ class FilmCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 200,
-      color: Colors.red,
+    return InkWell(
+      onTap: () {
+        //TODO: Rota para a Página do filme
+      },
+      child: AnimatedContainer(
+        duration: const Duration(),
+        child: Ink(
+          width: 150,
+          height: 200,
+          color: Colors.blueGrey,
+        ),
+      ),
     );
   }
 }
