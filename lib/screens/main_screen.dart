@@ -15,6 +15,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/buscar');
   }
 
+  void _gotoConfigPage(BuildContext context) {
+    Navigator.pushNamed(context, '/config');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +26,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            IconButton(
-              onPressed: () {},
+            /*IconButton(
+              onPressed: () {
+                _gotoConfigPage(context);
+              },
               icon: const Icon(Icons.list_rounded),
-            ),
+            ),*/
             Text(widget.title),
           ],
         ),
@@ -37,6 +43,47 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           )
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            Container(
+              color: Colors.grey,
+              height: 200,
+              alignment: Alignment.bottomLeft,
+              child: IconButton(
+                iconSize: 120,
+                color: Colors.white,
+                icon: const Icon(Icons.account_circle),
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(height: 50),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Login/Registrar-se",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 26, 26, 26), fontSize: 27),
+                  )),
+            ),
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () {
+                    _gotoConfigPage(context);
+                  },
+                  child: const Text(
+                    "Configurações",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 26, 26, 26), fontSize: 27),
+                  )),
+            )
+          ],
+        ),
       ),
       body: Column(
         children: const [
