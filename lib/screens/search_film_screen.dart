@@ -19,7 +19,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
   }
 
   void searchFilm(Map<String, dynamic> filtroFilme) {
-    print(filtroFilme);
+    //TODO: Implementar função de procurar filme
     setState(() {
       quantCards = filtroFilme['quantidade'] as int;
     });
@@ -28,6 +28,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: Scaffold(
         appBar: AppBar(
           title: Row(

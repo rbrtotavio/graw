@@ -13,7 +13,7 @@ class _LoginRegisterState extends State<LoginRegister> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyHomePage(
+            builder: (context) => const MyHomePage(
                   title: 'GRAW',
                 )));
   }
@@ -22,7 +22,7 @@ class _LoginRegisterState extends State<LoginRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Container(
@@ -35,11 +35,11 @@ class _LoginRegisterState extends State<LoginRegister> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Login",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                       //decoration: TextDecoration.underline
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 50,
                   ),
                   TextButton(
@@ -55,42 +55,42 @@ class _LoginRegisterState extends State<LoginRegister> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterPage()));
+                                builder: (context) => const RegisterPage()));
                       },
-                      child: Text("Registrar-se",
+                      child: const Text("Registrar-se",
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromARGB(255, 82, 82, 82))))
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: const InputDecoration(labelText: 'Nome'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Senha'),
+              decoration: const InputDecoration(labelText: 'Senha'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "Esqueci minha senha",
                   style: TextStyle(color: Color.fromARGB(255, 82, 82, 82)),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "LOGIN",
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ))
@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyHomePage(
+            builder: (context) => const MyHomePage(
                   title: 'GRAW',
                 )));
   }
@@ -122,7 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
             Container(
@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -144,16 +144,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginRegister()));
+                                builder: (context) => const LoginRegister()));
                       },
-                      child: Text("Login",
+                      child: const Text("Login",
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromARGB(255, 82, 82, 82)))),
-                  SizedBox(
+                  const SizedBox(
                     width: 50,
                   ),
-                  Text(
+                  const Text(
                     "Registrar-se",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -164,36 +164,37 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: const InputDecoration(labelText: 'Nome'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'E-mail válido'),
+              decoration: const InputDecoration(labelText: 'E-mail válido'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Senha'),
+              decoration: const InputDecoration(labelText: 'Senha'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Confirma sua senha'),
+              decoration:
+                  const InputDecoration(labelText: 'Confirma sua senha'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   "REGISTRAR-SE",
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ))

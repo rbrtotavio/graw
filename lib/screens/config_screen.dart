@@ -12,9 +12,6 @@ class _ConfigPageState extends State<ConfigPage> {
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
-  //void _gotoMainScreen(BuildContext context) {
-  //  Navigator.pushNamed(context, '/');
-  //}
 
   bool switchButton = false;
   var idiomas = ["português", 'inglês', "espanhol"];
