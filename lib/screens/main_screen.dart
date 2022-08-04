@@ -19,6 +19,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/config');
   }
 
+  void _gotoLoginRegister(BuildContext context) {
+    Navigator.pushNamed(context, '/login_register');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _gotoLoginRegister(context);
+                  },
                   child: const Text(
                     "Login/Registrar-se",
                     style: TextStyle(
