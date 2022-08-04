@@ -18,7 +18,6 @@ class FilmCarousel extends StatelessWidget {
         FilmCard(),
         SizedBox(width: 12),
         FilmCard(),
-        SizedBox(width: 12),
       ],
     );
   }

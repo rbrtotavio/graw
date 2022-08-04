@@ -54,19 +54,19 @@ class _ConfigPageState extends State<ConfigPage> {
               child: Expanded(
                 child: Column(
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "configurações gerais",
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "Modo noturno",
                           style: TextStyle(fontSize: 20),
                         ),
@@ -75,42 +75,42 @@ class _ConfigPageState extends State<ConfigPage> {
                           onChanged: (value) {
                             setState(() {
                               switchButton = value;
-                              print(switchButton);
                             });
                           },
-                          activeTrackColor: Color.fromARGB(255, 33, 188, 28),
+                          activeTrackColor:
+                              const Color.fromARGB(255, 33, 188, 28),
                           activeColor: Colors.green,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "idiomas",
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Acessibilidade",
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
-                      children: [
+                      children: const [
                         Text(
                           "Tamanho da fonte",
                           style: TextStyle(fontSize: 20),

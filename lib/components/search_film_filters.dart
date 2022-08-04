@@ -123,8 +123,8 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
         value: holder,
         isExpanded: true,
         elevation: 16,
-        underline: SizedBox(),
-        icon: SizedBox(),
+        underline: const SizedBox(),
+        icon: const SizedBox(),
         onChanged: (String? newValue) {
           setState(() {
             switch (categoria) {
@@ -153,22 +153,20 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            searchField(),
-            Row(
-              children: [
-                Expanded(flex: 10, child: menuFilter(genero, "G", generos)),
-                Expanded(
-                    flex: 9, child: menuFilter(lancamento, "L", lancamentos)),
-                Expanded(flex: 11, child: menuFilter(diretor, "D", diretores)),
-              ],
-            )
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          searchField(),
+          Row(
+            children: [
+              Expanded(flex: 10, child: menuFilter(genero, "G", generos)),
+              Expanded(
+                  flex: 9, child: menuFilter(lancamento, "L", lancamentos)),
+              Expanded(flex: 11, child: menuFilter(diretor, "D", diretores)),
+            ],
+          )
+        ],
       ),
     );
   }
