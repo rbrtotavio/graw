@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cinegraw_app/screens/main_screen.dart';
 
+//TODO: resolver erro do expanded
 class ConfigPage extends StatefulWidget {
   const ConfigPage({Key? key}) : super(key: key);
 
