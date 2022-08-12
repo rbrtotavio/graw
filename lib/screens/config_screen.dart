@@ -34,8 +34,7 @@ class _ConfigPageState extends State<ConfigPage> {
               },
             ),
           ),
-          Expanded(
-            flex: 1,
+          Flexible(
             child: Container(
               alignment: Alignment.bottomLeft,
               padding: const EdgeInsets.all(20),
@@ -46,80 +45,76 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
             ),
           ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(20),
-              child: Expanded(
-                child: Column(
+          Container(
+            height: 500,
+            color: Colors.white,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "configurações gerais",
+                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Row(
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "configurações gerais",
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
-                      ),
+                    Text(
+                      "Modo noturno",
+                      style: TextStyle(fontSize: 20),
                     ),
-                    SizedBox(
-                      height: 25,
+                    Switch(
+                      value: switchButton,
+                      onChanged: (value) {
+                        setState(() {
+                          switchButton = value;
+                          print(switchButton);
+                        });
+                      },
+                      activeTrackColor: Color.fromARGB(255, 33, 188, 28),
+                      activeColor: Colors.green,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          "Modo noturno",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Switch(
-                          value: switchButton,
-                          onChanged: (value) {
-                            setState(() {
-                              switchButton = value;
-                              print(switchButton);
-                            });
-                          },
-                          activeTrackColor: Color.fromARGB(255, 33, 188, 28),
-                          activeColor: Colors.green,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "idiomas",
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Acessibilidade",
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Tamanho da fonte",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    )
                   ],
                 ),
-              ),
+                SizedBox(
+                  height: 25,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "idiomas",
+                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Acessibilidade",
+                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Tamanho da fonte",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                )
+              ],
             ),
           )
         ],
