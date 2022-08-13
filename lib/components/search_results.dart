@@ -21,10 +21,9 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: const ScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       primary: false,
-      padding: const EdgeInsets.all(20),
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 2,
