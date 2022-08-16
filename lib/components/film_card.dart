@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/models/film.dart';
 import 'package:flutter/material.dart';
 
 class FilmCard extends StatelessWidget {
@@ -7,7 +8,11 @@ class FilmCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //TODO: Rota para a Página do filme
+        Navigator.pushNamed(
+          context,
+          '/film',
+          arguments: Film("teste"),
+        );
       },
       child: AnimatedContainer(
         duration: const Duration(),

@@ -14,7 +14,7 @@ class MovieDBApiRepository {
   }
 
   Film getFilm(int idFilm) {
-    return Film();
+    return Film("teste");
   }
 
   List<Review> getReviews(int idFilm) {
