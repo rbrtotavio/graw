@@ -30,12 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            /*IconButton(
-              onPressed: () {
-                _gotoConfigPage(context);
-              },
-              icon: const Icon(Icons.list_rounded),
-            ),*/
             Text(widget.title),
           ],
         ),
