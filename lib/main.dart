@@ -4,8 +4,11 @@ import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:cinegraw_app/screens/config_screen.dart';
 import 'package:cinegraw_app/screens/login_register.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
+
   runApp(const MyApp());
 }
 
