@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cinegraw_app/models/film.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,16 +11,12 @@ class MovieDBApiRepository {
 
   MovieDBApiRepository() {}
 
-  List<Film> getFilms(Map<String, dynamic> filters) {
-    List<Film> filmes = <Film>[];
-    return filmes;
-  }
-
-  Future<List<FilmMovieDB>> getTrendingFilms() async {
+  Future<List<FilmMovieDB>> getPopularFilms() async {
     List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
 
-    final response = await http
-        .get(Uri.parse("$_ApiUrl/trending/movie/week?api_key=$_ApiKey"));
+    Uri api =
+        Uri.parse("$_ApiUrl/movie/popular?api_key=$_ApiKey&language=pt-BR");
+    final response = await http.get(api);
 
     if (response.statusCode == 200) {
       Map<String, dynamic> resultado = jsonDecode(response.body);
@@ -33,10 +28,6 @@ class MovieDBApiRepository {
     }
 
     return filmsApi;
-  }
-
-  Film getFilm(int idFilm) {
-    return Film("teste");
   }
 
   List<Review> getReviews(int idFilm) {

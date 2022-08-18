@@ -1,51 +1,51 @@
 class FilmMovieDB {
   final int filmId;
-  final String titulo;
-  final String tituloOriginal;
-  final String sinopse;
-  final DateTime dataLancamento;
-  final bool conteudoAdulto;
-  final String imagemFundoPath;
-  final String imagemPosterPath;
-  final List<int> generosIds;
-  final double popularidade;
-  final double nota;
-  final int qtdVotos;
-  final String linguagemOriginal;
-  final bool video;
+  final String title;
+  final String originalTitle;
+  final String overview;
+  final DateTime releaseDate;
+  final bool isAdultContent;
+  final String coverImagePath;
+  final String cardImagePath;
+  final List<int> genresIds;
+  final double popularity;
+  final double average;
+  final int voteCount;
+  final String originalLang;
+  final bool hasVideo;
 
   FilmMovieDB({
     required this.filmId,
-    required this.titulo,
-    required this.tituloOriginal,
-    required this.sinopse,
-    required this.dataLancamento,
-    required this.conteudoAdulto,
-    required this.imagemFundoPath,
-    required this.imagemPosterPath,
-    required this.generosIds,
-    required this.popularidade,
-    required this.nota,
-    required this.qtdVotos,
-    required this.linguagemOriginal,
-    required this.video,
+    required this.title,
+    required this.originalTitle,
+    required this.overview,
+    required this.releaseDate,
+    required this.isAdultContent,
+    required this.coverImagePath,
+    required this.cardImagePath,
+    required this.genresIds,
+    required this.popularity,
+    required this.average,
+    required this.voteCount,
+    required this.originalLang,
+    required this.hasVideo,
   });
 
   factory FilmMovieDB.fromJson(Map<String, dynamic> json) {
     return FilmMovieDB(
         filmId: json["id"],
-        titulo: json["title"],
-        tituloOriginal: json["original_title"],
-        sinopse: json["overview"],
-        dataLancamento: DateTime.parse(json["release_date"]),
-        conteudoAdulto: json["adult"],
-        imagemFundoPath: json["backdrop_path"],
-        imagemPosterPath: json["poster_path"],
-        generosIds: json["genre_ids"].cast<int>(),
-        popularidade: json["popularity"],
-        nota: json["vote_average"],
-        qtdVotos: json["vote_count"],
-        linguagemOriginal: json["original_language"],
-        video: json["video"]);
+        title: json["title"],
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        isAdultContent: json["adult"],
+        coverImagePath: json["backdrop_path"],
+        cardImagePath: json["poster_path"],
+        genresIds: json["genre_ids"].cast<int>(),
+        popularity: double.parse(json["popularity"].toString()),
+        average: double.parse(json["vote_average"].toString()),
+        voteCount: json["vote_count"],
+        originalLang: json["original_language"],
+        hasVideo: json["video"]);
   }
 }
