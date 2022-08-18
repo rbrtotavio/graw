@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/screens/auth_page.dart';
 import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:cinegraw_app/screens/config_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: "GRAW"),
         '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
         '/config': (context) => const ConfigPage(),
-        '/login_register': ((context) => const LoginRegister())
+        '/login_register': ((context) => const LoginRegister()),
+        '/auth_page': ((context) => LoginAuth())
       },
     );
   }
