@@ -1,4 +1,5 @@
 # Miscellaneous
+google-services.json
 *.class
 *.log
 *.pyc
@@ -31,7 +32,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-google-services.json
+
 # Web related
 lib/generated_plugin_registrant.dart
 
