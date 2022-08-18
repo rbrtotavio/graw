@@ -87,11 +87,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: ListView(
-        children: const [
-          CarouselSector(sectorTitle: "Lançamentos"),
+        children: [
           CarouselSector(sectorTitle: "Populares"),
-          CarouselSector(sectorTitle: "Ranking de Filmes"),
-          CarouselSector(sectorTitle: "Filmes por Gênero"),
+          // CarouselSector(sectorTitle: "Lançamentos"),
+          // CarouselSector(sectorTitle: "Ranking de Filmes"),
+          // CarouselSector(sectorTitle: "Filmes por Gênero"),
         ],
       ),
     );

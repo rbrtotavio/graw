@@ -1,10 +1,14 @@
+import 'package:cinegraw_app/screens/film_Screen.dart';
 import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:cinegraw_app/screens/config_screen.dart';
 import 'package:cinegraw_app/screens/login_register.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
+
   runApp(const MyApp());
 }
 
@@ -21,7 +25,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: "GRAW"),
         '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
         '/config': (context) => const ConfigPage(),
-        '/login_register': ((context) => const LoginRegister())
+        '/login_register': ((context) => const LoginRegister()),
+        '/film': (context) => const FilmScreen(),
       },
     );
   }

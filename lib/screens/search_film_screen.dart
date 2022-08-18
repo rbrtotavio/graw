@@ -27,32 +27,29 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  _gotoReturn(context);
-                },
-              ),
-              Text(widget.title),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(widget.title),
+          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SearchFilmFilters(
-                  searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
-              SearchResults(
-                quantCards: quantCards,
-              ),
-            ],
-          ),
+        actions: const [
+          SizedBox(
+            width: 40,
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SearchFilmFilters(
+                searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
+            SearchResults(
+              quantCards: quantCards,
+            ),
+          ],
         ),
       ),
     );

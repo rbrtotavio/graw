@@ -13,7 +13,7 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   List<Widget> generateCards() {
     var a = List.generate(widget.quantCards, (index) {
-      return const FilmCard();
+      return const FilmCard(title: "title");
     });
     return a;
   }
@@ -21,7 +21,7 @@ class _SearchResultsState extends State<SearchResults> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: const ScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       primary: false,
       padding: const EdgeInsets.all(20),
