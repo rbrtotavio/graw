@@ -1,21 +1,20 @@
 import 'dart:convert';
 
+import 'package:cinegraw_app/env/env.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/review.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class MovieDBApiRepository {
-  String _ApiUrl = "https://api.themoviedb.org/3";
-  String _ApiKey = dotenv.env['MOVIEDB_KEY']!;
+  final String _apiUrl = "https://api.themoviedb.org/3";
 
   MovieDBApiRepository() {}
 
   Future<List<FilmMovieDB>> getPopularFilms() async {
     List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
 
-    Uri api =
-        Uri.parse("$_ApiUrl/movie/popular?api_key=$_ApiKey&language=pt-BR");
+    Uri api = Uri.parse(
+        "$_apiUrl/movie/popular?api_key=${Env.moviedb_key}&language=pt-BR");
     final response = await http.get(api);
 
     if (response.statusCode == 200) {
