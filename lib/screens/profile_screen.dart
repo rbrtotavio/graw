@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              _gotoReturn(context); //página inicial
+              _gotoReturn(context);
             },
           )
         ],
