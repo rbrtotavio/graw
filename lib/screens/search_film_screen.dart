@@ -1,4 +1,5 @@
-import 'package:cinegraw_app/components/search_film_filter.dart';
+import 'package:cinegraw_app/components/search_film_filters.dart';
+import 'package:cinegraw_app/components/search_results.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmScreen extends StatefulWidget {
@@ -11,17 +12,23 @@ class SearchFilmScreen extends StatefulWidget {
 }
 
 class _SearchFilmScreenState extends State<SearchFilmScreen> {
+  int quantCards = 9;
+
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  void searchFilm(Map<String, dynamic> filtroFilme) {
+    //TODO: Implementar função de procurar filme
+    setState(() {
+      quantCards = filtroFilme['quantidade'] as int;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        // TODO: a discutir
-        primarySwatch: Colors.blueGrey,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -36,10 +43,16 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
             ],
           ),
         ),
-        body: Column(
-          children: const [
-            SearchFilmFilter(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SearchFilmFilters(
+                  searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
+              SearchResults(
+                quantCards: quantCards,
+              ),
+            ],
+          ),
         ),
       ),
     );

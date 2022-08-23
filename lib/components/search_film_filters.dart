@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SearchFilmFilter extends StatefulWidget {
-  const SearchFilmFilter({Key? key}) : super(key: key);
+class SearchFilmFilters extends StatefulWidget {
+  const SearchFilmFilters({
+    Key? key,
+    required this.searchFilm,
+  }) : super(key: key);
+
+  final void Function(Map<String, dynamic>) searchFilm;
 
   @override
-  State<SearchFilmFilter> createState() => _SearchFilmFilterState();
+  State<SearchFilmFilters> createState() => _SearchFilmFiltersState();
 }
 
-class _SearchFilmFilterState extends State<SearchFilmFilter> {
+class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   String nomeFilme = "";
 
   String genero = "Gênero";
@@ -59,14 +64,15 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
     return false;
   }
 
-  void buscar_filme() {
+  void searchFilm() {
     var filtroFilme = {
       "nomefilme": nomeFilme != "" ? nomeFilme : null,
       "genero": genero != "Gênero" ? genero : null,
       "lancamento": lancamento != "Lançamento" ? lancamento : null,
-      "diretor": diretor != "Diretor" ? diretor : null
+      "diretor": diretor != "Diretor" ? diretor : null,
+      "quantidade": int.parse(nomeFilme)
     };
-    print(filtroFilme);
+    widget.searchFilm(filtroFilme);
   }
 
   Widget searchField() {
@@ -92,7 +98,7 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
         const SizedBox(width: 5),
         Expanded(
           child: ElevatedButton(
-            onPressed: filtroValido() ? buscar_filme : null,
+            onPressed: filtroValido() ? searchFilm : null,
             child: const Text(
               "Buscar",
               style: TextStyle(fontSize: 18),
@@ -103,7 +109,7 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
     );
   }
 
-  Widget filtroMenu(String holder, String categoria, List<String> opcoes) {
+  Widget menuFilter(String holder, String categoria, List<String> opcoes) {
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -117,8 +123,8 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
         value: holder,
         isExpanded: true,
         elevation: 16,
-        underline: SizedBox(),
-        icon: SizedBox(),
+        underline: const SizedBox(),
+        icon: const SizedBox(),
         onChanged: (String? newValue) {
           setState(() {
             switch (categoria) {
@@ -147,22 +153,20 @@ class _SearchFilmFilterState extends State<SearchFilmFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            searchField(),
-            Row(
-              children: [
-                Expanded(flex: 10, child: filtroMenu(genero, "G", generos)),
-                Expanded(
-                    flex: 9, child: filtroMenu(lancamento, "L", lancamentos)),
-                Expanded(flex: 11, child: filtroMenu(diretor, "D", diretores)),
-              ],
-            )
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          searchField(),
+          Row(
+            children: [
+              Expanded(flex: 10, child: menuFilter(genero, "G", generos)),
+              Expanded(
+                  flex: 9, child: menuFilter(lancamento, "L", lancamentos)),
+              Expanded(flex: 11, child: menuFilter(diretor, "D", diretores)),
+            ],
+          )
+        ],
       ),
     );
   }

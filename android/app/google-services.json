@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "872425861590",
+    "project_id": "ciw-20393",
+    "storage_bucket": "ciw-20393.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872425861590:android:f9338d45cb5f0b63a93477",
+        "android_client_info": {
+          "package_name": "com.company.cinegraw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872425861590-pac8vdlevuogg4mqqq3looci9g4oe7c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5UHYv1bd3CJOKWrfHeze6N4waApDXEks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872425861590-pac8vdlevuogg4mqqq3looci9g4oe7c2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872425861590:android:62b2febce18947dca93477",
+        "android_client_info": {
+          "package_name": "com.example.cinegraw_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872425861590-pac8vdlevuogg4mqqq3looci9g4oe7c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5UHYv1bd3CJOKWrfHeze6N4waApDXEks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872425861590-pac8vdlevuogg4mqqq3looci9g4oe7c2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
