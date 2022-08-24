@@ -113,7 +113,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                     signIn();
                   },
                   child: const Text(
-                    "LOGIN",
+                    "Entrar",
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ))
             ],
@@ -132,6 +132,23 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmpasswordController = TextEditingController();
+
+  Future signUp() async {
+    if (verifyPassword()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+      _gotoProfile(); //quebra galho, corrigir redirecionamento após registro
+    }
+  }
+
+  void _gotoProfile() {
+    Navigator.pushNamed(context, '/auth_page');
+  }
+
   void _gotoReturn(BuildContext context) {
     Navigator.push(
         context,
@@ -139,6 +156,23 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) => const MyHomePage(
                   title: 'GRAW',
                 )));
+  }
+
+  bool verifyPassword() {
+    if (_passwordController.text.trim() ==
+        _confirmpasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmpasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -197,26 +231,33 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 50,
             ),
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(labelText: 'E-mail válido'),
             ),
             const SizedBox(
               height: 50,
             ),
             TextFormField(
+              controller: _passwordController,
               decoration: const InputDecoration(labelText: 'Senha'),
+              obscureText: true,
             ),
             const SizedBox(
               height: 50,
             ),
             TextFormField(
+              controller: _confirmpasswordController,
               decoration:
                   const InputDecoration(labelText: 'Confirma sua senha'),
+              obscureText: true,
             ),
             const SizedBox(
               height: 50,
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  signUp();
+                },
                 child: const Text(
                   "REGISTRAR-SE",
                   style: TextStyle(fontSize: 20, color: Colors.black),

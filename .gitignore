@@ -1,5 +1,6 @@
 # Miscellaneous
 google-services.json
+/macos/firebase_app_id_file.json
 *.class
 *.log
 *.pyc
@@ -10,6 +11,11 @@ google-services.json
 .history
 .svn/
 migrate_working_dir/
+
+# Envify
+.env
+env.dart
+env.g.dart
 
 # IntelliJ related
 *.iml
