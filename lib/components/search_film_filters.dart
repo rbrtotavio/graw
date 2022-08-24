@@ -1,3 +1,6 @@
+import 'package:cinegraw_app/models/film.dart';
+import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmFilters extends StatefulWidget {
@@ -13,16 +16,24 @@ class SearchFilmFilters extends StatefulWidget {
 }
 
 class _SearchFilmFiltersState extends State<SearchFilmFilters> {
+  MovieDBApiRepository _movieDBApiRepository = new MovieDBApiRepository();
+
+  Future<List<Genre>> getGenres() async {
+    var genresApi = await _movieDBApiRepository.getGenres();
+    print(genresApi);
+    return genresApi;
+  }
+
   String nomeFilme = "";
 
   String genero = "Gênero";
-  List<String> generos = <String>[
-    "Gênero",
-    "Terror",
-    "Ação",
-    "Comédia",
-    "Drama"
-  ];
+  List<Map<int, String> generos = {
+    0: "Gênero",
+    1: "Terror",
+    2: "Ação",
+    3: "Comédia",
+    4: "Drama"
+};
 
   String lancamento = "Lançamento";
   List<String> lancamentos = <String>[
@@ -70,7 +81,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
       "genero": genero != "Gênero" ? genero : null,
       "lancamento": lancamento != "Lançamento" ? lancamento : null,
       "diretor": diretor != "Diretor" ? diretor : null,
-      "quantidade": int.parse(nomeFilme)
     };
     widget.searchFilm(filtroFilme);
   }
@@ -109,7 +119,8 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     );
   }
 
-  Widget menuFilter(String holder, String categoria, List<String> opcoes) {
+  Widget menuFilter(
+      String holder, String categoria, List<dynamic> opcoes) {
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -141,12 +152,13 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
             }
           });
         },
-        items: opcoes.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Center(child: Text(value)),
-          );
-        }).toList(),
+        items: opcoes.map((e) => null)
+        // items: opcoes.map<DropdownMenuItem<String>>((String value) {
+        //   return DropdownMenuItem<String>(
+        //     value: value,
+        //     child: Center(child: Text(value)),
+        //   );
+        // }).toList(),
       ),
     );
   }
@@ -160,10 +172,23 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
           searchField(),
           Row(
             children: [
-              Expanded(flex: 10, child: menuFilter(genero, "G", generos)),
               Expanded(
-                  flex: 9, child: menuFilter(lancamento, "L", lancamentos)),
-              Expanded(flex: 11, child: menuFilter(diretor, "D", diretores)),
+                flex: 10,
+                child: FutureBuilder(
+                  future: getGenres(),
+                  builder: (context, snapshot) {
+                    return menuFilter(genero, "G", snapshot.data!);
+                  }
+                ),
+              ),
+              Expanded(
+                flex: 9,
+                child: menuFilter(lancamento, "L", lancamentos),
+              ),
+              Expanded(
+                flex: 11,
+                child: menuFilter(diretor, "D", diretores),
+              ),
             ],
           )
         ],
@@ -171,3 +196,16 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     );
   }
 }
+
+
+FutureBuilder<List<Film>>(
+  future: getFilms(),
+  builder: (context, snapshot) {
+    if (snapshot.hasData) {
+      return FilmCarousel(films: snapshot.data!);
+    } else if (snapshot.hasError) {
+      print('${snapshot.error}');
+    }
+    return CircularProgressIndicator();
+  },
+),
