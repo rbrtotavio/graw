@@ -20,9 +20,8 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
 
   void searchFilm(Map<String, dynamic> filtroFilme) {
     //TODO: Implementar função de procurar filme
-    setState(() {
-      quantCards = filtroFilme['quantidade'] as int;
-    });
+    setState(() {});
+    print(filtroFilme);
   }
 
   @override

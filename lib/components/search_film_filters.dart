@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/components/filters/genreFilters.dart';
 import 'package:cinegraw_app/models/film.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
@@ -16,7 +17,7 @@ class SearchFilmFilters extends StatefulWidget {
 }
 
 class _SearchFilmFiltersState extends State<SearchFilmFilters> {
-  MovieDBApiRepository _movieDBApiRepository = new MovieDBApiRepository();
+  final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
 
   Future<List<Genre>> getGenres() async {
     var genresApi = await _movieDBApiRepository.getGenres();
@@ -24,16 +25,15 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     return genresApi;
   }
 
-  String nomeFilme = "";
+  int _genreId = 0;
+  void getGenreFilter(int genreId) {
+    setState(() {
+      _genreId = genreId;
+    });
+    print(_genreId);
+  }
 
-  String genero = "Gênero";
-  List<Map<int, String> generos = {
-    0: "Gênero",
-    1: "Terror",
-    2: "Ação",
-    3: "Comédia",
-    4: "Drama"
-};
+  String nomeFilme = "";
 
   String lancamento = "Lançamento";
   List<String> lancamentos = <String>[
@@ -63,7 +63,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     if (nomeFilme != "") {
       return true;
     }
-    if (genero != "Gênero") {
+    if (_genreId != 0) {
       return true;
     }
     if (lancamento != "Lançamento") {
@@ -78,7 +78,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   void searchFilm() {
     var filtroFilme = {
       "nomefilme": nomeFilme != "" ? nomeFilme : null,
-      "genero": genero != "Gênero" ? genero : null,
+      "genre": _genreId != 0 ? _genreId : null,
       "lancamento": lancamento != "Lançamento" ? lancamento : null,
       "diretor": diretor != "Diretor" ? diretor : null,
     };
@@ -119,8 +119,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     );
   }
 
-  Widget menuFilter(
-      String holder, String categoria, List<dynamic> opcoes) {
+  Widget menuFilter(String holder, String categoria, List<String> opcoes) {
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 10,
@@ -139,9 +138,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
         onChanged: (String? newValue) {
           setState(() {
             switch (categoria) {
-              case "G":
-                genero = newValue!;
-                break;
               case "L":
                 lancamento = newValue!;
                 break;
@@ -152,13 +148,12 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
             }
           });
         },
-        items: opcoes.map((e) => null)
-        // items: opcoes.map<DropdownMenuItem<String>>((String value) {
-        //   return DropdownMenuItem<String>(
-        //     value: value,
-        //     child: Center(child: Text(value)),
-        //   );
-        // }).toList(),
+        items: opcoes.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Center(child: Text(value)),
+          );
+        }).toList(),
       ),
     );
   }
@@ -172,14 +167,8 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
           searchField(),
           Row(
             children: [
-              Expanded(
-                flex: 10,
-                child: FutureBuilder(
-                  future: getGenres(),
-                  builder: (context, snapshot) {
-                    return menuFilter(genero, "G", snapshot.data!);
-                  }
-                ),
+              GenreFilters(
+                getFilter: (int genreId) => getGenreFilter(genreId),
               ),
               Expanded(
                 flex: 9,
@@ -196,16 +185,3 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     );
   }
 }
-
-
-FutureBuilder<List<Film>>(
-  future: getFilms(),
-  builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      return FilmCarousel(films: snapshot.data!);
-    } else if (snapshot.hasError) {
-      print('${snapshot.error}');
-    }
-    return CircularProgressIndicator();
-  },
-),
