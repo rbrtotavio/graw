@@ -1,7 +1,5 @@
 import 'package:cinegraw_app/components/filters/genreFilters.dart';
 import 'package:cinegraw_app/components/filters/releaseFilters.dart';
-import 'package:cinegraw_app/models/film.dart';
-import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -35,21 +33,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   }
 
   String nomeFilme = "";
-
-  String lancamento = "Lançamento";
-  List<String> lancamentos = <String>[
-    "Lançamento",
-    "2022",
-    "2021",
-    "2020",
-    "2019",
-    "2017",
-    "2016",
-    "2015",
-    "2014",
-    "2013",
-    "2012"
-  ];
 
   String diretor = "Diretor";
   List<String> diretores = <String>[
