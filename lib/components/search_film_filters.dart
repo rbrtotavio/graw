@@ -1,4 +1,5 @@
 import 'package:cinegraw_app/components/filters/genreFilters.dart';
+import 'package:cinegraw_app/components/filters/releaseFilters.dart';
 import 'package:cinegraw_app/models/film.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
@@ -18,19 +19,19 @@ class SearchFilmFilters extends StatefulWidget {
 
 class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
-
-  Future<List<Genre>> getGenres() async {
-    var genresApi = await _movieDBApiRepository.getGenres();
-    print(genresApi);
-    return genresApi;
-  }
-
   int _genreId = 0;
+  String _release = "Lançamento";
+
   void getGenreFilter(int genreId) {
     setState(() {
       _genreId = genreId;
     });
-    print(_genreId);
+  }
+
+  void getReleaseFilter(String release) {
+    setState(() {
+      _release = release;
+    });
   }
 
   String nomeFilme = "";
@@ -66,7 +67,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     if (_genreId != 0) {
       return true;
     }
-    if (lancamento != "Lançamento") {
+    if (_release != "Lançamento") {
       return true;
     }
     if (diretor != "Diretor") {
@@ -79,7 +80,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     var filtroFilme = {
       "nomefilme": nomeFilme != "" ? nomeFilme : null,
       "genre": _genreId != 0 ? _genreId : null,
-      "lancamento": lancamento != "Lançamento" ? lancamento : null,
+      "release": _release != "Lançamento" ? int.parse(_release) : null,
       "diretor": diretor != "Diretor" ? diretor : null,
     };
     widget.searchFilm(filtroFilme);
@@ -137,15 +138,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
         icon: const SizedBox(),
         onChanged: (String? newValue) {
           setState(() {
-            switch (categoria) {
-              case "L":
-                lancamento = newValue!;
-                break;
-              case "D":
-                diretor = newValue!;
-                break;
-              default:
-            }
+            diretor = newValue!;
           });
         },
         items: opcoes.map<DropdownMenuItem<String>>((String value) {
@@ -170,10 +163,8 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
               GenreFilters(
                 getFilter: (int genreId) => getGenreFilter(genreId),
               ),
-              Expanded(
-                flex: 9,
-                child: menuFilter(lancamento, "L", lancamentos),
-              ),
+              ReleaseFilters(
+                  getFilter: (String release) => getReleaseFilter(release)),
               Expanded(
                 flex: 11,
                 child: menuFilter(diretor, "D", diretores),
