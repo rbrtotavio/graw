@@ -1,4 +1,6 @@
 # Miscellaneous
+firebase_app_id_file.json
+google-services.json
 *.class
 *.log
 *.pyc
@@ -39,6 +41,7 @@ env.g.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
+
 
 # Symbolication related
 app.*.symbols

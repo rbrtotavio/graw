@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>872425861590-j9urvhis5qnn52nck0u7vuplqdkf3gll.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.872425861590-j9urvhis5qnn52nck0u7vuplqdkf3gll</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBNE91Mvp_M-tLwYz__h0pg8NcXs6V8lJ0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>872425861590</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cinegrawApp</string>
+	<key>PROJECT_ID</key>
+	<string>ciw-20393</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ciw-20393.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:872425861590:ios:14963bd8c386c2dfa93477</string>
+</dict>
+</plist>
