@@ -2,7 +2,8 @@ import 'package:cinegraw_app/models/film.dart';
 import 'package:flutter/material.dart';
 
 class FilmCard extends StatelessWidget {
-  const FilmCard({Key? key}) : super(key: key);
+  final String title;
+  const FilmCard({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class FilmCard extends StatelessWidget {
         Navigator.pushNamed(
           context,
           '/film',
-          arguments: Film("teste"),
+          arguments: Film(title),
         );
       },
       child: AnimatedContainer(

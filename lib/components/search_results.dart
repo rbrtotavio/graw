@@ -13,7 +13,7 @@ class SearchResults extends StatefulWidget {
 class _SearchResultsState extends State<SearchResults> {
   List<Widget> generateCards() {
     var a = List.generate(widget.quantCards, (index) {
-      return const FilmCard();
+      return const FilmCard(title: "title");
     });
     return a;
   }

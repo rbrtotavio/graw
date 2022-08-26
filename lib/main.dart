@@ -5,7 +5,7 @@ import 'package:cinegraw_app/screens/config_screen.dart';
 import 'package:cinegraw_app/screens/login_register.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
 
