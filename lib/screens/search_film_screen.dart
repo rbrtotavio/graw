@@ -1,5 +1,7 @@
 import 'package:cinegraw_app/components/search_film_filters.dart';
 import 'package:cinegraw_app/components/search_results.dart';
+import 'package:cinegraw_app/models/film.dart';
+import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmScreen extends StatefulWidget {
@@ -12,16 +14,25 @@ class SearchFilmScreen extends StatefulWidget {
 }
 
 class _SearchFilmScreenState extends State<SearchFilmScreen> {
-  int quantCards = 9;
+  MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  List<Film> films = <Film>[];
 
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
-  void searchFilm(Map<String, dynamic> filtroFilme) {
-    //TODO: Implementar função de procurar filme
+  void searchFilm(Map<String, dynamic> filtroFilme) async {
+    films.clear();
+    var filmsApi = await _movieDBApiRepository.searchFilm(
+      filtroFilme["release"] ?? "",
+      filtroFilme["genre"] ?? "",
+    );
+
+    for (var i = 0; i < 10; i++) {
+      films.add(Film(filmsApi[i].title));
+    }
+
     setState(() {});
-    print(filtroFilme);
   }
 
   @override
@@ -46,7 +57,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
             SearchFilmFilters(
                 searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
             SearchResults(
-              quantCards: quantCards,
+              films: films,
             ),
           ],
         ),

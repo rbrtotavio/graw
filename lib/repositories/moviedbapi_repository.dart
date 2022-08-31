@@ -27,7 +27,7 @@ class MovieDBApiRepository {
         filmsApi.add(filmapi);
       }
     }
-
+    // TODO: TRATAR CASO STATUSCODE != 200
     return filmsApi;
   }
 
@@ -46,7 +46,27 @@ class MovieDBApiRepository {
         genresApi.add(genreApi);
       }
     }
-
+    // TODO: TRATAR CASO STATUSCODE != 200
     return genresApi;
+  }
+
+  Future<List<FilmMovieDB>> searchFilm(
+      String releaseYear, String genreId) async {
+    List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/discover/movie?api_key=${Env.moviedb_key}&sort_by=popularity.desc&primary_release_year=$releaseYear&with_genres=$genreId&language=pt-BR");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+
+      for (Map<String, dynamic> film in result["results"]) {
+        var filmapi = FilmMovieDB.fromJson(film);
+        filmsApi.add(filmapi);
+      }
+    }
+    // TODO: TRATAR CASO STATUSCODE != 200
+    return filmsApi;
   }
 }
