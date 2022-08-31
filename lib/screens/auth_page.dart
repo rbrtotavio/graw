@@ -13,9 +13,9 @@ class LoginAuth extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ProfilePage();
+            return const ProfilePage();
           } else {
-            return LoginRegister();
+            return const LoginRegister();
           }
         },
       ),
