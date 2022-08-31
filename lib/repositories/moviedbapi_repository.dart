@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 
 class MovieDBApiRepository {
   final String _apiUrl = "https://api.themoviedb.org/3";
+  final String _imgUrl =
+      "https://image.tmdb.org/t/p/"; // TODO: pegar de configuration API?
   final String _language = "pt-BR";
 
   MovieDBApiRepository() {}
@@ -68,5 +70,19 @@ class MovieDBApiRepository {
     }
     // TODO: TRATAR CASO STATUSCODE != 200
     return filmsApi;
+  }
+
+  Future<Map<String, dynamic>> getFilmCard(String imgUrl) async {
+    Map<String, dynamic> result = {};
+
+    Uri api = Uri.parse("$_imgUrl/w300/$imgUrl");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      result = jsonDecode(response.body);
+      return result;
+    }
+
+    return result;
   }
 }

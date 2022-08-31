@@ -1,11 +1,11 @@
 import 'package:cinegraw_app/components/film_card.dart';
-import 'package:cinegraw_app/models/film.dart';
+import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 
 class SearchResults extends StatefulWidget {
   const SearchResults({Key? key, required this.films}) : super(key: key);
 
-  final List<Film> films;
+  final List<FilmMovieDB> films;
 
   @override
   State<SearchResults> createState() => _SearchResultsState();
@@ -15,7 +15,7 @@ class _SearchResultsState extends State<SearchResults> {
   List<Widget> generateCards() {
     var a = List.generate(widget.films.length, (index) {
       var film = widget.films[index];
-      return FilmCard(title: film.title);
+      return FilmCard(film: film);
     });
     return a;
   }
