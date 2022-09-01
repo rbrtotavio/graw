@@ -62,9 +62,9 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
   void searchFilm() {
     var filtroFilme = {
       "nomefilme": nomeFilme != "" ? nomeFilme : null,
-      "genre": _genreId != 0 ? _genreId : null,
-      "release": _release != "Lançamento" ? int.parse(_release) : null,
-      "diretor": diretor != "Diretor" ? diretor : null,
+      "genre": _genreId != 0 ? _genreId.toString() : null,
+      "release": _release != "Lançamento" ? _release.toString() : null,
+      "diretor": diretor != "Diretor" ? diretor.toString() : null,
     };
     widget.searchFilm(filtroFilme);
   }
