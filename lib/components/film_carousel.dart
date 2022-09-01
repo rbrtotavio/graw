@@ -17,10 +17,7 @@ class FilmCarousel extends StatelessWidget {
       children: List.generate(
         (films.length),
         (index) {
-          if (index.isEven) {
-            return FilmCard(film: films[index]);
-          }
-          return const SizedBox(width: 12);
+          return FilmCard(film: films[index]);
         },
       ),
     );

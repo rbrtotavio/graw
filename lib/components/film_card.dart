@@ -21,12 +21,6 @@ class _FilmCardState extends State<FilmCard> {
     );
   }
 
-  void getFilmCard() async {
-    var result =
-        await _movieDBApiRepository.getFilmCard(widget.film.cardImagePath);
-    return;
-  }
-
   @override
   Widget build(BuildContext context) {
     // getFilmCard();
@@ -35,16 +29,5 @@ class _FilmCardState extends State<FilmCard> {
       onTap: _gotoFilm,
       child: _movieDBApiRepository.renderImage(widget.film.cardImagePath),
     );
-    // return InkWell(
-    //   onTap: _gotoFilm,
-    //   child: AnimatedContainer(
-    //     duration: const Duration(),
-    //     child: Ink(
-    //       width: 150,
-    //       height: 200,
-    //       color: Colors.blueGrey,
-    //     ),
-    //   ),
-    // );
   }
 }

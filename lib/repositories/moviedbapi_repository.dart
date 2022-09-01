@@ -72,21 +72,6 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
-  Future<Map<String, dynamic>> getFilmCard(String imgUrl) async {
-    Map<String, dynamic> result = {};
-
-    Uri api = Uri.parse("$_imgUrl/w300/$imgUrl");
-    final response = await http.get(api);
-
-    if (response.statusCode == 200) {
-      var bd = response.body;
-      var result = jsonDecode(response.body);
-      return result;
-    }
-
-    return result;
-  }
-
   Image renderImage(String imgUrl) {
     return Image.network("$_imgUrl/w300/$imgUrl");
   }
