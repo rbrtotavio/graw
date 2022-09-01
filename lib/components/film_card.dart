@@ -33,14 +33,18 @@ class _FilmCardState extends State<FilmCard> {
 
     return InkWell(
       onTap: _gotoFilm,
-      child: AnimatedContainer(
-        duration: const Duration(),
-        child: Ink(
-          width: 150,
-          height: 200,
-          color: Colors.blueGrey,
-        ),
-      ),
+      child: _movieDBApiRepository.renderImage(widget.film.cardImagePath),
     );
+    // return InkWell(
+    //   onTap: _gotoFilm,
+    //   child: AnimatedContainer(
+    //     duration: const Duration(),
+    //     child: Ink(
+    //       width: 150,
+    //       height: 200,
+    //       color: Colors.blueGrey,
+    //     ),
+    //   ),
+    // );
   }
 }

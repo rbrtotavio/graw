@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cinegraw_app/env/env.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
-import 'package:cinegraw_app/models/review.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MovieDBApiRepository {
@@ -57,7 +57,7 @@ class MovieDBApiRepository {
     List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
 
     Uri api = Uri.parse(
-        "$_apiUrl/discover/movie?api_key=${Env.moviedb_key}&sort_by=popularity.desc&primary_release_year=$releaseYear&with_genres=$genreId&language=pt-BR");
+        "$_apiUrl/discover/movie?api_key=${Env.moviedb_key}&sort_by=popularity.desc&primary_release_year=$releaseYear&with_genres=$genreId&language=$_language");
     final response = await http.get(api);
 
     if (response.statusCode == 200) {
@@ -79,10 +79,15 @@ class MovieDBApiRepository {
     final response = await http.get(api);
 
     if (response.statusCode == 200) {
-      result = jsonDecode(response.body);
+      var bd = response.body;
+      var result = jsonDecode(response.body);
       return result;
     }
 
     return result;
+  }
+
+  Image renderImage(String imgUrl) {
+    return Image.network("$_imgUrl/w300/$imgUrl");
   }
 }
