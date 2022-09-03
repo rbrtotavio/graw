@@ -19,7 +19,7 @@ class CarouselSector extends StatefulWidget {
 class _CarouselSectorState extends State<CarouselSector> {
   MovieDBApiRepository _movieDBApiRepository = new MovieDBApiRepository();
 
-  Future<List<Film>> getFilms() async {
+  Future<List<Film>> getPopular() async {
     var filmsApi = await _movieDBApiRepository.getPopularFilms();
 
     List<Film> films = <Film>[];
@@ -68,16 +68,21 @@ class _CarouselSectorState extends State<CarouselSector> {
   }
 
   Future<List<Film>> CarrosselSelector() async {
-    if (widget.sectorTitle == "Populares") {
-      return getFilms();
-    } else if (widget.sectorTitle == "Lançamentos") {
-      return getNowplaying();
-    } else if (widget.sectorTitle == "Em breve") {
-      return getUpcoming();
-    } else if (widget.sectorTitle == "Melhores filmes") {
-      return getToprated();
-    } else {
-      return getFilms();
+    switch (widget.sectorTitle) {
+      case 'Populares':
+        return getPopular();
+
+      case 'Lançamentos':
+        return getNowplaying();
+
+      case 'Em breve':
+        return getUpcoming();
+
+      case 'Melhores filmes':
+        return getToprated();
+
+      default:
+        return getPopular();
     }
   }
 
