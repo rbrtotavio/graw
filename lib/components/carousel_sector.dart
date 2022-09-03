@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/film.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
