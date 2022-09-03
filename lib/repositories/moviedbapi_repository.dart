@@ -31,6 +31,63 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
+  Future<List<FilmMovieDB>> getNowPlaying() async {
+    List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/movie/now_playing?api_key=${Env.moviedb_key}&language=$_language");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+
+      for (Map<String, dynamic> film in result["results"]) {
+        var filmapi = FilmMovieDB.fromJson(film);
+        filmsApi.add(filmapi);
+      }
+    }
+
+    return filmsApi;
+  }
+
+  Future<List<FilmMovieDB>> getUpComing() async {
+    List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/movie/upcoming?api_key=${Env.moviedb_key}&language=$_language");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+
+      for (Map<String, dynamic> film in result["results"]) {
+        var filmapi = FilmMovieDB.fromJson(film);
+        filmsApi.add(filmapi);
+      }
+    }
+
+    return filmsApi;
+  }
+
+  Future<List<FilmMovieDB>> getTopRated() async {
+    List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/movie/top_rated?api_key=${Env.moviedb_key}&language=$_language");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+
+      for (Map<String, dynamic> film in result["results"]) {
+        var filmapi = FilmMovieDB.fromJson(film);
+        filmsApi.add(filmapi);
+      }
+    }
+
+    return filmsApi;
+  }
+
   Future<List<Genre>> getGenres() async {
     List<Genre> genresApi = <Genre>[];
 

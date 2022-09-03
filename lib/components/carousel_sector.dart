@@ -21,6 +21,7 @@ class _CarouselSectorState extends State<CarouselSector> {
 
   Future<List<Film>> getFilms() async {
     var filmsApi = await _movieDBApiRepository.getPopularFilms();
+
     List<Film> films = <Film>[];
 
     for (var i = 0; i < 10; i++) {
@@ -28,6 +29,56 @@ class _CarouselSectorState extends State<CarouselSector> {
     }
 
     return films;
+  }
+
+  Future<List<Film>> getNowplaying() async {
+    var filmsApi = await _movieDBApiRepository.getNowPlaying();
+
+    List<Film> films = <Film>[];
+
+    for (var i = 0; i < 10; i++) {
+      films.add(Film(filmsApi[i].title));
+    }
+
+    return films;
+  }
+
+  Future<List<Film>> getUpcoming() async {
+    var filmsApi = await _movieDBApiRepository.getUpComing();
+
+    List<Film> films = <Film>[];
+
+    for (var i = 0; i < 10; i++) {
+      films.add(Film(filmsApi[i].title));
+    }
+
+    return films;
+  }
+
+  Future<List<Film>> getToprated() async {
+    var filmsApi = await _movieDBApiRepository.getTopRated();
+
+    List<Film> films = <Film>[];
+
+    for (var i = 0; i < 10; i++) {
+      films.add(Film(filmsApi[i].title));
+    }
+
+    return films;
+  }
+
+  Future<List<Film>> CarrosselSelector() async {
+    if (widget.sectorTitle == "Populares") {
+      return getFilms();
+    } else if (widget.sectorTitle == "Lançamentos") {
+      return getNowplaying();
+    } else if (widget.sectorTitle == "Em breve") {
+      return getUpcoming();
+    } else if (widget.sectorTitle == "Melhores filmes") {
+      return getToprated();
+    } else {
+      return getFilms();
+    }
   }
 
   @override
@@ -45,19 +96,18 @@ class _CarouselSectorState extends State<CarouselSector> {
         SizedBox(
           height: 200,
           child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: FutureBuilder<List<Film>>(
-              future: getFilms(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return FilmCarousel(films: snapshot.data!);
-                } else if (snapshot.hasError) {
-                  print('${snapshot.error}');
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-          ),
+              scrollDirection: Axis.horizontal,
+              child: FutureBuilder<List<Film>>(
+                future: CarrosselSelector(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return FilmCarousel(films: snapshot.data!);
+                  } else if (snapshot.hasError) {
+                    print('${snapshot.error}');
+                  }
+                  return CircularProgressIndicator();
+                },
+              )),
         ),
       ],
     );
