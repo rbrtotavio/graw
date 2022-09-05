@@ -5,28 +5,60 @@ import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmScreen extends StatefulWidget {
-  const SearchFilmScreen({Key? key, required this.title}) : super(key: key);
+  SearchFilmScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
+  MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
 
   @override
   State<SearchFilmScreen> createState() => _SearchFilmScreenState();
 }
 
 class _SearchFilmScreenState extends State<SearchFilmScreen> {
-  MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  Map<String, dynamic> _filmFilter = {};
   List<FilmMovieDB> films = <FilmMovieDB>[];
+
+  ScrollController _scrollController = ScrollController();
+  int page = 0;
 
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
   void searchFilm(Map<String, dynamic> filtroFilme) async {
-    films = await _movieDBApiRepository.searchFilm(
-      filtroFilme["release"] ?? "",
-      filtroFilme["genre"] ?? "",
+    _filmFilter = filtroFilme;
+    page = 1;
+    films = await widget._movieDBApiRepository.searchFilm(
+      _filmFilter["release"] ?? "",
+      _filmFilter["genre"] ?? "",
+      page.toString(),
     );
     setState(() {});
+  }
+
+  void searchMoreFilm() async {
+    page += 1;
+    films += await widget._movieDBApiRepository.searchFilm(
+      _filmFilter["release"] ?? "",
+      _filmFilter["genre"] ?? "",
+      page.toString(),
+    );
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset >=
+              _scrollController.position.maxScrollExtent &&
+          !_scrollController.position.outOfRange) {
+        print("buscando filmes");
+        searchMoreFilm();
+        print(films.length);
+      }
+    });
   }
 
   @override
@@ -46,6 +78,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SearchFilmFilters(
