@@ -61,10 +61,9 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
 
   void searchFilm() {
     var filtroFilme = {
-      "nomefilme": nomeFilme != "" ? nomeFilme : null,
+      "filmName": nomeFilme != "" ? nomeFilme : null,
       "genre": _genreId != 0 ? _genreId.toString() : null,
       "release": _release != "Lançamento" ? _release.toString() : null,
-      "diretor": diretor != "Diretor" ? diretor.toString() : null,
     };
     widget.searchFilm(filtroFilme);
   }
@@ -148,10 +147,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
               ),
               ReleaseFilters(
                   getFilter: (String release) => getReleaseFilter(release)),
-              Expanded(
-                flex: 11,
-                child: menuFilter(diretor, "D", diretores),
-              ),
+              // TODO: botao de limpar filtros
             ],
           )
         ],

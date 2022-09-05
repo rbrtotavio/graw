@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/aplications/films_app.dart';
 import 'package:cinegraw_app/components/search_film_filters.dart';
 import 'package:cinegraw_app/components/search_results.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
@@ -8,7 +9,7 @@ class SearchFilmScreen extends StatefulWidget {
   SearchFilmScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  final FilmsApp _filmsApp = FilmsApp();
 
   @override
   State<SearchFilmScreen> createState() => _SearchFilmScreenState();
@@ -28,7 +29,8 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
   void searchFilm(Map<String, dynamic> filtroFilme) async {
     _filmFilter = filtroFilme;
     page = 1;
-    films = await widget._movieDBApiRepository.searchFilm(
+    films = await widget._filmsApp.searchFilms(
+      _filmFilter["filmName"] ?? "",
       _filmFilter["release"] ?? "",
       _filmFilter["genre"] ?? "",
       page.toString(),
@@ -38,7 +40,8 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
 
   void searchMoreFilm() async {
     page += 1;
-    films += await widget._movieDBApiRepository.searchFilm(
+    films += await widget._filmsApp.searchFilms(
+      _filmFilter["filmName"] ?? "",
       _filmFilter["release"] ?? "",
       _filmFilter["genre"] ?? "",
       page.toString(),
@@ -54,9 +57,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
       if (_scrollController.offset >=
               _scrollController.position.maxScrollExtent &&
           !_scrollController.position.outOfRange) {
-        print("buscando filmes");
         searchMoreFilm();
-        print(films.length);
       }
     });
   }

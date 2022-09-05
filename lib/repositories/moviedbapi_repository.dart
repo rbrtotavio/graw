@@ -24,7 +24,6 @@ class MovieDBApiRepository {
 
   void getConfiguration() async {
     if (configurationMovieDB == null) {
-      print("obtendo config");
       Uri api = Uri.parse("$_apiUrl/configuration?api_key=${Env.moviedb_key}");
       final response = await http.get(api);
 
@@ -76,7 +75,8 @@ class MovieDBApiRepository {
     return genresApi;
   }
 
-  Future<List<FilmMovieDB>> searchFilm(
+  // TODO: tratar buscas alem do limite de paginas
+  Future<List<FilmMovieDB>> searchFilmByFilters(
     String releaseYear,
     String genreId,
     String page,
@@ -86,7 +86,29 @@ class MovieDBApiRepository {
     Uri api = Uri.parse(
         "$_apiUrl/discover/movie?api_key=${Env.moviedb_key}&sort_by=popularity.desc&primary_release_year=$releaseYear&with_genres=$genreId&language=$_language&page=$page");
     final response = await http.get(api);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
 
+      for (Map<String, dynamic> film in result["results"]) {
+        var filmapi = FilmMovieDB.fromJson(film);
+        filmsApi.add(filmapi);
+      }
+    }
+    // TODO: TRATAR CASO STATUSCODE != 200
+    return filmsApi;
+  }
+
+  // TODO: tratar buscas alem do limite de paginas
+  Future<List<FilmMovieDB>> searchFilmByName(
+    String releaseYear,
+    String name,
+    String page,
+  ) async {
+    List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/search/movie?api_key=${Env.moviedb_key}&sort_by=popularity.desc&primary_release_year=$releaseYear&query=$name&language=$_language&page=$page");
+    final response = await http.get(api);
     if (response.statusCode == 200) {
       Map<String, dynamic> result = jsonDecode(response.body);
 
