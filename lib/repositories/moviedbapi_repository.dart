@@ -10,13 +10,17 @@ class MovieDBApiRepository {
   final String _language = "pt-BR";
   String _apiUrl = "https://api.themoviedb.org/3";
   String _imgUrl = "https://image.tmdb.org/t/p/";
-  List<String> cardSizes = <String>["original"];
-  List<String> coverSizes = <String>["original"];
+  List<String> _cardSizes = <String>["original"];
+  List<String> _coverSizes = <String>["original"];
   ConfigurationMovieDB? configurationMovieDB;
 
-  MovieDBApiRepository() {
-    getConfiguration();
+  static final MovieDBApiRepository _movieDBApiRepository =
+      MovieDBApiRepository._internal();
+  factory MovieDBApiRepository() {
+    _movieDBApiRepository.getConfiguration();
+    return _movieDBApiRepository;
   }
+  MovieDBApiRepository._internal();
 
   void getConfiguration() async {
     if (configurationMovieDB == null) {
@@ -28,6 +32,8 @@ class MovieDBApiRepository {
         Map<String, dynamic> result = jsonDecode(response.body);
         configurationMovieDB = ConfigurationMovieDB.fromJson(result["images"]);
         _imgUrl = configurationMovieDB!.secureUrlImage;
+        _cardSizes = configurationMovieDB!.cardSize;
+        _coverSizes = configurationMovieDB!.coverSize;
       }
     }
   }
