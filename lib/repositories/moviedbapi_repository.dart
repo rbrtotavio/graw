@@ -14,6 +14,7 @@ class MovieDBApiRepository {
   List<String> _coverSizes = <String>["original"];
   ConfigurationMovieDB? configurationMovieDB;
 
+  // Sigleton
   static final MovieDBApiRepository _movieDBApiRepository =
       MovieDBApiRepository._internal();
   factory MovieDBApiRepository() {
@@ -121,8 +122,8 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
-  Image renderImage(String imgUrl) {
-    var img = Image.network("$_imgUrl/w300/$imgUrl");
+  Image getImage(String imgPath) {
+    var img = Image.network("$_imgUrl/w300/$imgPath");
     return img;
   }
 }

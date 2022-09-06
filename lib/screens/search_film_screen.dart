@@ -1,26 +1,26 @@
-import 'package:cinegraw_app/aplications/films_app.dart';
+import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/components/search_film_filters.dart';
 import 'package:cinegraw_app/components/search_results.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmScreen extends StatefulWidget {
-  SearchFilmScreen({Key? key, required this.title}) : super(key: key);
+  const SearchFilmScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  final FilmsApp _filmsApp = FilmsApp();
 
   @override
   State<SearchFilmScreen> createState() => _SearchFilmScreenState();
 }
 
 class _SearchFilmScreenState extends State<SearchFilmScreen> {
+  final FilmsApp _filmsApp = FilmsApp();
+
   Map<String, dynamic> _filmFilter = {};
   List<FilmMovieDB> films = <FilmMovieDB>[];
-
-  ScrollController _scrollController = ScrollController();
   int page = 0;
+
+  final ScrollController _scrollController = ScrollController();
 
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
@@ -29,7 +29,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
   void searchFilm(Map<String, dynamic> filtroFilme) async {
     _filmFilter = filtroFilme;
     page = 1;
-    films = await widget._filmsApp.searchFilms(
+    films = await _filmsApp.searchFilms(
       _filmFilter["filmName"] ?? "",
       _filmFilter["release"] ?? "",
       _filmFilter["genre"] ?? "",
@@ -40,7 +40,7 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
 
   void searchMoreFilm() async {
     page += 1;
-    films += await widget._filmsApp.searchFilms(
+    films += await _filmsApp.searchFilms(
       _filmFilter["filmName"] ?? "",
       _filmFilter["release"] ?? "",
       _filmFilter["genre"] ?? "",

@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),
-        '/buscar': (context) => SearchFilmScreen(title: "Buscar filme"),
+        '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
         '/config': (context) => const ConfigPage(),
         '/login_register': ((context) => const LoginRegister()),
-        '/auth_page': ((context) => LoginAuth()),
+        '/auth_page': ((context) => const LoginAuth()),
         '/film': (context) => const FilmScreen(),
       },
     );

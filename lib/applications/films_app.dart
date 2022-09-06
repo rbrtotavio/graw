@@ -1,9 +1,20 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
+import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
+import 'package:flutter/material.dart';
 
 class FilmsApp {
-  FilmsApp();
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+
+  FilmsApp();
+
+  Future<List<FilmMovieDB>> getPopularFilms() async {
+    return await _movieDBApiRepository.getPopularFilms();
+  }
+
+  Future<List<Genre>> getGenres() async {
+    return await _movieDBApiRepository.getGenres();
+  }
 
   Future<List<FilmMovieDB>> searchFilms(
     String name,
@@ -24,5 +35,10 @@ class FilmsApp {
 
     return await _movieDBApiRepository.searchFilmByFilters(
         releaseYear, genreId, page);
+  }
+
+  Image renderImage(imgPath) {
+    // TODO: ajustar retorno da image, caso erro
+    return _movieDBApiRepository.getImage(imgPath);
   }
 }

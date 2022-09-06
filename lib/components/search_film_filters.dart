@@ -1,6 +1,5 @@
-import 'package:cinegraw_app/components/filters/genreFilters.dart';
-import 'package:cinegraw_app/components/filters/releaseFilters.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
+import 'package:cinegraw_app/components/filters/genre_filters.dart';
+import 'package:cinegraw_app/components/filters/release_filters.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmFilters extends StatefulWidget {
@@ -16,7 +15,6 @@ class SearchFilmFilters extends StatefulWidget {
 }
 
 class _SearchFilmFiltersState extends State<SearchFilmFilters> {
-  final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
   int _genreId = 0;
   String _release = "Lançamento";
 
