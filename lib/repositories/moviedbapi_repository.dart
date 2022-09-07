@@ -180,7 +180,7 @@ class MovieDBApiRepository {
   }
 
   Image getImage(String imgPath) {
-    var img = Image.network("${_imgUrl}original$imgPath");
+    var img = Image.network("${_imgUrl}w500$imgPath");
     return img;
   }
 }
