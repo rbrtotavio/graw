@@ -133,7 +133,6 @@ class MovieDBApiRepository {
     return genresApi;
   }
 
-  // TODO: tratar buscas alem do limite de paginas
   Future<List<FilmMovieDB>> searchFilmByFilters(
     String releaseYear,
     String genreId,
@@ -156,7 +155,6 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
-  // TODO: tratar buscas alem do limite de paginas
   Future<List<FilmMovieDB>> searchFilmByName(
     String releaseYear,
     String name,

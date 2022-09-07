@@ -19,46 +19,8 @@ class CarouselSector extends StatefulWidget {
 class _CarouselSectorState extends State<CarouselSector> {
   final FilmsApp _filmsApp = FilmsApp();
 
-  Future<List<FilmMovieDB>> getPopular() async {
-    var filmsApi = await _filmsApp.getPopularFilms();
-    return filmsApi;
-  }
-
-  Future<List<FilmMovieDB>> getNowPlaying() async {
-    var filmsApi = await _filmsApp.getNowPlaying();
-
-    return filmsApi;
-  }
-
-  Future<List<FilmMovieDB>> getUpComing() async {
-    var filmsApi = await _filmsApp.getUpComing();
-
-    return filmsApi;
-  }
-
-  Future<List<FilmMovieDB>> getTopRated() async {
-    var filmsApi = await _filmsApp.getTopRated();
-
-    return filmsApi;
-  }
-
   Future<List<FilmMovieDB>> CarrosselSelector() async {
-    switch (widget.sectorTitle) {
-      case 'Populares':
-        return getPopular();
-
-      case 'Lançamentos':
-        return getNowPlaying();
-
-      case 'Em breve':
-        return getUpComing();
-
-      case 'Melhores filmes':
-        return getTopRated();
-
-      default:
-        return getPopular();
-    }
+    return await _filmsApp.getCarroselFilms(widget.sectorTitle);
   }
 
   @override

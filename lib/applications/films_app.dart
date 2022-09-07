@@ -8,24 +8,19 @@ class FilmsApp {
 
   FilmsApp();
 
-  Future<List<FilmMovieDB>> getPopularFilms() async {
-    return await _movieDBApiRepository.getPopularFilms();
-  }
-
-  Future<List<FilmMovieDB>> getNowPlaying() async {
-    return await _movieDBApiRepository.getNowPlaying();
-  }
-
-  Future<List<FilmMovieDB>> getUpComing() async {
-    return await _movieDBApiRepository.getUpComing();
-  }
-
-  Future<List<FilmMovieDB>> getTopRated() async {
-    return await _movieDBApiRepository.getTopRated();
-  }
-
   Future<List<Genre>> getGenres() async {
     return await _movieDBApiRepository.getGenres();
+  }
+
+  Future<List<FilmMovieDB>> getCarroselFilms(String category) async {
+    Map<String, Function> searchRepositoryMethods = {
+      "Populares": _movieDBApiRepository.getPopularFilms,
+      "Lançamentos": _movieDBApiRepository.getNowPlaying,
+      "Em breve": _movieDBApiRepository.getUpComing,
+      "Melhores filmes": _movieDBApiRepository.getTopRated
+    };
+
+    return await Function.apply(searchRepositoryMethods[category]!, null);
   }
 
   Future<List<FilmMovieDB>> searchFilms(
