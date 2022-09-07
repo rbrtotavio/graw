@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
         '/config': (context) => const ConfigPage(),
         '/login_register': ((context) => const LoginRegister()),
-        '/auth_page': ((context) => LoginAuth()),
+        '/auth_page': ((context) => const LoginAuth()),
         '/film': (context) => const FilmScreen(),
       },
     );

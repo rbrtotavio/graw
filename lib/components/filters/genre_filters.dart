@@ -1,5 +1,5 @@
+import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class GenreFilters extends StatefulWidget {
@@ -15,7 +15,7 @@ class GenreFilters extends StatefulWidget {
 }
 
 class _GenreFiltersState extends State<GenreFilters> {
-  final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  final FilmsApp _filmsApp = FilmsApp();
   Genre _selectedGenre = Genre(genreId: 0, genreName: "Gênero");
 
   bool search = true;
@@ -23,7 +23,7 @@ class _GenreFiltersState extends State<GenreFilters> {
   Future<List<Genre>> getGenres() async {
     if (search) {
       search = false;
-      var genresApi = await _movieDBApiRepository.getGenres();
+      var genresApi = await _filmsApp.getGenres();
       genresApi.insert(0, Genre(genreId: 0, genreName: "Gênero"));
       _genres = List.from(genresApi);
       return genresApi;

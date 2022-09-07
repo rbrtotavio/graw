@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class FilmCard extends StatefulWidget {
 }
 
 class _FilmCardState extends State<FilmCard> {
-  MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  final FilmsApp _filmsApp = FilmsApp();
 
   void _gotoFilm() {
     Navigator.pushNamed(
@@ -27,7 +28,7 @@ class _FilmCardState extends State<FilmCard> {
 
     return InkWell(
       onTap: _gotoFilm,
-      child: _movieDBApiRepository.renderImage(widget.film.cardImagePath),
+      child: _filmsApp.renderImage(widget.film.cardImagePath),
     );
   }
 }

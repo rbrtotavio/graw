@@ -1,6 +1,5 @@
+import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
-import 'package:cinegraw_app/models/film.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'film_carousel.dart';
@@ -18,69 +17,44 @@ class CarouselSector extends StatefulWidget {
 }
 
 class _CarouselSectorState extends State<CarouselSector> {
-  MovieDBApiRepository _movieDBApiRepository = new MovieDBApiRepository();
+  final FilmsApp _filmsApp = FilmsApp();
 
-  Future<List<Film>> getPopular() async {
-    var filmsApi = await _movieDBApiRepository.getPopularFilms();
-
-    List<Film> films = <Film>[];
-
-    for (var i = 0; i < 10; i++) {
-      films.add(Film(filmsApi[i].title));
-    }
-
-    return films;
+  Future<List<FilmMovieDB>> getPopular() async {
+    var filmsApi = await _filmsApp.getPopularFilms();
+    return filmsApi;
   }
 
-  Future<List<Film>> getNowplaying() async {
-    var filmsApi = await _movieDBApiRepository.getNowPlaying();
+  Future<List<FilmMovieDB>> getNowPlaying() async {
+    var filmsApi = await _filmsApp.getNowPlaying();
 
-    List<Film> films = <Film>[];
-
-    for (var i = 0; i < 10; i++) {
-      films.add(Film(filmsApi[i].title));
-    }
-
-    return films;
+    return filmsApi;
   }
 
-  Future<List<Film>> getUpcoming() async {
-    var filmsApi = await _movieDBApiRepository.getUpComing();
+  Future<List<FilmMovieDB>> getUpComing() async {
+    var filmsApi = await _filmsApp.getUpComing();
 
-    List<Film> films = <Film>[];
-
-    for (var i = 0; i < 10; i++) {
-      films.add(Film(filmsApi[i].title));
-    }
-
-    return films;
+    return filmsApi;
   }
 
-  Future<List<Film>> getToprated() async {
-    var filmsApi = await _movieDBApiRepository.getTopRated();
+  Future<List<FilmMovieDB>> getTopRated() async {
+    var filmsApi = await _filmsApp.getTopRated();
 
-    List<Film> films = <Film>[];
-
-    for (var i = 0; i < 10; i++) {
-      films.add(Film(filmsApi[i].title));
-    }
-
-    return films;
+    return filmsApi;
   }
 
-  Future<List<Film>> CarrosselSelector() async {
+  Future<List<FilmMovieDB>> CarrosselSelector() async {
     switch (widget.sectorTitle) {
       case 'Populares':
         return getPopular();
 
       case 'Lançamentos':
-        return getNowplaying();
+        return getNowPlaying();
 
       case 'Em breve':
-        return getUpcoming();
+        return getUpComing();
 
       case 'Melhores filmes':
-        return getToprated();
+        return getTopRated();
 
       default:
         return getPopular();
@@ -102,18 +76,19 @@ class _CarouselSectorState extends State<CarouselSector> {
         SizedBox(
           height: 200,
           child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: FutureBuilder<List<Film>>(
-                future: CarrosselSelector(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return FilmCarousel(films: snapshot.data!);
-                  } else if (snapshot.hasError) {
-                    print('${snapshot.error}');
-                  }
-                  return CircularProgressIndicator();
-                },
-              )),
+            scrollDirection: Axis.horizontal,
+            child: FutureBuilder<List<FilmMovieDB>>(
+              future: CarrosselSelector(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return FilmCarousel(films: snapshot.data!);
+                } else if (snapshot.hasError) {
+                  print('${snapshot.error}');
+                }
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
         ),
       ],
     );
