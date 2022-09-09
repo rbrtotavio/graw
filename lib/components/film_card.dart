@@ -1,6 +1,5 @@
 import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class FilmCard extends StatefulWidget {
@@ -24,11 +23,9 @@ class _FilmCardState extends State<FilmCard> {
 
   @override
   Widget build(BuildContext context) {
-    // getFilmCard();
-
     return InkWell(
       onTap: _gotoFilm,
-      child: _filmsApp.renderImage(widget.film.cardImagePath),
+      child: _filmsApp.getCardImage(widget.film.cardImagePath),
     );
   }
 }
