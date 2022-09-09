@@ -44,8 +44,13 @@ class FilmsApp {
         releaseYear, genreId, page);
   }
 
-  Image renderImage(imgPath) {
-    // TODO: ajustar retorno da image, caso erro
-    return _movieDBApiRepository.getImage(imgPath);
+  Image getCardImage(imgPath) {
+    var img = _movieDBApiRepository.getCardImage(imgPath);
+    return img;
+  }
+
+  Image getCoverImage(imgPath) {
+    var img = _movieDBApiRepository.getCoverImage(imgPath);
+    return img;
   }
 }

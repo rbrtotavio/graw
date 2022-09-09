@@ -33,7 +33,7 @@ class MovieDBApiRepository {
         configurationMovieDB = ConfigurationMovieDB.fromJson(result["images"]);
         _imgUrl = configurationMovieDB!.secureUrlImage;
         _cardSizes = configurationMovieDB!.cardSize;
-        _coverSizes = configurationMovieDB!.coverSize;
+        _coverSizes = configurationMovieDB!.coverSize.reversed.toList();
       }
     }
   }
@@ -177,8 +177,49 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
-  Image getImage(String imgPath) {
-    var img = Image.network("${_imgUrl}w500$imgPath");
+  Image getCardImage(String imgPath) {
+    bool error = false;
+    // TODO: criar cardholder
+    Image img = Image.network("${_imgUrl}original$imgPath");
+
+    for (var size in _cardSizes) {
+      var imgTemp = Image.network(
+        "${_imgUrl}${size}$imgPath",
+        errorBuilder: (context, error, stackTrace) {
+          error = true;
+          return SizedBox();
+        },
+      );
+
+      if (!error == true) {
+        img = imgTemp;
+        break;
+      }
+    }
+
+    return img;
+  }
+
+  Image getCoverImage(String imgPath) {
+    bool error = false;
+    // TODO: criar coverholder
+    Image img = Image.network("${_imgUrl}original$imgPath");
+
+    for (var size in _coverSizes) {
+      var imgTemp = Image.network(
+        "${_imgUrl}${size}$imgPath",
+        errorBuilder: (context, error, stackTrace) {
+          error = true;
+          return SizedBox();
+        },
+      );
+
+      if (!error == true) {
+        img = imgTemp;
+        break;
+      }
+    }
+
     return img;
   }
 }

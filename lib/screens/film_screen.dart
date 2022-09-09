@@ -28,7 +28,7 @@ class _FilmScreenState extends State<FilmScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _filmsApp.renderImage(film.coverImagePath),
+            _filmsApp.getCoverImage(film.coverImagePath),
             Container(
               height: 80,
               color: const Color.fromARGB(255, 220, 220, 220),
