@@ -1,5 +1,7 @@
+import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/components/search_film_filters.dart';
 import 'package:cinegraw_app/components/search_results.dart';
+import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmScreen extends StatefulWidget {
@@ -12,16 +14,51 @@ class SearchFilmScreen extends StatefulWidget {
 }
 
 class _SearchFilmScreenState extends State<SearchFilmScreen> {
-  int quantCards = 9;
+  final FilmsApp _filmsApp = FilmsApp();
+
+  Map<String, dynamic> _filmFilter = {};
+  List<FilmMovieDB> films = <FilmMovieDB>[];
+  int page = 0;
+
+  final ScrollController _scrollController = ScrollController();
 
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
-  void searchFilm(Map<String, dynamic> filtroFilme) {
-    //TODO: Implementar função de procurar filme
-    setState(() {
-      quantCards = filtroFilme['quantidade'] as int;
+  void searchFilm(Map<String, dynamic> filtroFilme) async {
+    _filmFilter = filtroFilme;
+    page = 1;
+    films = await _filmsApp.searchFilms(
+      _filmFilter["filmName"] ?? "",
+      _filmFilter["release"] ?? "",
+      _filmFilter["genre"] ?? "",
+      page.toString(),
+    );
+    setState(() {});
+  }
+
+  void searchMoreFilm() async {
+    page += 1;
+    films += await _filmsApp.searchFilms(
+      _filmFilter["filmName"] ?? "",
+      _filmFilter["release"] ?? "",
+      _filmFilter["genre"] ?? "",
+      page.toString(),
+    );
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset >=
+              _scrollController.position.maxScrollExtent &&
+          !_scrollController.position.outOfRange) {
+        searchMoreFilm();
+      }
     });
   }
 
@@ -42,12 +79,13 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SearchFilmFilters(
                 searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
             SearchResults(
-              quantCards: quantCards,
+              films: films,
             ),
           ],
         ),

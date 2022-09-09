@@ -3,7 +3,7 @@ class FilmMovieDB {
   final String title;
   final String originalTitle;
   final String overview;
-  final DateTime releaseDate;
+  final DateTime? releaseDate;
   final bool isAdultContent;
   final String coverImagePath;
   final String cardImagePath;
@@ -33,19 +33,24 @@ class FilmMovieDB {
 
   factory FilmMovieDB.fromJson(Map<String, dynamic> json) {
     return FilmMovieDB(
-        filmId: json["id"],
-        title: json["title"],
-        originalTitle: json["original_title"],
-        overview: json["overview"],
+        filmId: json["id"] ?? -1,
+        title: json["title"] ?? "",
+        originalTitle: json["original_title"] ?? "",
+        overview: json["overview"] ?? "",
         releaseDate: DateTime.parse(json["release_date"]),
         isAdultContent: json["adult"],
-        coverImagePath: json["backdrop_path"],
-        cardImagePath: json["poster_path"],
-        genresIds: json["genre_ids"].cast<int>(),
-        popularity: double.parse(json["popularity"].toString()),
-        average: double.parse(json["vote_average"].toString()),
-        voteCount: json["vote_count"],
-        originalLang: json["original_language"],
+        coverImagePath: json["backdrop_path"] ?? "",
+        cardImagePath: json["poster_path"] ?? "",
+        genresIds:
+            json["genre_ids"] != null ? json["genre_ids"].cast<int>() : [],
+        popularity: json["popularity"] != null
+            ? double.parse(json["popularity"].toString())
+            : -1.0,
+        average: json["vote_average"] != null
+            ? double.parse(json["vote_average"].toString())
+            : -1.0,
+        voteCount: json["vote_count"] ?? -1,
+        originalLang: json["original_language"] ?? "",
         hasVideo: json["video"]);
   }
 }

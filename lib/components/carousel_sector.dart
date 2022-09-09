@@ -1,5 +1,5 @@
-import 'package:cinegraw_app/models/film.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
+import 'package:cinegraw_app/applications/films_app.dart';
+import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 
 import 'film_carousel.dart';
@@ -17,17 +17,10 @@ class CarouselSector extends StatefulWidget {
 }
 
 class _CarouselSectorState extends State<CarouselSector> {
-  MovieDBApiRepository _movieDBApiRepository = new MovieDBApiRepository();
+  final FilmsApp _filmsApp = FilmsApp();
 
-  Future<List<Film>> getFilms() async {
-    var filmsApi = await _movieDBApiRepository.getPopularFilms();
-    List<Film> films = <Film>[];
-
-    for (var i = 0; i < 10; i++) {
-      films.add(Film(filmsApi[i].title));
-    }
-
-    return films;
+  Future<List<FilmMovieDB>> CarrosselSelector() async {
+    return await _filmsApp.getCarroselFilms(widget.sectorTitle);
   }
 
   @override
@@ -46,8 +39,8 @@ class _CarouselSectorState extends State<CarouselSector> {
           height: 200,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: FutureBuilder<List<Film>>(
-              future: getFilms(),
+            child: FutureBuilder<List<FilmMovieDB>>(
+              future: CarrosselSelector(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return FilmCarousel(films: snapshot.data!);

@@ -20,6 +20,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/config');
   }
 
+  void _gotoAuthPage(BuildContext context) {
+    Navigator.pushNamed(context, '/auth_page');
+  }
+
   void _gotoLoginRegister(BuildContext context) {
     Navigator.pushNamed(context, '/login_register');
   }
@@ -62,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: TextButton(
                   onPressed: () {
-                    _gotoLoginRegister(context);
+                    _gotoAuthPage(context);
                   },
                   child: const Text(
                     "Login/Registrar-se",
@@ -89,9 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          // CarouselSector(sectorTitle: "Lançamentos"),
-          // CarouselSector(sectorTitle: "Ranking de Filmes"),
-          // CarouselSector(sectorTitle: "Filmes por Gênero"),
+          CarouselSector(sectorTitle: "Lançamentos"),
+          CarouselSector(sectorTitle: "Em breve"),
+          CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );

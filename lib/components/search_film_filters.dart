@@ -1,3 +1,5 @@
+import 'package:cinegraw_app/components/filters/genre_filters.dart';
+import 'package:cinegraw_app/components/filters/release_filters.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmFilters extends StatefulWidget {
@@ -13,31 +15,22 @@ class SearchFilmFilters extends StatefulWidget {
 }
 
 class _SearchFilmFiltersState extends State<SearchFilmFilters> {
+  int _genreId = 0;
+  String _release = "Lançamento";
+
+  void getGenreFilter(int genreId) {
+    setState(() {
+      _genreId = genreId;
+    });
+  }
+
+  void getReleaseFilter(String release) {
+    setState(() {
+      _release = release;
+    });
+  }
+
   String nomeFilme = "";
-
-  String genero = "Gênero";
-  List<String> generos = <String>[
-    "Gênero",
-    "Terror",
-    "Ação",
-    "Comédia",
-    "Drama"
-  ];
-
-  String lancamento = "Lançamento";
-  List<String> lancamentos = <String>[
-    "Lançamento",
-    "2022",
-    "2021",
-    "2020",
-    "2019",
-    "2017",
-    "2016",
-    "2015",
-    "2014",
-    "2013",
-    "2012"
-  ];
 
   String diretor = "Diretor";
   List<String> diretores = <String>[
@@ -52,10 +45,10 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
     if (nomeFilme != "") {
       return true;
     }
-    if (genero != "Gênero") {
+    if (_genreId != 0) {
       return true;
     }
-    if (lancamento != "Lançamento") {
+    if (_release != "Lançamento") {
       return true;
     }
     if (diretor != "Diretor") {
@@ -66,11 +59,9 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
 
   void searchFilm() {
     var filtroFilme = {
-      "nomefilme": nomeFilme != "" ? nomeFilme : null,
-      "genero": genero != "Gênero" ? genero : null,
-      "lancamento": lancamento != "Lançamento" ? lancamento : null,
-      "diretor": diretor != "Diretor" ? diretor : null,
-      "quantidade": int.parse(nomeFilme)
+      "filmName": nomeFilme != "" ? nomeFilme : null,
+      "genre": _genreId != 0 ? _genreId.toString() : null,
+      "release": _release != "Lançamento" ? _release.toString() : null,
     };
     widget.searchFilm(filtroFilme);
   }
@@ -127,18 +118,7 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
         icon: const SizedBox(),
         onChanged: (String? newValue) {
           setState(() {
-            switch (categoria) {
-              case "G":
-                genero = newValue!;
-                break;
-              case "L":
-                lancamento = newValue!;
-                break;
-              case "D":
-                diretor = newValue!;
-                break;
-              default:
-            }
+            diretor = newValue!;
           });
         },
         items: opcoes.map<DropdownMenuItem<String>>((String value) {
@@ -160,10 +140,12 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
           searchField(),
           Row(
             children: [
-              Expanded(flex: 10, child: menuFilter(genero, "G", generos)),
-              Expanded(
-                  flex: 9, child: menuFilter(lancamento, "L", lancamentos)),
-              Expanded(flex: 11, child: menuFilter(diretor, "D", diretores)),
+              GenreFilters(
+                getFilter: (int genreId) => getGenreFilter(genreId),
+              ),
+              ReleaseFilters(
+                  getFilter: (String release) => getReleaseFilter(release)),
+              // TODO: botao de limpar filtros
             ],
           )
         ],
