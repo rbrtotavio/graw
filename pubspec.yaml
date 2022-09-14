@@ -39,6 +39,7 @@ dependencies:
   http: ^0.13.5
   envify: any
   analyzer: ^2.8.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

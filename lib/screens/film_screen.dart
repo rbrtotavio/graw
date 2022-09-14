@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
@@ -30,17 +31,30 @@ class _FilmScreenState extends State<FilmScreen> {
           children: [
             _filmsApp.getCoverImage(film.coverImagePath),
             Container(
+              padding: EdgeInsets.all(8.0),
               height: 80,
               color: const Color.fromARGB(255, 220, 220, 220),
               child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(film.title),
+                  SizedBox(
+                    width: 346,
+                    child: AutoSizeText(
+                      film.title,
+                      maxFontSize: 120,
+                      minFontSize: 20,
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(film.average.toString()),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        "Nota",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 30, 30, 30),
+                        ),
+                      ),
+                      Text(film.average.toString()),
+                    ],
                   ),
                 ],
               ),
