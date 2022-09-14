@@ -1,7 +1,7 @@
+import 'package:cinegraw_app/applications/auth_app.dart';
 import 'package:cinegraw_app/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:cinegraw_app/screens/main_screen.dart';
-import '../repositories/firebase_repository.dart';
 
 class LoginRegister extends StatefulWidget {
   const LoginRegister({Key? key}) : super(key: key);
@@ -13,6 +13,7 @@ class LoginRegister extends StatefulWidget {
 class _LoginRegisterState extends State<LoginRegister> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final AuthApp _authApp = AuthApp();
 
   void _gotoReturn(BuildContext context) {
     Navigator.push(
@@ -106,7 +107,8 @@ class _LoginRegisterState extends State<LoginRegister> {
               ),
               TextButton(
                   onPressed: () {
-                    signIn(_emailController, _passwordController);
+                    _authApp.signIn(
+                        _emailController.text, _passwordController.text);
                   },
                   child: const Text(
                     "Entrar",

@@ -1,10 +1,13 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/repositories/firebase_firestore.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 
 class FilmsApp {
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  final FireBaseFireStoreRepository _fireBaseFireStoreRepository =
+      FireBaseFireStoreRepository();
 
   FilmsApp();
 
@@ -24,11 +27,7 @@ class FilmsApp {
   }
 
   Future<List<FilmMovieDB>> searchFilms(
-    String name,
-    String releaseYear,
-    String genreId,
-    String page,
-  ) async {
+      String name, String releaseYear, String genreId, String page) async {
     if (name != "") {
       var films =
           await _movieDBApiRepository.searchFilmByName(releaseYear, name, page);
@@ -49,7 +48,7 @@ class FilmsApp {
     return img;
   }
 
-  Image getCoverImage(imgPath) {
+  Image getCoverImage(String imgPath) {
     var img = _movieDBApiRepository.getCoverImage(imgPath);
     return img;
   }

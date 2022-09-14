@@ -39,6 +39,7 @@ dependencies:
   http: ^0.13.5
   envify: any
   analyzer: ^2.8.0
+  cloud_firestore: ^3.4.7
 
 dev_dependencies:
   flutter_test:
