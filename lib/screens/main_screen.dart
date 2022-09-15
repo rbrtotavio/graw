@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cinegraw_app/applications/auth_app.dart';
 import '../components/carousel_sector.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -26,6 +27,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _gotoLoginRegister(BuildContext context) {
     Navigator.pushNamed(context, '/login_register');
+  }
+
+  void changeWidgets() {
+    setState(() {
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          userState = false;
+        } else {
+          userState = true;
+        }
+      });
+    });
+  }
+
+  AuthApp _authApp = AuthApp();
+
+  bool userState = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => changeWidgets());
+
+    print('criando');
   }
 
   @override
@@ -63,17 +89,30 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 50),
             Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                  onPressed: () {
-                    _gotoAuthPage(context);
-                  },
-                  child: const Text(
-                    "Login/Registrar-se",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 26, 26, 26), fontSize: 27),
-                  )),
-            ),
+                alignment: Alignment.centerLeft,
+                child: userState
+                    ? TextButton(
+                        onPressed: () {
+                          _gotoAuthPage(context);
+                          changeWidgets();
+                        },
+                        child: const Text(
+                          "Perfil",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 26, 26, 26),
+                              fontSize: 27),
+                        ))
+                    : TextButton(
+                        onPressed: () {
+                          _gotoAuthPage(context);
+                          changeWidgets();
+                        },
+                        child: const Text(
+                          "Login/cadastro",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 26, 26, 26),
+                              fontSize: 27),
+                        ))),
             const SizedBox(height: 40),
             Align(
               alignment: Alignment.centerLeft,

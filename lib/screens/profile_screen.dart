@@ -13,6 +13,10 @@ class ProfilePage extends StatelessWidget {
                 )));
   }
 
+  void _gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +25,7 @@ class ProfilePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {
-                _gotoReturn(context);
+                _gotoMainScreen(context);
               },
             )
           ],

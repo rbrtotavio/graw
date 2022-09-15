@@ -44,4 +44,15 @@ class FirebaseAuthRepository {
       return false;
     }
   }
+
+  bool verifyUser(bool userState) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        userState = false;
+      } else {
+        userState = true;
+      }
+    });
+    return userState;
+  }
 }
