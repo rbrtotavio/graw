@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinegraw_app/applications/films_app.dart';
+import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 
@@ -33,35 +34,71 @@ class _FilmScreenState extends State<FilmScreen> {
             Container(
               padding: EdgeInsets.all(8.0),
               height: 80,
-              color: const Color.fromARGB(255, 220, 220, 220),
+              color: Colors.blueGrey,
               child: Row(
                 children: [
                   SizedBox(
-                    width: 346,
+                    width: 216,
                     child: AutoSizeText(
                       film.title,
-                      maxFontSize: 120,
-                      minFontSize: 20,
+                      maxFontSize: 24,
+                      minFontSize: 16,
+                      maxLines: 2,
+                      style: Utilities.styleTitle,
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        "Nota",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 30, 30, 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "GRAW",
+                          style: Utilities.styleRater,
                         ),
-                      ),
-                      Text(film.average.toString()),
-                    ],
+                        Text(
+                          "${film.average.toString()}/10",
+                          style: Utilities.styleRating,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "TMDB",
+                          style: Utilities.styleRater,
+                        ),
+                        Text(
+                          "${film.average.toString()}/10",
+                          style: Utilities.styleRating,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(film.overview),
+              child: Column(
+                children: [
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Text(
+                        "Sinopse:",
+                        textAlign: TextAlign.start,
+                        style: Utilities.styleOverviewtitle,
+                      ),
+                    ],
+                  ),
+                  Text(film.overview),
+                ],
+              ),
             ),
           ],
         ),
