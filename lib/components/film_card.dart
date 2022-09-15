@@ -15,12 +15,14 @@ class FilmCard extends StatefulWidget {
 class _FilmCardState extends State<FilmCard> {
   final FilmsApp _filmsApp = FilmsApp();
 
-  void _gotoFilm() {
-    Navigator.pushNamed(
-      context,
-      '/film',
-      arguments: widget.film,
-    );
+  void _gotoFilm() async {
+    var reviews = await _filmsApp.getFilmReviews(widget.film.filmId);
+    print(reviews);
+    // Navigator.pushNamed(
+    //   context,
+    //   '/film',
+    //   arguments: widget.film,
+    // );
   }
 
   @override

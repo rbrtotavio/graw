@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/models/review.dart';
 import 'package:cinegraw_app/repositories/firebase_firestore.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class FilmsApp {
         releaseYear, genreId, page);
   }
 
-  Image getCardImage(imgPath) {
+  Image getCardImage(String imgPath) {
     var img = _movieDBApiRepository.getCardImage(imgPath);
     return img;
   }
@@ -51,5 +52,9 @@ class FilmsApp {
   Image getCoverImage(String imgPath) {
     var img = _movieDBApiRepository.getCoverImage(imgPath);
     return img;
+  }
+
+  Future<List<Review>> getFilmReviews(int filmId) async {
+    return await _fireBaseFireStoreRepository.getFilmReviews(filmId);
   }
 }
