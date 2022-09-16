@@ -38,4 +38,19 @@ class FireBaseFireStoreRepository {
     });
     return reviews;
   }
+
+  Future<List<Review>> getFilmReviews2(int filmId) async {
+    var reviews = await _db
+        .collection("Reviews")
+        .where("FilmId", isEqualTo: filmId)
+        .get()
+        .then((value) {
+      List<Review> listReviews = <Review>[];
+      for (var review in value.docs) {
+        listReviews.add(Review.FromJson(review.data(), review.id, filmId));
+      }
+      return listReviews;
+    });
+    return reviews;
+  }
 }

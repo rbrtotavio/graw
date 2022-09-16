@@ -16,7 +16,7 @@ class _FilmCardState extends State<FilmCard> {
   final FilmsApp _filmsApp = FilmsApp();
 
   void _gotoFilm() async {
-    var reviews = await _filmsApp.getFilmReviews(widget.film.filmId);
+    var reviews = await _filmsApp.getFilmReviews2(widget.film.filmId);
     print(reviews);
     // Navigator.pushNamed(
     //   context,

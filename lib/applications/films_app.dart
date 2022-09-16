@@ -57,4 +57,8 @@ class FilmsApp {
   Future<List<Review>> getFilmReviews(int filmId) async {
     return await _fireBaseFireStoreRepository.getFilmReviews(filmId);
   }
+
+  Future<List<Review>> getFilmReviews2(int filmId) async {
+    return await _fireBaseFireStoreRepository.getFilmReviews2(filmId);
+  }
 }
