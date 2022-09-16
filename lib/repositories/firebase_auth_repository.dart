@@ -45,7 +45,8 @@ class FirebaseAuthRepository {
     }
   }
 
-  bool verifyUser(bool userState) {
+  bool verifyUser() {
+    bool userState = false;
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         userState = false;

@@ -31,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void changeWidgets() {
     setState(() {
+      //userState = _authApp.verifyUser();
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user == null) {
           userState = false;
@@ -47,11 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => changeWidgets());
-
-    print('criando');
   }
 
   @override

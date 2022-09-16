@@ -14,7 +14,7 @@ class AuthApp {
     await _firebaseAuthentication.signUp(password, confirmpassword, email);
   }
 
-  bool verifyUser(bool userState) {
-    return _firebaseAuthentication.verifyUser(userState);
+  bool verifyUser() {
+    return _firebaseAuthentication.verifyUser();
   }
 }
