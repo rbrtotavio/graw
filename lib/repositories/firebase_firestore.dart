@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/models/review.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class FireBaseFireStoreRepository {
   bool _configured = false;
@@ -22,24 +23,7 @@ class FireBaseFireStoreRepository {
     }
   }
 
-  Future<List<Review>> getFilmReviews(int filmId) async {
-    var reviews = await _db
-        .collection("ReviewsByFilm")
-        .doc(filmId.toString())
-        .collection("Reviews")
-        .get()
-        .then((value) {
-      List<Review> listReviews = <Review>[];
-      for (var review in value.docs) {
-        var r = review.data();
-        listReviews.add(Review.FromJson(r, review.id, filmId));
-      }
-      return listReviews;
-    });
-    return reviews;
-  }
-
-  Future<List<Review>> getFilmReviews2(int filmId) async {
+  Future<List<Review>> getReviewsByFilm(int filmId) async {
     var reviews = await _db
         .collection("Reviews")
         .where("FilmId", isEqualTo: filmId)
@@ -52,5 +36,24 @@ class FireBaseFireStoreRepository {
       return listReviews;
     });
     return reviews;
+  }
+
+  void reviewFilm(int filmId, String review, double nota, DateTime dataReview,
+      String usuarioId, String reviewId) async {
+    var userReview = <String, dynamic>{
+      "DataReview": dataReview,
+      "Nota": nota,
+      "Review": review,
+      "UsuarioId": usuarioId,
+      "FilmId": filmId
+    };
+
+    _db
+        .collection("Reviews")
+        .doc(reviewId)
+        .set(userReview)
+        .onError((error, stackTrace) {
+      print(error);
+    });
   }
 }

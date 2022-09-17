@@ -1,6 +1,7 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/models/review.dart';
+import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
 import 'package:cinegraw_app/repositories/firebase_firestore.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ class FilmsApp {
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
   final FireBaseFireStoreRepository _fireBaseFireStoreRepository =
       FireBaseFireStoreRepository();
+  final FirebaseAuthRepository _firebaseAuthRepository =
+      FirebaseAuthRepository();
 
   FilmsApp();
 
@@ -55,10 +58,22 @@ class FilmsApp {
   }
 
   Future<List<Review>> getFilmReviews(int filmId) async {
-    return await _fireBaseFireStoreRepository.getFilmReviews(filmId);
+    return await _fireBaseFireStoreRepository.getReviewsByFilm(filmId);
   }
 
-  Future<List<Review>> getFilmReviews2(int filmId) async {
-    return await _fireBaseFireStoreRepository.getFilmReviews2(filmId);
+  void reviewFilm(int filmId, String review, double nota, String? reviewId) {
+    DateTime dataReview = DateTime.now();
+    var user = _firebaseAuthRepository.getUser();
+
+    if (user == null) {
+      print("usuario nao esta logado"); // TODO: Tratar usuario nao logado
+      return;
+    }
+
+    reviewId ??= UniqueKey().toString(); // TODO: alterar para GUID
+    print(reviewId);
+
+    _fireBaseFireStoreRepository.reviewFilm(
+        filmId, review, nota, dataReview, user.uid, reviewId);
   }
 }

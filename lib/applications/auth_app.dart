@@ -19,6 +19,6 @@ class AuthApp {
   }
 
   bool verifyUser() {
-    return _firebaseAuthentication.verifyUser();
+    return _firebaseAuthentication.getUser() != null;
   }
 }
