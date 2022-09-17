@@ -24,6 +24,10 @@ class _LoginRegisterState extends State<LoginRegister> {
                 )));
   }
 
+  void _gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/');
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -44,7 +48,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    _gotoReturn(context);
+                    _gotoMainScreen(context);
                   },
                 ),
               ),

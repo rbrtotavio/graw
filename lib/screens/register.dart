@@ -25,6 +25,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 )));
   }
 
+  void _gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/');
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -45,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  _gotoReturn(context);
+                  _gotoMainScreen(context);
                 },
               ),
             ),

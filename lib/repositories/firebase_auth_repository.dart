@@ -36,6 +36,10 @@ class FirebaseAuthRepository {
     }
   }
 
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   //função de validação que verifica se as senhas são iguais
   bool _verifyPassword(String password, String confirmpassword) {
     if (password.trim() == confirmpassword.trim()) {
@@ -43,5 +47,17 @@ class FirebaseAuthRepository {
     } else {
       return false;
     }
+  }
+
+  bool verifyUser() {
+    bool userState = false;
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        userState = false;
+      } else {
+        userState = true;
+      }
+    });
+    return userState;
   }
 }

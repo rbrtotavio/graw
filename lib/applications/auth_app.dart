@@ -13,4 +13,12 @@ class AuthApp {
   Future signUp(String password, String confirmpassword, String email) async {
     await _firebaseAuthentication.signUp(password, confirmpassword, email);
   }
+
+  void signOut() {
+    _firebaseAuthentication.signOut();
+  }
+
+  bool verifyUser() {
+    return _firebaseAuthentication.verifyUser();
+  }
 }
