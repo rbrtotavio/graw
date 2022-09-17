@@ -25,8 +25,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/auth_page');
   }
 
-  void _gotoLoginRegister(BuildContext context) {
-    Navigator.pushNamed(context, '/login_register');
+  void _gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/');
   }
 
   void changeWidgets() {
@@ -123,7 +123,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(
                         color: Color.fromARGB(255, 26, 26, 26), fontSize: 27),
                   )),
-            )
+            ),
+            const SizedBox(height: 40),
+            userState
+                ? Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                        onPressed: () {
+                          _authApp.signOut();
+                          changeWidgets();
+                          _gotoMainScreen(context);
+                        },
+                        child: const Text(
+                          "Sair",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 26, 26, 26),
+                              fontSize: 27),
+                        )),
+                  )
+                : const SizedBox(height: 40),
           ],
         ),
       ),

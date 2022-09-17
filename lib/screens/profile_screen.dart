@@ -21,6 +21,12 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              _gotoMainScreen(context);
+            },
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -53,18 +59,20 @@ class ProfilePage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Row(
                       children: [
-                        Column(
-                          children: [
-                            const Text(
-                              'Nome do usuário',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            SizedBox(height: 10),
-                            Text("Bio do usuário")
-                          ],
+                        Flexible(
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Nome do usuário',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              SizedBox(height: 10),
+                              Text("Bio do usuário")
+                            ],
+                          ),
                         ),
                         const SizedBox(
-                          width: 100,
+                          width: 80,
                         ),
                         Container(
                           child: Column(
@@ -92,7 +100,91 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                   )),
-              Container(
+              SingleChildScrollView(
+                child: Container(
+                  color: Colors.blueGrey,
+                  padding: EdgeInsets.all(30),
+                  height: 300,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.movie,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Text(
+                            'Review do filme',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.movie,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Text(
+                            'Review do filme',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.movie,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Text(
+                            'Review do filme',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.movie,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Text(
+                            'Review do filme',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              /*Container(
                 color: Colors.blueGrey,
                 padding: EdgeInsets.all(30),
                 height: 300,
@@ -173,7 +265,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              ),*/
               SizedBox(height: 50),
               MaterialButton(
                   child: Text("Sair"),

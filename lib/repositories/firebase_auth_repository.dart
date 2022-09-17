@@ -36,6 +36,10 @@ class FirebaseAuthRepository {
     }
   }
 
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   //função de validação que verifica se as senhas são iguais
   bool _verifyPassword(String password, String confirmpassword) {
     if (password.trim() == confirmpassword.trim()) {
