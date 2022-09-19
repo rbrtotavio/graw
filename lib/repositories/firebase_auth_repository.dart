@@ -30,9 +30,13 @@ class FirebaseAuthRepository {
 
   //função para se registrar no app
   Future signUp(String password, String confirmpassword, String email) async {
-    if (_verifyPassword(password, confirmpassword)) {
-      await _db.createUserWithEmailAndPassword(
-          email: email.trim(), password: password.trim());
+    try {
+      if (_verifyPassword(password, confirmpassword)) {
+        await _db.createUserWithEmailAndPassword(
+            email: email.trim(), password: password.trim());
+      }
+    } on FirebaseAuthException catch (e) {
+      return e.message;
     }
   }
 

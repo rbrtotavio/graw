@@ -42,6 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+//remover daqui
+  Future<void> changeUsername(user) async {
+    await user?.updateDisplayName("Jane Q. User");
+  }
+
+  void userName() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        print(user.uid);
+      }
+    });
+  }
+
   AuthApp _authApp = AuthApp();
 
   bool userState = false;
@@ -91,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: userState
                     ? TextButton(
                         onPressed: () {
+                          userName();
                           _gotoAuthPage(context);
                           changeWidgets();
                         },
