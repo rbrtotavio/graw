@@ -39,6 +39,8 @@ dependencies:
   http: ^0.13.5
   envify: any
   analyzer: ^2.8.0
+  cloud_firestore: ^3.4.7
+  uuid: ^3.0.6
   auto_size_text: ^3.0.0
 
 dev_dependencies:

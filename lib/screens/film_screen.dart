@@ -21,7 +21,6 @@ class _FilmScreenState extends State<FilmScreen> {
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

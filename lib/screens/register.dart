@@ -1,6 +1,5 @@
+import 'package:cinegraw_app/applications/auth_app.dart';
 import 'package:flutter/material.dart';
-
-import '../repositories/firebase_repository.dart';
 import 'login_register.dart';
 import 'main_screen.dart';
 
@@ -15,6 +14,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmpasswordController = TextEditingController();
+  final AuthApp _authApp = AuthApp();
 
   void _gotoReturn(BuildContext context) {
     Navigator.push(
@@ -23,6 +23,10 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) => const MyHomePage(
                   title: 'GRAW',
                 )));
+  }
+
+  void _gotoMainScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/');
   }
 
   @override
@@ -45,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  _gotoReturn(context);
+                  _gotoMainScreen(context);
                 },
               ),
             ),
@@ -114,8 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             TextButton(
                 onPressed: () {
-                  signUp(_passwordController, _confirmpasswordController,
-                      _emailController);
+                  _authApp.signUp(_passwordController.text,
+                      _confirmpasswordController.text, _emailController.text);
                 },
                 child: const Text(
                   "Registrar-se",

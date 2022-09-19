@@ -15,7 +15,7 @@ class FilmCard extends StatefulWidget {
 class _FilmCardState extends State<FilmCard> {
   final FilmsApp _filmsApp = FilmsApp();
 
-  void _gotoFilm() {
+  void _gotoFilm() async {
     Navigator.pushNamed(
       context,
       '/film',

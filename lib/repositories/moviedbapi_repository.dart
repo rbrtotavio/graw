@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MovieDBApiRepository {
+  bool _configured = false;
   final String _language = "pt-BR";
   String _apiUrl = "https://api.themoviedb.org/3";
   String _imgUrl = "https://image.tmdb.org/t/p/";
@@ -17,14 +18,17 @@ class MovieDBApiRepository {
   // Sigleton
   static final MovieDBApiRepository _movieDBApiRepository =
       MovieDBApiRepository._internal();
+
   factory MovieDBApiRepository() {
     _movieDBApiRepository.getConfiguration();
     return _movieDBApiRepository;
   }
+
   MovieDBApiRepository._internal();
 
   void getConfiguration() async {
-    if (configurationMovieDB == null) {
+    if (!_configured) {
+      _configured = true;
       Uri api = Uri.parse("$_apiUrl/configuration?api_key=${Env.moviedb_key}");
       final response = await http.get(api);
 
@@ -134,10 +138,7 @@ class MovieDBApiRepository {
   }
 
   Future<List<FilmMovieDB>> searchFilmByFilters(
-    String releaseYear,
-    String genreId,
-    String page,
-  ) async {
+      String releaseYear, String genreId, String page) async {
     List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
 
     Uri api = Uri.parse(
@@ -156,10 +157,7 @@ class MovieDBApiRepository {
   }
 
   Future<List<FilmMovieDB>> searchFilmByName(
-    String releaseYear,
-    String name,
-    String page,
-  ) async {
+      String releaseYear, String name, String page) async {
     List<FilmMovieDB> filmsApi = <FilmMovieDB>[];
 
     Uri api = Uri.parse(

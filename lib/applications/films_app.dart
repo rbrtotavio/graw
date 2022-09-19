@@ -1,10 +1,19 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/models/result.dart';
+import 'package:cinegraw_app/models/review.dart';
+import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
+import 'package:cinegraw_app/repositories/firebase_firestore.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class FilmsApp {
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
+  final FireBaseFireStoreRepository _fireBaseFireStoreRepository =
+      FireBaseFireStoreRepository();
+  final FirebaseAuthRepository _firebaseAuthRepository =
+      FirebaseAuthRepository();
 
   FilmsApp();
 
@@ -24,11 +33,7 @@ class FilmsApp {
   }
 
   Future<List<FilmMovieDB>> searchFilms(
-    String name,
-    String releaseYear,
-    String genreId,
-    String page,
-  ) async {
+      String name, String releaseYear, String genreId, String page) async {
     if (name != "") {
       var films =
           await _movieDBApiRepository.searchFilmByName(releaseYear, name, page);
@@ -44,13 +49,53 @@ class FilmsApp {
         releaseYear, genreId, page);
   }
 
-  Image getCardImage(imgPath) {
+  Image getCardImage(String imgPath) {
     var img = _movieDBApiRepository.getCardImage(imgPath);
     return img;
   }
 
-  Image getCoverImage(imgPath) {
+  Image getCoverImage(String imgPath) {
     var img = _movieDBApiRepository.getCoverImage(imgPath);
     return img;
+  }
+
+  Future<List<Review>> getFilmReviews(int filmId) async {
+    return await _fireBaseFireStoreRepository.getReviewsByFilm(filmId);
+  }
+
+  Future<List<Review>> getUserReviews(String userId) async {
+    return await _fireBaseFireStoreRepository.getReviewsByUser(userId);
+  }
+
+  Future<Result> reviewFilm(
+      int filmId, String review, double nota, String? reviewId) async {
+    var user = _firebaseAuthRepository.getUser();
+    if (user == null) {
+      return Result.Error("É necessario estar logado para realizar essa ação");
+    }
+
+    DateTime dataReview = DateTime.now();
+    reviewId ??= const Uuid().v4();
+    var resultado = await _fireBaseFireStoreRepository.reviewFilm(
+        filmId, review, nota, dataReview, user.uid, reviewId);
+
+    if (resultado.isNotEmpty) {
+      return Result.Error(resultado);
+    }
+    return Result.Success("");
+  }
+
+  Future<Result> deleteReview(String reviewId) async {
+    var user = _firebaseAuthRepository.getUser();
+    if (user == null) {
+      return Result.Error("É necessario estar logado para realizar essa ação");
+    }
+
+    var resultado = await _fireBaseFireStoreRepository.deleteReview(reviewId);
+
+    if (resultado.isNotEmpty) {
+      return Result.Error(resultado);
+    }
+    return Result.Success("");
   }
 }
