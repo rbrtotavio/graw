@@ -1,6 +1,5 @@
 import 'package:cinegraw_app/models/review.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class FireBaseFireStoreRepository {
   bool _configured = false;
@@ -31,11 +30,46 @@ class FireBaseFireStoreRepository {
         .then((value) {
       List<Review> listReviews = <Review>[];
       for (var review in value.docs) {
-        listReviews.add(Review.FromJson(review.data(), review.id, filmId));
+        listReviews.add(Review.FromJson(review.data(), review.id));
       }
       return listReviews;
     });
     return reviews;
+  }
+
+  Future<List<Review>> getReviewsByUser(String userId) async {
+    var reviews = await _db
+        .collection("Reviews")
+        .where("UserId", isEqualTo: userId)
+        .get()
+        .then((value) {
+      List<Review> listReviews = <Review>[];
+      for (var review in value.docs) {
+        listReviews.add(Review.FromJson(review.data(), review.id));
+      }
+      return listReviews;
+    });
+    return reviews;
+  }
+
+  Future<Review?> getReviewById(String reviewId) async {
+    var review = await _db.collection("Reviews").doc(reviewId).get();
+    if (review.exists) {
+      return Review.FromJson(review.data()!, reviewId);
+    }
+
+    return null;
+  }
+
+  void deleteReview(String reviewId) async {
+    var review = await getReviewById(reviewId);
+    if (review == null) {
+      print("Não foi possivel encontrar a review");
+    }
+
+    _db.collection("Reviews").doc(reviewId).delete().then(
+        (value) => print("Review excluida"),
+        onError: (error) => print(error));
   }
 
   void reviewFilm(int filmId, String review, double nota, DateTime dataReview,

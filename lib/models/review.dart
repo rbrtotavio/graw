@@ -14,11 +14,10 @@ class Review {
       required this.nota,
       required this.dataReview});
 
-  factory Review.FromJson(
-      Map<String, dynamic> json, String reviewId, int filmId) {
+  factory Review.FromJson(Map<String, dynamic> json, String reviewId) {
     return Review(
         reviewId: reviewId,
-        filmId: filmId,
+        filmId: json["FilmId"],
         review: json["Review"],
         usuarioId: json["UsuarioId"],
         nota: json["Nota"],
