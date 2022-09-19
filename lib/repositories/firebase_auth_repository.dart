@@ -49,18 +49,6 @@ class FirebaseAuthRepository {
     }
   }
 
-  // bool verifyUser() {
-  //   bool userState = false;
-  //   _db.authStateChanges().listen((User? user) {
-  //     if (user == null) {
-  //       userState = false;
-  //     } else {
-  //       userState = true;
-  //     }
-  //   });
-  //   return userState;
-  // }
-
   User? getUser() {
     return _db.currentUser;
   }
