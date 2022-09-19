@@ -61,19 +61,8 @@ class FireBaseFireStoreRepository {
     return null;
   }
 
-  void deleteReview(String reviewId) async {
-    var review = await getReviewById(reviewId);
-    if (review == null) {
-      print("Não foi possivel encontrar a review");
-    }
-
-    _db.collection("Reviews").doc(reviewId).delete().then(
-        (value) => print("Review excluida"),
-        onError: (error) => print(error));
-  }
-
-  void reviewFilm(int filmId, String review, double nota, DateTime dataReview,
-      String usuarioId, String reviewId) async {
+  Future<String> reviewFilm(int filmId, String review, double nota,
+      DateTime dataReview, String usuarioId, String reviewId) async {
     var userReview = <String, dynamic>{
       "DataReview": dataReview,
       "Nota": nota,
@@ -82,12 +71,23 @@ class FireBaseFireStoreRepository {
       "FilmId": filmId
     };
 
-    _db
+    return _db
         .collection("Reviews")
         .doc(reviewId)
         .set(userReview)
-        .onError((error, stackTrace) {
-      print(error);
-    });
+        .then((value) => "", onError: (error) => error.toString());
+  }
+
+  Future<String> deleteReview(String reviewId) async {
+    var review = await getReviewById(reviewId);
+    if (review == null) {
+      return "";
+    }
+
+    return _db
+        .collection("Reviews")
+        .doc(reviewId)
+        .delete()
+        .then((value) => "", onError: (error) => error.toString());
   }
 }

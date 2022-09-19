@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
 import 'package:cinegraw_app/repositories/firebase_firestore.dart';
@@ -66,18 +67,35 @@ class FilmsApp {
     return await _fireBaseFireStoreRepository.getReviewsByUser(userId);
   }
 
-  void reviewFilm(int filmId, String review, double nota, String? reviewId) {
+  Future<Result> reviewFilm(
+      int filmId, String review, double nota, String? reviewId) async {
     var user = _firebaseAuthRepository.getUser();
     if (user == null) {
-      // TODO: Tratar usuario nao logado
-      return;
+      return Result.Error("É necessario estar logado para realizar essa ação");
     }
 
     DateTime dataReview = DateTime.now();
     reviewId ??= const Uuid().v4();
-    print(reviewId);
-
-    _fireBaseFireStoreRepository.reviewFilm(
+    var resultado = await _fireBaseFireStoreRepository.reviewFilm(
         filmId, review, nota, dataReview, user.uid, reviewId);
+
+    if (resultado.isNotEmpty) {
+      return Result.Error(resultado);
+    }
+    return Result.Success("");
+  }
+
+  Future<Result> deleteReview(String reviewId) async {
+    var user = _firebaseAuthRepository.getUser();
+    if (user == null) {
+      return Result.Error("É necessario estar logado para realizar essa ação");
+    }
+
+    var resultado = await _fireBaseFireStoreRepository.deleteReview(reviewId);
+
+    if (resultado.isNotEmpty) {
+      return Result.Error(resultado);
+    }
+    return Result.Success("");
   }
 }
