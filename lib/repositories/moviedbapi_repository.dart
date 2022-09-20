@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:cinegraw_app/env/env.dart';
 import 'package:cinegraw_app/models/movieDB/configuration_movieDB.dart';
+import 'package:cinegraw_app/models/movieDB/credits.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
+import 'package:cinegraw_app/models/result.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,6 +119,23 @@ class MovieDBApiRepository {
     }
 
     return filmsApi;
+  }
+
+  Future<List<dynamic>> getDirector(Int movieId) async {
+    //TODO: Fazer isso funcionar, deus me guie!
+    List<Crew> crewApi = <Crew>[];
+
+    Uri api = Uri.parse(
+        "$_apiUrl/movie/${movieId.toString()}/credits?api_key=${Env.moviedb_key}");
+    final response = await http.get(api);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+
+      List crewElements = result["crew"];
+      crewApi = crewElements.map((crew) => Crew.fromJson(crew)).toList();
+    }
+    return crewApi;
   }
 
   Future<List<Genre>> getGenres() async {

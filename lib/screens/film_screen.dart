@@ -36,8 +36,7 @@ class _FilmScreenState extends State<FilmScreen> {
               color: Colors.blueGrey,
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 216,
+                  Expanded(
                     child: AutoSizeText(
                       film.title,
                       maxFontSize: 24,
