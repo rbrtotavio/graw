@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final colorTheme = const Color(0xFF221e22);
   void _gotoSearchFilm(BuildContext context) {
     Navigator.pushNamed(context, '/buscar');
   }
@@ -88,7 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-              color: Colors.grey,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              color: colorTheme,
               height: 200,
               alignment: Alignment.bottomLeft,
               child: IconButton(
@@ -162,9 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          CarouselSector(sectorTitle: "Lançamentos"),
-          CarouselSector(sectorTitle: "Em breve"),
-          CarouselSector(sectorTitle: "Melhores filmes"),
+          //CarouselSector(sectorTitle: "Lançamentos"),
+          //CarouselSector(sectorTitle: "Em breve"),
+          //CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );

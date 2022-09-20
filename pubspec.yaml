@@ -40,6 +40,7 @@ dependencies:
   envify: any
   analyzer: ^2.8.0
   cloud_firestore: ^3.4.7
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

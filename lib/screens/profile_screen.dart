@@ -2,8 +2,14 @@ import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   void _gotoReturn(BuildContext context) {
     Navigator.push(
         context,
@@ -74,205 +80,61 @@ class ProfilePage extends StatelessWidget {
                         const SizedBox(
                           width: 80,
                         ),
-                        Container(
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Seguindo',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text('50')
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        Column(
-                          children: [
-                            const Text(
-                              'Seguidores',
-                              style: TextStyle(fontSize: 20),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Row(children: [
+                            Column(
+                              children: [
+                                const Text(
+                                  'Seguindo',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text('50')
+                              ],
                             ),
-                            Text('50')
-                          ],
+                            const SizedBox(
+                              width: 25,
+                            ),
+                            Column(
+                              children: [
+                                const Text(
+                                  'Seguidores',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text('50')
+                              ],
+                            )
+                          ]),
                         )
                       ],
                     ),
                   )),
-              SingleChildScrollView(
+              Expanded(
                 child: Container(
-                  color: Colors.blueGrey,
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(10.0),
                   height: 300,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.movie,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Text(
-                            'Review do filme',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.movie,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Text(
-                            'Review do filme',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.movie,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Text(
-                            'Review do filme',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.movie,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Text(
-                            'Review do filme',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                  color: Colors.grey,
+                  child: SingleChildScrollView(
+                      child: Column(children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.movie,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Review do filme',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ])),
                 ),
               ),
-              /*Container(
-                color: Colors.blueGrey,
-                padding: EdgeInsets.all(30),
-                height: 300,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.movie,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Review do filme',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.movie,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Review do filme',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.movie,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Review do filme',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.movie,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Review do filme',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),*/
-              SizedBox(height: 50),
-              MaterialButton(
-                  child: Text("Sair"),
-                  color: Colors.grey,
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  })
             ],
           ),
         ));

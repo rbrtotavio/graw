@@ -7,6 +7,7 @@ import 'package:cinegraw_app/screens/login_register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +18,21 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final colorAppbar = const Color(0xFF221e22);
+  final colorBG = const Color(0xFFf7fff7);
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      theme: ThemeData(
+          appBarTheme: AppBarTheme(color: colorAppbar),
+          drawerTheme: DrawerThemeData(backgroundColor: colorBG),
+          scaffoldBackgroundColor: colorBG,
+          textTheme: GoogleFonts.ralewayTextTheme(),
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue),
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),
