@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:cinegraw_app/applications/films_app.dart';
+import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 

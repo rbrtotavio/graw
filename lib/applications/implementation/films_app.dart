@@ -1,32 +1,24 @@
+import 'package:cinegraw_app/applications/interface/base_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
-import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
-import 'package:cinegraw_app/repositories/firestore_review_repository.dart';
-import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class FilmsApp {
-  final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
-  final FirestoreReviewRepository _firestoreReviewRepository =
-      FirestoreReviewRepository();
-  final FirebaseAuthRepository _firebaseAuthRepository =
-      FirebaseAuthRepository();
-
+class FilmsApp extends BaseApp {
   FilmsApp();
 
   Future<List<Genre>> getGenres() async {
-    return await _movieDBApiRepository.getGenres();
+    return await movieDBApiRepository.getGenres();
   }
 
   Future<List<FilmMovieDB>> getCarroselFilms(String category) async {
     Map<String, Function> searchRepositoryMethods = {
-      "Populares": _movieDBApiRepository.getPopularFilms,
-      "Lançamentos": _movieDBApiRepository.getNowPlaying,
-      "Em breve": _movieDBApiRepository.getUpComing,
-      "Melhores filmes": _movieDBApiRepository.getTopRated
+      "Populares": movieDBApiRepository.getPopularFilms,
+      "Lançamentos": movieDBApiRepository.getNowPlaying,
+      "Em breve": movieDBApiRepository.getUpComing,
+      "Melhores filmes": movieDBApiRepository.getTopRated
     };
 
     return await Function.apply(searchRepositoryMethods[category]!, null);
@@ -36,7 +28,7 @@ class FilmsApp {
       String name, String releaseYear, String genreId, String page) async {
     if (name != "") {
       var films =
-          await _movieDBApiRepository.searchFilmByName(releaseYear, name, page);
+          await movieDBApiRepository.searchFilmByName(releaseYear, name, page);
       if (genreId != "") {
         films = films
             .where((film) => film.genresIds.contains(int.parse(genreId)))
@@ -45,38 +37,38 @@ class FilmsApp {
       return films;
     }
 
-    return await _movieDBApiRepository.searchFilmByFilters(
+    return await movieDBApiRepository.searchFilmByFilters(
         releaseYear, genreId, page);
   }
 
   Image getCardImage(String imgPath) {
-    var img = _movieDBApiRepository.getCardImage(imgPath);
+    var img = movieDBApiRepository.getCardImage(imgPath);
     return img;
   }
 
   Image getCoverImage(String imgPath) {
-    var img = _movieDBApiRepository.getCoverImage(imgPath);
+    var img = movieDBApiRepository.getCoverImage(imgPath);
     return img;
   }
 
   Future<List<Review>> getFilmReviews(int filmId) async {
-    return await _firestoreReviewRepository.getReviewsByFilm(filmId);
+    return await firestoreReviewRepository.getReviewsByFilm(filmId);
   }
 
   Future<List<Review>> getUserReviews(String userId) async {
-    return await _firestoreReviewRepository.getReviewsByUser(userId);
+    return await firestoreReviewRepository.getReviewsByUser(userId);
   }
 
   Future<Result> reviewFilm(
       int filmId, String review, double nota, String? reviewId) async {
-    var user = _firebaseAuthRepository.getUser();
+    var user = firebaseAuthRepository.getUser();
     if (user == null) {
       return Result.Error("É necessario estar logado para realizar essa ação");
     }
 
     DateTime dataReview = DateTime.now();
     reviewId ??= const Uuid().v4();
-    var resultado = await _firestoreReviewRepository.reviewFilm(
+    var resultado = await firestoreReviewRepository.reviewFilm(
         filmId, review, nota, dataReview, user.uid, reviewId);
 
     if (resultado.isNotEmpty) {
@@ -86,12 +78,12 @@ class FilmsApp {
   }
 
   Future<Result> deleteReview(String reviewId) async {
-    var user = _firebaseAuthRepository.getUser();
+    var user = firebaseAuthRepository.getUser();
     if (user == null) {
       return Result.Error("É necessario estar logado para realizar essa ação");
     }
 
-    var resultado = await _firestoreReviewRepository.deleteReview(reviewId);
+    var resultado = await firestoreReviewRepository.deleteReview(reviewId);
 
     if (resultado.isNotEmpty) {
       return Result.Error(resultado);

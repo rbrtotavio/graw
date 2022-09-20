@@ -1,4 +1,4 @@
-import 'package:cinegraw_app/applications/auth_app.dart';
+import 'package:cinegraw_app/applications/implementation/auth_app.dart';
 import 'package:flutter/material.dart';
 import 'login_register.dart';
 import 'main_screen.dart';

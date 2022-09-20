@@ -5,12 +5,12 @@ class FirebaseAuthRepository {
   late FirebaseAuth _db;
 
   // Sigleton
-  static final FirebaseAuthRepository _firebaseAuthentication =
+  static final FirebaseAuthRepository _firebaseAuthRepository =
       FirebaseAuthRepository._internal();
 
   factory FirebaseAuthRepository() {
-    _firebaseAuthentication.configure();
-    return _firebaseAuthentication;
+    _firebaseAuthRepository.configure();
+    return _firebaseAuthRepository;
   }
 
   FirebaseAuthRepository._internal();
