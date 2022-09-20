@@ -20,13 +20,13 @@ class MovieDBApiRepository {
       MovieDBApiRepository._internal();
 
   factory MovieDBApiRepository() {
-    _movieDBApiRepository.getConfiguration();
+    _movieDBApiRepository.configure();
     return _movieDBApiRepository;
   }
 
   MovieDBApiRepository._internal();
 
-  void getConfiguration() async {
+  void configure() async {
     if (!_configured) {
       _configured = true;
       Uri api = Uri.parse("$_apiUrl/configuration?api_key=${Env.moviedb_key}");

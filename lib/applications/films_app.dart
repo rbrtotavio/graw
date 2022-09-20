@@ -3,15 +3,15 @@ import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
-import 'package:cinegraw_app/repositories/firebase_firestore.dart';
+import 'package:cinegraw_app/repositories/firestore_review_repository.dart';
 import 'package:cinegraw_app/repositories/moviedbapi_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class FilmsApp {
   final MovieDBApiRepository _movieDBApiRepository = MovieDBApiRepository();
-  final FireBaseFireStoreRepository _fireBaseFireStoreRepository =
-      FireBaseFireStoreRepository();
+  final FirestoreReviewRepository _firestoreReviewRepository =
+      FirestoreReviewRepository();
   final FirebaseAuthRepository _firebaseAuthRepository =
       FirebaseAuthRepository();
 
@@ -60,11 +60,11 @@ class FilmsApp {
   }
 
   Future<List<Review>> getFilmReviews(int filmId) async {
-    return await _fireBaseFireStoreRepository.getReviewsByFilm(filmId);
+    return await _firestoreReviewRepository.getReviewsByFilm(filmId);
   }
 
   Future<List<Review>> getUserReviews(String userId) async {
-    return await _fireBaseFireStoreRepository.getReviewsByUser(userId);
+    return await _firestoreReviewRepository.getReviewsByUser(userId);
   }
 
   Future<Result> reviewFilm(
@@ -76,7 +76,7 @@ class FilmsApp {
 
     DateTime dataReview = DateTime.now();
     reviewId ??= const Uuid().v4();
-    var resultado = await _fireBaseFireStoreRepository.reviewFilm(
+    var resultado = await _firestoreReviewRepository.reviewFilm(
         filmId, review, nota, dataReview, user.uid, reviewId);
 
     if (resultado.isNotEmpty) {
@@ -91,7 +91,7 @@ class FilmsApp {
       return Result.Error("É necessario estar logado para realizar essa ação");
     }
 
-    var resultado = await _fireBaseFireStoreRepository.deleteReview(reviewId);
+    var resultado = await _firestoreReviewRepository.deleteReview(reviewId);
 
     if (resultado.isNotEmpty) {
       return Result.Error(resultado);

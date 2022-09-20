@@ -148,9 +148,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          CarouselSector(sectorTitle: "Lançamentos"),
-          CarouselSector(sectorTitle: "Em breve"),
-          CarouselSector(sectorTitle: "Melhores filmes"),
+          // CarouselSector(sectorTitle: "Lançamentos"),
+          // CarouselSector(sectorTitle: "Em breve"),
+          // CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );
