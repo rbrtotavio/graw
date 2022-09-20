@@ -167,8 +167,12 @@ class MovieDBApiRepository {
       Map<String, dynamic> result = jsonDecode(response.body);
 
       for (Map<String, dynamic> film in result["results"]) {
-        var filmapi = FilmMovieDB.fromJson(film);
-        filmsApi.add(filmapi);
+        try {
+          var filmapi = FilmMovieDB.fromJson(film);
+          filmsApi.add(filmapi);
+        } catch (e) {
+          print(e.toString());
+        }
       }
     }
     // TODO: TRATAR CASO STATUSCODE != 200
