@@ -18,8 +18,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final colorAppbar = const Color(0xFF221e22);
-  final colorBG = const Color(0xFFf7fff7);
+  final colorAppbar = const Color(0xFF006D77);
+  final colorBG = const Color(0xFFEDF6F9);
+  //final colorAppbar = const Color(0xFF221e22);
+  //final colorBG = const Color(0xFFf7fff7);
   const MyApp({Key? key}) : super(key: key);
 
   @override

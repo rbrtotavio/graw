@@ -13,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final colorTheme = const Color(0xFF221e22);
+  final colorTheme = const Color(0xFF006D77);
   void _gotoSearchFilm(BuildContext context) {
     Navigator.pushNamed(context, '/buscar');
   }
