@@ -73,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 50,
                   ),
                   const Text(
-                    "Registrar-se",
+                    "Cadastro",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -122,8 +122,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       _confirmpasswordController.text, _emailController.text);
                 },
                 child: const Text(
-                  "Registrar-se",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  "Cadastrar",
+                  style: TextStyle(fontSize: 24, color: Colors.black),
                 ))
           ],
         ),

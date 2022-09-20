@@ -41,6 +41,7 @@ dependencies:
   analyzer: ^2.8.0
   cloud_firestore: ^3.4.7
   uuid: ^3.0.6
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

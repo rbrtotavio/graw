@@ -75,7 +75,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                               MaterialPageRoute(
                                   builder: (context) => const RegisterPage()));
                         },
-                        child: const Text("Registrar-se",
+                        child: const Text("Cadastro",
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Color.fromARGB(255, 82, 82, 82))))
@@ -101,23 +101,23 @@ class _LoginRegisterState extends State<LoginRegister> {
                 height: 50,
               ),
               TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Esqueci minha senha",
-                    style: TextStyle(color: Color.fromARGB(255, 82, 82, 82)),
-                  )),
-              const SizedBox(
-                height: 50,
-              ),
-              TextButton(
                   onPressed: () {
                     _authApp.signIn(
                         _emailController.text, _passwordController.text);
                   },
                   child: const Text(
                     "Entrar",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ))
+                    style: TextStyle(fontSize: 24, color: Colors.black),
+                  )),
+              const SizedBox(
+                height: 50,
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Esqueci minha senha",
+                    style: TextStyle(color: Color.fromARGB(255, 82, 82, 82)),
+                  )),
             ],
           ),
         ),

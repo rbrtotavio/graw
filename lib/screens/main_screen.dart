@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final colorTheme = const Color(0xFF006D77);
   void _gotoSearchFilm(BuildContext context) {
     Navigator.pushNamed(context, '/buscar');
   }
@@ -39,6 +40,19 @@ class _MyHomePageState extends State<MyHomePage> {
           userState = true;
         }
       });
+    });
+  }
+
+//remover daqui
+  Future<void> changeUsername(user) async {
+    await user?.updateDisplayName("Jane Q. User");
+  }
+
+  void userName() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        print(user.uid);
+      }
     });
   }
 
@@ -75,7 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-              color: Colors.grey,
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              color: colorTheme,
               height: 200,
               alignment: Alignment.bottomLeft,
               child: IconButton(
@@ -91,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: userState
                     ? TextButton(
                         onPressed: () {
+                          userName();
                           _gotoAuthPage(context);
                           changeWidgets();
                         },
@@ -148,9 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          CarouselSector(sectorTitle: "Lançamentos"),
-          CarouselSector(sectorTitle: "Em breve"),
-          CarouselSector(sectorTitle: "Melhores filmes"),
+          //CarouselSector(sectorTitle: "Lançamentos"),
+          //CarouselSector(sectorTitle: "Em breve"),
+          //CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );
