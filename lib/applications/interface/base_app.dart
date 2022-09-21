@@ -11,7 +11,7 @@ abstract class BaseApp {
       FirebaseAuthRepository();
   final FirestoreReviewRepository firestoreReviewRepository =
       FirestoreReviewRepository();
-  final FirestoreProfileRepository _firestoreProfileRepository =
+  final FirestoreProfileRepository firestoreProfileRepository =
       FirestoreProfileRepository();
   final MovieDBApiRepository movieDBApiRepository = MovieDBApiRepository();
 
@@ -19,8 +19,11 @@ abstract class BaseApp {
     _user = firebaseAuthRepository.getUser();
   }
 
-  User? getUser() {
+  Future<Profile?> getUser() async {
     _user ??= firebaseAuthRepository.getUser();
-    return _user;
+    if (_user == null) {
+      return null;
+    }
+    return await firestoreProfileRepository.getByUser(_user!);
   }
 }

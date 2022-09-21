@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class Profile {
   String idProfile;
   String name;
@@ -13,13 +15,13 @@ class Profile {
     required this.birthDate,
   });
 
-  factory Profile.FromJson(Map<String, dynamic> json, String idProfile) {
+  factory Profile.FromFirebase(Map<String, dynamic> json, User user) {
     return Profile(
-      idProfile: idProfile,
+      idProfile: user.uid,
       name: json["Name"],
       bio: json["Bio"],
       urlCover: json["UrlCover"],
-      birthDate: json["BirthDate"],
+      birthDate: json["BirthDate"].toDate(),
     );
   }
 }

@@ -14,11 +14,13 @@ class _FilmCardState extends State<FilmCard> {
   final FilmsApp _filmsApp = FilmsApp();
 
   void _gotoFilm() async {
-    Navigator.pushNamed(
-      context,
-      '/film',
-      arguments: widget.film,
-    );
+    var profile = await _filmsApp.getUser();
+    print(profile == null);
+    // Navigator.pushNamed(
+    //   context,
+    //   '/film',
+    //   arguments: widget.film,
+    // );
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/models/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreProfileRepository {
   bool _configured = false;
@@ -22,11 +23,11 @@ class FirestoreProfileRepository {
     }
   }
 
-  Future<Profile?> getById(profileId) async {
-    var profile = await _db.doc(profileId).get();
+  Future<Profile?> getByUser(User user) async {
+    var profile = await _db.doc(user.uid).get();
     if (profile.exists) {
-      return Profile.FromJson(
-          profile.data()! as Map<String, dynamic>, profileId);
+      return Profile.FromFirebase(
+          profile.data()! as Map<String, dynamic>, user);
     }
 
     return null;
