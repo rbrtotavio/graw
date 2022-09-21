@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/models/movieDB/credits.dart';
 import 'package:cinegraw_app/applications/interface/base_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
@@ -39,6 +40,17 @@ class FilmsApp extends BaseApp {
 
     return await movieDBApiRepository.searchFilmByFilters(
         releaseYear, genreId, page);
+  }
+
+  Future<String> getDirector(int filmId) async {
+    List<Crew> crew = await movieDBApiRepository.getCrew(filmId);
+    String director = "";
+    for (var crewmate in crew) {
+      if (crewmate.job == "Director") {
+        director = crewmate.name.toString();
+      }
+    }
+    return director;
   }
 
   Image getCardImage(String imgPath) {
