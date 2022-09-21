@@ -1,6 +1,5 @@
-import 'dart:io';
-
-import 'package:cinegraw_app/applications/films_app.dart';
+import 'package:cinegraw_app/applications/implementation/films_app.dart';
+import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +13,7 @@ class FilmCard extends StatefulWidget {
 
 class _FilmCardState extends State<FilmCard> {
   final FilmsApp _filmsApp = FilmsApp();
+  final ProfileApp _profileApp = ProfileApp();
 
   void _gotoFilm() async {
     Navigator.pushNamed(

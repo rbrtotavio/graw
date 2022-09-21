@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cinegraw_app/applications/films_app.dart';
 import 'package:cinegraw_app/config/utilities.dart';
+import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:flutter/material.dart';
 

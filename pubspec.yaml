@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^3.4.7
   uuid: ^3.0.6
   auto_size_text: ^3.0.0
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

@@ -23,13 +23,13 @@ class MovieDBApiRepository {
       MovieDBApiRepository._internal();
 
   factory MovieDBApiRepository() {
-    _movieDBApiRepository.getConfiguration();
+    _movieDBApiRepository.configure();
     return _movieDBApiRepository;
   }
 
   MovieDBApiRepository._internal();
 
-  void getConfiguration() async {
+  void configure() async {
     if (!_configured) {
       _configured = true;
       Uri api = Uri.parse("$_apiUrl/configuration?api_key=${Env.moviedb_key}");
@@ -186,8 +186,12 @@ class MovieDBApiRepository {
       Map<String, dynamic> result = jsonDecode(response.body);
 
       for (Map<String, dynamic> film in result["results"]) {
-        var filmapi = FilmMovieDB.fromJson(film);
-        filmsApi.add(filmapi);
+        try {
+          var filmapi = FilmMovieDB.fromJson(film);
+          filmsApi.add(filmapi);
+        } catch (e) {
+          print(e.toString());
+        }
       }
     }
     // TODO: TRATAR CASO STATUSCODE != 200

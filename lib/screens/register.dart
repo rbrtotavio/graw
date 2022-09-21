@@ -1,4 +1,4 @@
-import 'package:cinegraw_app/applications/auth_app.dart';
+import 'package:cinegraw_app/applications/implementation/auth_app.dart';
 import 'package:flutter/material.dart';
 import 'login_register.dart';
 import 'main_screen.dart';
@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
+  final _nomeController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmpasswordController = TextEditingController();
   final AuthApp _authApp = AuthApp();
@@ -34,6 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmpasswordController.dispose();
+    _nomeController.dispose();
     super.dispose();
   }
 
@@ -73,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 50,
                   ),
                   const Text(
-                    "Registrar-se",
+                    "Cadastro",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -87,6 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 70,
             ),
             TextFormField(
+              controller: _nomeController,
               decoration: const InputDecoration(labelText: 'Nome'),
             ),
             const SizedBox(
@@ -118,12 +121,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             TextButton(
                 onPressed: () {
-                  _authApp.signUp(_passwordController.text,
-                      _confirmpasswordController.text, _emailController.text);
+                  _authApp.signUp(
+                      _passwordController.text,
+                      _confirmpasswordController.text,
+                      _emailController.text,
+                      _nomeController.text);
                 },
                 child: const Text(
-                  "Registrar-se",
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  "Cadastrar",
+                  style: TextStyle(fontSize: 24, color: Colors.black),
                 ))
           ],
         ),
