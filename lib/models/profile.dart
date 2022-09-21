@@ -18,7 +18,7 @@ class Profile {
   factory Profile.FromFirebase(Map<String, dynamic> json, User user) {
     return Profile(
       idProfile: user.uid,
-      name: json["Name"],
+      name: user.displayName!,
       bio: json["Bio"],
       urlCover: json["UrlCover"],
       birthDate: json["BirthDate"].toDate(),

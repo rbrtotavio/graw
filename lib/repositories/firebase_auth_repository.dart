@@ -29,15 +29,17 @@ class FirebaseAuthRepository {
   }
 
   //função para se registrar no app
-  Future signUp(String password, String confirmpassword, String email) async {
+  Future<UserCredential?> signUp(
+      String password, String confirmpassword, String email) async {
     if (_verifyPassword(password, confirmpassword)) {
-      await _db.createUserWithEmailAndPassword(
+      return await _db.createUserWithEmailAndPassword(
           email: email.trim(), password: password.trim());
     }
+    return null;
   }
 
-  void signOut() {
-    FirebaseAuth.instance.signOut();
+  void signOut() async {
+    await _db.signOut();
   }
 
   //função de validação que verifica se as senhas são iguais

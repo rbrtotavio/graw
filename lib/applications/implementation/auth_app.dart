@@ -8,8 +8,15 @@ class AuthApp extends BaseApp {
         onError: (error) => print(error.toString()));
   }
 
-  Future signUp(String password, String confirmpassword, String email) async {
-    await firebaseAuthRepository.signUp(password, confirmpassword, email);
+  Future signUp(String password, String confirmpassword, String email,
+      String name) async {
+    var user =
+        await firebaseAuthRepository.signUp(password, confirmpassword, email);
+    if (user == null || user.user == null) {
+      print("Não foi possivel cadastrar seu usuario");
+      return;
+    }
+    await user.user!.updateDisplayName(name);
   }
 
   void signOut() {

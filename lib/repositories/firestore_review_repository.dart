@@ -32,9 +32,9 @@ class FirestoreReviewRepository {
     return reviews;
   }
 
-  Future<List<Review>> getReviewsByUser(String userId) async {
+  Future<List<Review>> getReviewsByUser(String profileId) async {
     QuerySnapshot reviewsQuery =
-        await _db.where("UserId", isEqualTo: userId).get();
+        await _db.where("ProfileId", isEqualTo: profileId).get();
     List<Review> reviews = reviewsQuery.docs
         .map((r) => Review.FromJson(r.data() as Map<String, dynamic>, r.id))
         .toList();
@@ -50,13 +50,13 @@ class FirestoreReviewRepository {
     return null;
   }
 
-  Future<String> reviewFilm(int filmId, String review, double nota,
-      DateTime dataReview, String usuarioId, String reviewId) async {
+  Future<String> reviewFilm(int filmId, String review, double rating,
+      DateTime reviewDate, String profileId, String reviewId) async {
     var userReview = <String, dynamic>{
-      "DataReview": dataReview,
-      "Nota": nota,
+      "ReviewDate": reviewDate,
+      "Rating": rating,
       "Review": review,
-      "UsuarioId": usuarioId,
+      "ProfileId": profileId,
       "FilmId": filmId
     };
 

@@ -19,7 +19,7 @@ abstract class BaseApp {
     _user = firebaseAuthRepository.getUser();
   }
 
-  Future<Profile?> getUser() async {
+  Future<Profile?> getProfile() async {
     _user ??= firebaseAuthRepository.getUser();
     if (_user == null) {
       return null;
