@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cinegraw_app/applications/auth_app.dart';
+import 'package:cinegraw_app/applications/implementation/auth_app.dart';
 import '../components/carousel_sector.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -164,9 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          //CarouselSector(sectorTitle: "Lançamentos"),
-          //CarouselSector(sectorTitle: "Em breve"),
-          //CarouselSector(sectorTitle: "Melhores filmes"),
+          // CarouselSector(sectorTitle: "Lançamentos"),
+          // CarouselSector(sectorTitle: "Em breve"),
+          // CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );

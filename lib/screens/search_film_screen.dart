@@ -1,4 +1,4 @@
-import 'package:cinegraw_app/applications/films_app.dart';
+import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/components/search_film_filters.dart';
 import 'package:cinegraw_app/components/search_results.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';

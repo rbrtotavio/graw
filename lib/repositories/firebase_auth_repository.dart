@@ -5,12 +5,12 @@ class FirebaseAuthRepository {
   late FirebaseAuth _db;
 
   // Sigleton
-  static final FirebaseAuthRepository _firebaseAuthentication =
+  static final FirebaseAuthRepository _firebaseAuthRepository =
       FirebaseAuthRepository._internal();
 
   factory FirebaseAuthRepository() {
-    _firebaseAuthentication.configure();
-    return _firebaseAuthentication;
+    _firebaseAuthRepository.configure();
+    return _firebaseAuthRepository;
   }
 
   FirebaseAuthRepository._internal();
@@ -29,19 +29,17 @@ class FirebaseAuthRepository {
   }
 
   //função para se registrar no app
-  Future signUp(String password, String confirmpassword, String email) async {
-    try {
-      if (_verifyPassword(password, confirmpassword)) {
-        await _db.createUserWithEmailAndPassword(
-            email: email.trim(), password: password.trim());
-      }
-    } on FirebaseAuthException catch (e) {
-      return e.message;
+  Future<UserCredential?> signUp(
+      String password, String confirmpassword, String email) async {
+    if (_verifyPassword(password, confirmpassword)) {
+      return await _db.createUserWithEmailAndPassword(
+          email: email.trim(), password: password.trim());
     }
+    return null;
   }
 
-  void signOut() {
-    FirebaseAuth.instance.signOut();
+  void signOut() async {
+    await _db.signOut();
   }
 
   //função de validação que verifica se as senhas são iguais

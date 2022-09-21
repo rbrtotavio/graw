@@ -37,7 +37,9 @@ class FilmMovieDB {
         title: json["title"] ?? "",
         originalTitle: json["original_title"] ?? "",
         overview: json["overview"] ?? "",
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: json["release_date"].isNotEmpty
+            ? DateTime.parse(json["release_date"])
+            : null,
         isAdultContent: json["adult"],
         coverImagePath: json["backdrop_path"] ?? "",
         cardImagePath: json["poster_path"] ?? "",
