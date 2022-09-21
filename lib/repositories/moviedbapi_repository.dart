@@ -121,8 +121,7 @@ class MovieDBApiRepository {
     return filmsApi;
   }
 
-  Future<List<dynamic>> getDirector(Int movieId) async {
-    //TODO: Fazer isso funcionar, deus me guie!
+  Future<List<Crew>> getCrew(int movieId) async {
     List<Crew> crewApi = <Crew>[];
 
     Uri api = Uri.parse(

@@ -21,6 +21,7 @@ class _FilmScreenState extends State<FilmScreen> {
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
+    // String director = await _filmsApp.getDirector(film.filmId).toString();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -95,6 +96,16 @@ class _FilmScreenState extends State<FilmScreen> {
                     ],
                   ),
                   Text(film.overview),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data.toString());
+                      } else {
+                        return Text("Loading...");
+                      }
+                    },
+                    future: _filmsApp.getDirector(film.filmId),
+                  )
                 ],
               ),
             ),

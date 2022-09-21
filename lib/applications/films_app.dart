@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/models/movieDB/credits.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
 import 'package:cinegraw_app/models/result.dart';
@@ -61,6 +62,17 @@ class FilmsApp {
 
   Future<List<Review>> getFilmReviews(int filmId) async {
     return await _fireBaseFireStoreRepository.getReviewsByFilm(filmId);
+  }
+
+  Future<String> getDirector(int filmId) async {
+    List<Crew> crew = await _movieDBApiRepository.getCrew(filmId);
+    String director = "";
+    for (var crewmate in crew) {
+      if (crewmate.job == "Director") {
+        director = crewmate.name.toString();
+      }
+    }
+    return director;
   }
 
   Future<List<Review>> getUserReviews(String userId) async {
