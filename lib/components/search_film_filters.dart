@@ -1,5 +1,6 @@
 import 'package:cinegraw_app/components/filters/genre_filters.dart';
 import 'package:cinegraw_app/components/filters/release_filters.dart';
+import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmFilters extends StatefulWidget {

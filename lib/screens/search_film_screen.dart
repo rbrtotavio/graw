@@ -78,17 +78,20 @@ class _SearchFilmScreenState extends State<SearchFilmScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            SearchFilmFilters(
-                searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
-            SearchResults(
-              films: films,
+      body: Column(
+        children: [
+          SearchFilmFilters(
+              searchFilm: (filtroFilme) => searchFilm(filtroFilme)),
+          Expanded(
+              child: Container(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: SearchResults(
+                films: films,
+              ),
             ),
-          ],
-        ),
+          ))
+        ],
       ),
     );
   }

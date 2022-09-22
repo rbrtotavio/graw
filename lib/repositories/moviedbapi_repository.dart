@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:cinegraw_app/env/env.dart';
 import 'package:cinegraw_app/models/movieDB/configuration_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/credits.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
-import 'package:cinegraw_app/models/result.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
