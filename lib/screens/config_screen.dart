@@ -9,6 +9,7 @@ class ConfigPage extends StatefulWidget {
 }
 
 class _ConfigPageState extends State<ConfigPage> {
+  final colorTheme = const Color(0xFF006D77);
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
@@ -18,14 +19,17 @@ class _ConfigPageState extends State<ConfigPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
       body: Column(
         children: [
           Container(
+            color: colorTheme,
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.all(10),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
               onPressed: () {
                 _gotoReturn(context);
               },
@@ -35,7 +39,7 @@ class _ConfigPageState extends State<ConfigPage> {
             child: Container(
               alignment: Alignment.bottomLeft,
               padding: const EdgeInsets.all(20),
-              color: Colors.grey,
+              color: colorTheme,
               child: const Text(
                 "Configurações",
                 style: TextStyle(fontSize: 25, color: Colors.white),
@@ -44,23 +48,22 @@ class _ConfigPageState extends State<ConfigPage> {
           ),
           Container(
             height: 500,
-            color: Colors.white,
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "configurações gerais",
-                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Modo noturno",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -69,43 +72,42 @@ class _ConfigPageState extends State<ConfigPage> {
                       onChanged: (value) {
                         setState(() {
                           switchButton = value;
-                          print(switchButton);
                         });
                       },
-                      activeTrackColor: Color.fromARGB(255, 33, 188, 28),
-                      activeColor: Colors.green,
+                      activeTrackColor: colorTheme,
+                      activeColor: colorTheme,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "idiomas",
-                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Acessibilidade",
-                    style: TextStyle(color: Colors.grey, fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Tamanho da fonte",
                       style: TextStyle(fontSize: 20),
                     ),

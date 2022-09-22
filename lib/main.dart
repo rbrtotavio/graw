@@ -4,6 +4,7 @@ import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:cinegraw_app/screens/config_screen.dart';
 import 'package:cinegraw_app/screens/login_register.dart';
+import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -20,21 +21,13 @@ void main() async {
 class MyApp extends StatelessWidget {
   final colorAppbar = const Color(0xFF006D77);
   final colorBG = const Color(0xFFEDF6F9);
-  //final colorAppbar = const Color(0xFF221e22);
-  //final colorBG = const Color(0xFFf7fff7);
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(color: colorAppbar),
-          drawerTheme: DrawerThemeData(backgroundColor: colorBG),
-          scaffoldBackgroundColor: colorBG,
-          textTheme: GoogleFonts.ralewayTextTheme(),
-          brightness: Brightness.light,
-          primarySwatch: Colors.blue),
+      theme: darkTheme,
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),

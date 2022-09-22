@@ -69,8 +69,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       child: const Text("Login",
                           style: TextStyle(
-                              fontSize: 20,
-                              color: Color.fromARGB(255, 82, 82, 82)))),
+                            fontSize: 20,
+                          ))),
                   const SizedBox(
                     width: 50,
                   ),
@@ -79,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      //decoration: TextDecoration.underline
                     ),
                   ),
                 ],
@@ -129,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: const Text(
                   "Cadastrar",
-                  style: TextStyle(fontSize: 24, color: Colors.black),
+                  style: TextStyle(fontSize: 24),
                 ))
           ],
         ),
