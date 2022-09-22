@@ -33,15 +33,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
 
   String nomeFilme = "";
 
-  String diretor = "Diretor";
-  List<String> diretores = <String>[
-    "Diretor",
-    "Erik Kripke",
-    "George A. Romero",
-    "Alfred hitchcock",
-    "Martin Scorsese"
-  ];
-
   bool filtroValido() {
     if (nomeFilme != "") {
       return true;
@@ -50,9 +41,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
       return true;
     }
     if (_release != "Lançamento") {
-      return true;
-    }
-    if (diretor != "Diretor") {
       return true;
     }
     return false;
@@ -98,37 +86,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget menuFilter(String holder, String categoria, List<String> opcoes) {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 3,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(),
-      ),
-      child: DropdownButton<String>(
-        value: holder,
-        isExpanded: true,
-        elevation: 16,
-        underline: const SizedBox(),
-        icon: const SizedBox(),
-        onChanged: (String? newValue) {
-          setState(() {
-            diretor = newValue!;
-          });
-        },
-        items: opcoes.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Center(child: Text(value)),
-          );
-        }).toList(),
-      ),
     );
   }
 
