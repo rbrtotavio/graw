@@ -32,7 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void changeWidgets() {
     setState(() {
-      //userState = _authApp.verifyUser();
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user == null) {
           userState = false;
@@ -41,11 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       });
     });
-  }
-
-//remover daqui
-  Future<void> changeUsername(user) async {
-    await user?.updateDisplayName("Jane Q. User");
   }
 
   void userName() {
@@ -112,9 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const Text(
                           "Perfil",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 26, 26, 26),
-                              fontSize: 27),
+                          style: TextStyle(fontSize: 27),
                         ))
                     : TextButton(
                         onPressed: () {
@@ -123,9 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const Text(
                           "Login/cadastro",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 26, 26, 26),
-                              fontSize: 27),
+                          style: TextStyle(fontSize: 27),
                         ))),
             const SizedBox(height: 40),
             Align(
@@ -136,8 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text(
                     "Configurações",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 26, 26, 26), fontSize: 27),
+                    style: TextStyle(fontSize: 27),
                   )),
             ),
             const SizedBox(height: 40),

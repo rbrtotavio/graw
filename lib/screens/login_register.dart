@@ -77,8 +77,8 @@ class _LoginRegisterState extends State<LoginRegister> {
                         },
                         child: const Text("Cadastro",
                             style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 82, 82, 82))))
+                              fontSize: 20,
+                            )))
                   ],
                 ),
               ),
@@ -107,7 +107,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                   },
                   child: const Text(
                     "Entrar",
-                    style: TextStyle(fontSize: 24, color: Colors.black),
+                    style: TextStyle(fontSize: 24),
                   )),
               const SizedBox(
                 height: 50,
@@ -116,7 +116,6 @@ class _LoginRegisterState extends State<LoginRegister> {
                   onPressed: () {},
                   child: const Text(
                     "Esqueci minha senha",
-                    style: TextStyle(color: Color.fromARGB(255, 82, 82, 82)),
                   )),
             ],
           ),

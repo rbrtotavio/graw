@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +15,12 @@ ThemeData appTheme = ThemeData(
     primarySwatch: Colors.blue);
 
 ThemeData darkTheme = ThemeData(
-    appBarTheme: const AppBarTheme(color: colorDarkbar),
+    appBarTheme: const AppBarTheme(color: colorAppbar),
+    buttonTheme: const ButtonThemeData(buttonColor: Colors.white),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+      primary: Colors.white,
+    )),
     drawerTheme: const DrawerThemeData(backgroundColor: colorDarkBG),
     scaffoldBackgroundColor: colorDarkBG,
     textTheme: GoogleFonts.ralewayTextTheme().copyWith(
