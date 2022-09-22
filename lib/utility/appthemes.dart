@@ -7,6 +7,11 @@ const colorBG = Color(0xFFEDF6F9);
 const colorDarkBG = Color(0xFF495057);
 
 ThemeData appTheme = ThemeData(
+    buttonTheme: const ButtonThemeData(buttonColor: Colors.black),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+      primary: Colors.black,
+    )),
     appBarTheme: const AppBarTheme(color: colorAppbar),
     drawerTheme: const DrawerThemeData(backgroundColor: colorBG),
     scaffoldBackgroundColor: colorBG,
