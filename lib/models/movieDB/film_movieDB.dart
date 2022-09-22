@@ -32,14 +32,16 @@ class FilmMovieDB {
   });
 
   factory FilmMovieDB.fromJson(Map<String, dynamic> json) {
+    var releaseDate = null;
+    if (json["release_date"] != null && json["release_date"].isNotEmpty) {
+      releaseDate = DateTime.parse(json["release_date"]);
+    }
     return FilmMovieDB(
         filmId: json["id"] ?? -1,
         title: json["title"] ?? "",
         originalTitle: json["original_title"] ?? "",
         overview: json["overview"] ?? "",
-        releaseDate: json["release_date"].isNotEmpty
-            ? DateTime.parse(json["release_date"])
-            : null,
+        releaseDate: releaseDate,
         isAdultContent: json["adult"],
         coverImagePath: json["backdrop_path"] ?? "",
         cardImagePath: json["poster_path"] ?? "",
