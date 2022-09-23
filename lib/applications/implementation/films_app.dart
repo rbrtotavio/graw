@@ -2,10 +2,8 @@ import 'package:cinegraw_app/models/movieDB/credits.dart';
 import 'package:cinegraw_app/applications/interface/base_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/movieDB/genre.dart';
-import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class FilmsApp extends BaseApp {
   FilmsApp();

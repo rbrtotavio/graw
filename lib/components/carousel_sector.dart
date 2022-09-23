@@ -19,10 +19,6 @@ class CarouselSector extends StatefulWidget {
 class _CarouselSectorState extends State<CarouselSector> {
   final FilmsApp _filmsApp = FilmsApp();
 
-  Future<List<FilmMovieDB>> CarrosselSelector() async {
-    return await _filmsApp.getCarroselFilms(widget.sectorTitle);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +36,7 @@ class _CarouselSectorState extends State<CarouselSector> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: FutureBuilder<List<FilmMovieDB>>(
-              future: CarrosselSelector(),
+              future: _filmsApp.getCarroselFilms(widget.sectorTitle),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return FilmCarousel(films: snapshot.data!);

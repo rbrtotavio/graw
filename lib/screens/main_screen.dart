@@ -14,6 +14,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final colorTheme = const Color(0xFF006D77);
+  final AuthApp _authApp = AuthApp();
+  bool userState = false;
+
   void _gotoSearchFilm(BuildContext context) {
     Navigator.pushNamed(context, '/buscar');
   }
@@ -41,18 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     });
   }
-
-  void userName() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user != null) {
-        print(user.uid);
-      }
-    });
-  }
-
-  AuthApp _authApp = AuthApp();
-
-  bool userState = false;
 
   @override
   void initState() {
@@ -100,7 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: userState
                     ? TextButton(
                         onPressed: () {
-                          userName();
                           _gotoAuthPage(context);
                           changeWidgets();
                         },
@@ -153,9 +143,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           CarouselSector(sectorTitle: "Populares"),
-          // CarouselSector(sectorTitle: "Lançamentos"),
-          // CarouselSector(sectorTitle: "Em breve"),
-          // CarouselSector(sectorTitle: "Melhores filmes"),
+          CarouselSector(sectorTitle: "Lançamentos"),
+          CarouselSector(sectorTitle: "Em breve"),
+          CarouselSector(sectorTitle: "Melhores filmes"),
         ],
       ),
     );

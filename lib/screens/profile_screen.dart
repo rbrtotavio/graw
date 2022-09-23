@@ -1,6 +1,7 @@
-import 'package:cinegraw_app/screens/main_screen.dart';
+import 'package:cinegraw_app/applications/implementation/profile_app.dart';
+import 'package:cinegraw_app/components/review_list.dart';
+import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,14 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  void _gotoReturn(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const MyHomePage(
-                  title: 'GRAW',
-                )));
-  }
+  ProfileApp _profileApp = ProfileApp();
 
   void _gotoMainScreen(BuildContext context) {
     Navigator.pushNamed(context, '/');
@@ -50,90 +44,71 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Color.fromARGB(255, 138, 171, 188),
                 padding: const EdgeInsets.all(20),
                 alignment: Alignment.bottomCenter,
-                child: Icon(
+                child: const Icon(
                   Icons.person,
                   size: 70,
                   color: Colors.white,
                 ),
               ),
               Container(
-                  height: 100,
-                  //color: Color.fromARGB(255, 138, 171, 188),
-                  padding: const EdgeInsets.all(20),
-                  //alignment: Alignment.topLeft,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Column(
+                height: 100,
+                //color: Color.fromARGB(255, 138, 171, 188),
+                padding: const EdgeInsets.all(20),
+                //alignment: Alignment.topLeft,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Nome do usuário',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Row(children: [
+                          Column(
                             children: [
                               const Text(
-                                'Nome do usuário',
+                                'Seguindo',
                                 style: TextStyle(fontSize: 20),
                               ),
-                              SizedBox(height: 10),
-                              Text("Bio do usuário")
+                              Text('50')
                             ],
                           ),
-                        ),
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Row(children: [
-                            Column(
-                              children: [
-                                const Text(
-                                  'Seguindo',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text('50')
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 25,
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Seguidores',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text('50')
-                              ],
-                            )
-                          ]),
-                        )
-                      ],
-                    ),
-                  )),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  height: 300,
-                  color: Colors.grey,
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.movie,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                          'Review do filme',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ])),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          Column(
+                            children: [
+                              const Text(
+                                'Seguidores',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text('50')
+                            ],
+                          )
+                        ]),
+                      )
+                    ],
+                  ),
                 ),
+              ),
+              FutureBuilder<List<Review>>(
+                future: _profileApp.getUserReviews(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ReviewList(reviews: snapshot.data!);
+                  } else if (snapshot.hasError) {
+                    print('${snapshot.error}');
+                  }
+                  return CircularProgressIndicator();
+                },
               ),
             ],
           ),
