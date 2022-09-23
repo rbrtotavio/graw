@@ -31,11 +31,12 @@ class ReviewCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Container(
-                width: 300,
-                child: Text(
-                  review.review,
-                  style: const TextStyle(fontSize: 18, color: Colors.white),
+              Flexible(
+                child: Container(
+                  child: Text(
+                    review.review,
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
               ),
             ],
