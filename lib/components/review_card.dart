@@ -1,4 +1,5 @@
 import 'package:cinegraw_app/models/review.dart';
+import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -14,9 +15,11 @@ class ReviewCard extends StatelessWidget {
     return Column(
       children: [
         Container(
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
+            color: colorAppbar,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(),
+            border: Border.all(color: colorAppbar),
           ),
           child: Row(
             children: [
