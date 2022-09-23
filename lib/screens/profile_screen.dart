@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
             )
           ],
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -54,49 +54,44 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 100,
                 //color: Color.fromARGB(255, 138, 171, 188),
                 padding: const EdgeInsets.all(20),
-                //alignment: Alignment.topLeft,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: Column(
-                          children: [
-                            const Text(
-                              'Nome do usuário',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        const Text(
+                          'Nome do usuário',
+                          style: TextStyle(fontSize: 20),
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 75,
+                    ),
+                    Row(children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'Seguindo',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text('50')
+                        ],
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Row(children: [
-                          Column(
-                            children: [
-                              const Text(
-                                'Seguindo',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text('50')
-                            ],
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'Seguidores',
+                            style: TextStyle(fontSize: 20),
                           ),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Column(
-                            children: [
-                              const Text(
-                                'Seguidores',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text('50')
-                            ],
-                          )
-                        ]),
+                          Text('50')
+                        ],
                       )
-                    ],
-                  ),
+                    ])
+                  ],
                 ),
               ),
               FutureBuilder<List<Review>>(
