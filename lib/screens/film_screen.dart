@@ -28,99 +28,101 @@ class _FilmScreenState extends State<FilmScreen> {
         centerTitle: true,
         title: Text("GRAW"),
       ),
-      body: Column(
-        children: [
-          _filmsApp.getCoverImage(film.coverImagePath),
-          Container(
-            padding: EdgeInsets.all(8.0),
-            height: 80,
-            color: Colors.blueGrey,
-            child: Row(
-              children: [
-                Expanded(
-                  child: AutoSizeText(
-                    film.title,
-                    maxFontSize: 24,
-                    minFontSize: 16,
-                    maxLines: 2,
-                    style: Utilities.styleTitle,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "GRAW",
-                        style: Utilities.styleRater,
-                      ),
-                      Text(
-                        "${film.average.toString()}/10",
-                        style: Utilities.styleRating,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "TMDB",
-                        style: Utilities.styleRater,
-                      ),
-                      Text(
-                        "${film.average.toString()}/10",
-                        style: Utilities.styleRating,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Flex(
-                  direction: Axis.horizontal,
-                  children: [
-                    Text(
-                      "Sinopse:",
-                      textAlign: TextAlign.start,
-                      style: Utilities.styleOverviewtitle,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _filmsApp.getCoverImage(film.coverImagePath),
+            Container(
+              padding: EdgeInsets.all(8.0),
+              height: 80,
+              color: Colors.blueGrey,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: AutoSizeText(
+                      film.title,
+                      maxFontSize: 24,
+                      minFontSize: 16,
+                      maxLines: 2,
+                      style: Utilities.styleTitle,
                     ),
-                  ],
-                ),
-                Text(film.overview),
-                FutureBuilder(
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(snapshot.data.toString());
-                    } else {
-                      return Text("Loading...");
-                    }
-                  },
-                  future: _filmsApp.getDirector(film.filmId),
-                )
-              ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "GRAW",
+                          style: Utilities.styleRater,
+                        ),
+                        Text(
+                          "${film.average.toString()}/10",
+                          style: Utilities.styleRating,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "TMDB",
+                          style: Utilities.styleRater,
+                        ),
+                        Text(
+                          "${film.average.toString()}/10",
+                          style: Utilities.styleRating,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          FutureBuilder<List<Review>>(
-            future: _filmsApp.getFilmReviews(film.filmId),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ReviewList(reviews: snapshot.data!);
-              } else if (snapshot.hasError) {
-                print('${snapshot.error}');
-              }
-              return CircularProgressIndicator();
-            },
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Text(
+                        "Sinopse:",
+                        textAlign: TextAlign.start,
+                        style: Utilities.styleOverviewtitle,
+                      ),
+                    ],
+                  ),
+                  Text(film.overview),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data.toString());
+                      } else {
+                        return Text("Loading...");
+                      }
+                    },
+                    future: _filmsApp.getDirector(film.filmId),
+                  )
+                ],
+              ),
+            ),
+            FutureBuilder<List<Review>>(
+              future: _filmsApp.getFilmReviews(film.filmId),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ReviewList(reviews: snapshot.data!);
+                } else if (snapshot.hasError) {
+                  print('${snapshot.error}');
+                }
+                return CircularProgressIndicator();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
