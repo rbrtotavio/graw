@@ -1,7 +1,9 @@
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/components/review_list.dart';
+import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
+import 'package:cinegraw_app/utility/appthemes.dart' as theme;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -11,7 +13,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  ProfileApp _profileApp = ProfileApp();
+  final ProfileApp _profileApp = ProfileApp();
 
   void _gotoMainScreen(BuildContext context) {
     Navigator.pushNamed(context, '/');
@@ -21,20 +23,15 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Text('GRAW'),
+          // TODO: Remover centerTitle
+          centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
               _gotoMainScreen(context);
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                _gotoMainScreen(context);
-              },
-            )
-          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -50,49 +47,62 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-              Container(
-                height: 100,
-                //color: Color.fromARGB(255, 138, 171, 188),
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
+              Flex(
+                direction: Axis.vertical,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: theme.colorAppbar,
+                    child: Row(
                       children: [
-                        const Text(
-                          'Nome do usuário',
-                          style: TextStyle(fontSize: 20),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Nome de Usuário",
+                                style: Utilities.styleTitle,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    "Seguindo: ",
+                                    style: TextStyle(color: theme.colorBG),
+                                  ),
+                                  Text(
+                                    "201",
+                                    style: TextStyle(
+                                        color: theme.colorBG,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  VerticalDivider(
+                                    thickness: 2.0,
+                                    width: 8.0,
+                                    color: theme.colorBG,
+                                  ),
+                                  Text(
+                                    "Seguidores: ",
+                                    style: TextStyle(color: theme.colorBG),
+                                  ),
+                                  Text(
+                                    "101",
+                                    style: TextStyle(
+                                        color: theme.colorBG,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 75,
-                    ),
-                    Row(children: [
-                      Column(
-                        children: [
-                          const Text(
-                            'Seguindo',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text('50')
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      Column(
-                        children: [
-                          const Text(
-                            'Seguidores',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text('50')
-                        ],
-                      )
-                    ])
-                  ],
-                ),
+                  ),
+                ],
               ),
               FutureBuilder<List<Review>>(
                 future: _profileApp.getUserReviews(),
@@ -102,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   } else if (snapshot.hasError) {
                     print('${snapshot.error}');
                   }
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
               ),
             ],
