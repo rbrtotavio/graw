@@ -5,6 +5,8 @@ class Review {
   String review;
   double rating;
   DateTime reviewDate;
+  String filmName;
+  String profileName;
 
   Review(
       {required this.reviewId,
@@ -12,7 +14,9 @@ class Review {
       required this.profileId,
       required this.review,
       required this.rating,
-      required this.reviewDate});
+      required this.reviewDate,
+      required this.filmName,
+      required this.profileName});
 
   factory Review.FromJson(Map<String, dynamic> json, String reviewId) {
     return Review(
@@ -21,6 +25,8 @@ class Review {
         review: json["Review"],
         profileId: json["ProfileId"],
         rating: json["Rating"],
-        reviewDate: json["ReviewDate"].toDate());
+        reviewDate: json["ReviewDate"].toDate(),
+        filmName: json["FilmName"],
+        profileName: json["ProfileName"]);
   }
 }

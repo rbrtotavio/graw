@@ -53,4 +53,8 @@ class ProfileApp extends BaseApp {
     }
     return Result.Success("");
   }
+
+  Future<bool> isLogged() async {
+    return await getProfile() != null;
+  }
 }

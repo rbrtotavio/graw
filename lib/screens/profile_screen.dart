@@ -179,7 +179,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 future: _profileApp.getUserReviews(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return ReviewList(reviews: snapshot.data!);
+                    return ReviewList(
+                      reviews: snapshot.data!,
+                      isProfileScreen: true,
+                    );
                   } else if (snapshot.hasError) {
                     print('${snapshot.error}');
                   }

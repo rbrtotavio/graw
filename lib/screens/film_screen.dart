@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/screens/components/review_list.dart';
 import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/applications/implementation/films_app.dart';
@@ -16,6 +17,7 @@ class FilmScreen extends StatefulWidget {
 
 class _FilmScreenState extends State<FilmScreen> {
   final FilmsApp _filmsApp = FilmsApp();
+  final ProfileApp _profileApp = ProfileApp();
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +68,7 @@ class _FilmScreenState extends State<FilmScreen> {
                                         const TextStyle(color: theme.colorBG),
                                   );
                                 } else if (snapshot.hasError) {
-                                  print(
-                                      'Line 72, getDirector Error: ${snapshot.error}');
+                                  print('${snapshot.error}');
                                 }
                                 return const Text(
                                   "Loading...",
@@ -110,14 +111,26 @@ class _FilmScreenState extends State<FilmScreen> {
                           ],
                         ),
                       ),
-                      Container(
-                        child: ElevatedButton(
-                          child: Text("Avaliar"),
-                          onPressed: () {
-                            _gotoReviewPage(context);
-                          },
-                        ),
-                      )
+                      FutureBuilder<bool>(
+                          future: _profileApp.isLogged(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasError &&
+                                snapshot.hasData &&
+                                snapshot.data!) {
+                              return ElevatedButton(
+                                child: Text("Avaliar"),
+                                onPressed: () {
+                                  _gotoReviewPage(context);
+                                },
+                              );
+                            }
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.grey),
+                              child: Text("Avaliar"),
+                              onPressed: () {},
+                            );
+                          })
                     ],
                   ),
                 ),
@@ -145,7 +158,10 @@ class _FilmScreenState extends State<FilmScreen> {
               future: _filmsApp.getFilmReviews(film.filmId),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ReviewList(reviews: snapshot.data!);
+                  return ReviewList(
+                    reviews: snapshot.data!,
+                    isProfileScreen: false,
+                  );
                 } else if (snapshot.hasError) {
                   print('${snapshot.error}');
                 }
