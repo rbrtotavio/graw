@@ -17,10 +17,6 @@ class FilmScreen extends StatefulWidget {
 class _FilmScreenState extends State<FilmScreen> {
   final FilmsApp _filmsApp = FilmsApp();
 
-  void _gotoReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;

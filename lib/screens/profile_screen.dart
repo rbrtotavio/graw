@@ -1,15 +1,10 @@
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/components/review_list.dart';
 import 'package:cinegraw_app/config/utilities.dart';
+import 'package:cinegraw_app/models/profile.dart';
 import 'package:cinegraw_app/models/review.dart';
-import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cinegraw_app/utility/appthemes.dart' as theme;
-
-import '../applications/implementation/auth_app.dart';
-
-import '../applications/implementation/auth_app.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -30,8 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('GRAW'),
-          // TODO: Remover centerTitle
-          centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -53,62 +46,134 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-              Flex(
-                direction: Axis.vertical,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    color: theme.colorAppbar,
-                    child: Row(
+              FutureBuilder(
+                //TODO: Fazer funcionar
+                future: _profileApp.getProfile(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    Profile profile = snapshot.data as Profile;
+                    return Flex(
+                      direction: Axis.vertical,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        Container(
+                          padding: const EdgeInsets.all(8.0),
+                          color: theme.colorAppbar,
+                          child: Row(
                             children: [
-                              Text(
-                                "Nome de Usuário",
-                                style: Utilities.styleTitle,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      //"Nome de Usuário",
+                                      profile.name,
+                                      style: Utilities.styleTitle,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text(
+                                          "Seguindo: ",
+                                          style:
+                                              TextStyle(color: theme.colorBG),
+                                        ),
+                                        Text(
+                                          "201",
+                                          style: TextStyle(
+                                              color: theme.colorBG,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        VerticalDivider(
+                                          thickness: 2.0,
+                                          width: 8.0,
+                                          color: theme.colorBG,
+                                        ),
+                                        Text(
+                                          "Seguidores: ",
+                                          style:
+                                              TextStyle(color: theme.colorBG),
+                                        ),
+                                        Text(
+                                          "101",
+                                          style: TextStyle(
+                                              color: theme.colorBG,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    "Seguindo: ",
-                                    style: TextStyle(color: theme.colorBG),
-                                  ),
-                                  Text(
-                                    "201",
-                                    style: TextStyle(
-                                        color: theme.colorBG,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  VerticalDivider(
-                                    thickness: 2.0,
-                                    width: 8.0,
-                                    color: theme.colorBG,
-                                  ),
-                                  Text(
-                                    "Seguidores: ",
-                                    style: TextStyle(color: theme.colorBG),
-                                  ),
-                                  Text(
-                                    "101",
-                                    style: TextStyle(
-                                        color: theme.colorBG,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                ],
+                    );
+                  } else if (snapshot.hasError) {
+                    print('${snapshot.error}');
+                  }
+                  return Flex(
+                    direction: Axis.vertical,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: theme.colorAppbar,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Nome de Usuário",
+                                    style: Utilities.styleTitle,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Text(
+                                        "Seguindo: ",
+                                        style: TextStyle(color: theme.colorBG),
+                                      ),
+                                      Text(
+                                        "201",
+                                        style: TextStyle(
+                                            color: theme.colorBG,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      VerticalDivider(
+                                        thickness: 2.0,
+                                        width: 8.0,
+                                        color: theme.colorBG,
+                                      ),
+                                      Text(
+                                        "Seguidores: ",
+                                        style: TextStyle(color: theme.colorBG),
+                                      ),
+                                      Text(
+                                        "101",
+                                        style: TextStyle(
+                                            color: theme.colorBG,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               FutureBuilder<List<Review>>(
                 future: _profileApp.getUserReviews(),
