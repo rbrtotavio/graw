@@ -51,6 +51,12 @@ class FirebaseAuthRepository {
     }
   }
 
+  //  TODO:corrigir bug: não pode ser usado com acesso estático
+  String getDisplayName() {
+    String name = _db.currentUser!.displayName.toString();
+    return name;
+  }
+
   User? getUser() {
     return _db.currentUser;
   }

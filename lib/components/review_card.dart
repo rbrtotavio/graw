@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/applications/implementation/auth_app.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
@@ -21,22 +22,34 @@ class ReviewCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: colorAppbar),
           ),
-          child: Row(
+          child: Column(
             children: [
-              const Icon(
-                Icons.movie,
-                color: Colors.white,
-                size: 30,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Flexible(
-                child: Container(
-                  child: Text(
-                    review.review,
-                    style: const TextStyle(fontSize: 18, color: Colors.white),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.movie,
+                    color: Colors.white,
+                    size: 30,
                   ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        review.rating.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: Colors.white),
+                      )),
+                ],
+              ),
+              Container(
+                child: Text(
+                  review.review,
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ],

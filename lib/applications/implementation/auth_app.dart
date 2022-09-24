@@ -19,6 +19,10 @@ class AuthApp extends BaseApp {
     await user.user!.updateDisplayName(name);
   }
 
+  String getDisplayName() {
+    return firebaseAuthRepository.getDisplayName();
+  }
+
   void signOut() {
     firebaseAuthRepository.signOut();
   }

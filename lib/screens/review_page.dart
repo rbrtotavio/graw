@@ -51,10 +51,8 @@ class _ReviewPageState extends State<ReviewPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 border: Border.all(width: 2, color: colorAppbar)),
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
                       'Sua nota:',
@@ -72,7 +70,6 @@ class _ReviewPageState extends State<ReviewPage> {
                           }).toList(),
                           onChanged: (value) {
                             setState(() {
-                              print(film.filmId);
                               _rating = value;
                             });
                           }),
@@ -101,7 +98,6 @@ class _ReviewPageState extends State<ReviewPage> {
                   _filmsApp.reviewFilm(film.filmId, _reviewController.text,
                       double.parse(_rating.toString()), null);
                   _gotoReturn(context);
-                  //FutureBuilder(future:_filmsApp.reviewFilm(film.filmId,_reviewController,_rating),builder: (BuildContext context))
                 });
               },
               child: Text("Enviar"))

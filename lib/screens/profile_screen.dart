@@ -1,7 +1,11 @@
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/components/review_list.dart';
 import 'package:cinegraw_app/models/review.dart';
+import 'package:cinegraw_app/repositories/firebase_auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../applications/implementation/auth_app.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -59,8 +63,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Column(
                       children: [
-                        const Text(
-                          'Nome do usuário',
+                        Text(
+                          "Nome de usuário",
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
