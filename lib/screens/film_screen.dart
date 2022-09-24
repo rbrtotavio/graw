@@ -154,20 +154,10 @@ class _FilmScreenState extends State<FilmScreen> {
                 ],
               ),
             ),
-            FutureBuilder<List<Review>>(
-              future: _filmsApp.getFilmReviews(film.filmId),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ReviewList(
-                    reviews: snapshot.data!,
-                    isProfileScreen: false,
-                  );
-                } else if (snapshot.hasError) {
-                  print('${snapshot.error}');
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
+            ReviewList(
+              isProfileScreen: false,
+              filmId: film.filmId,
+            )
           ],
         ),
       ),

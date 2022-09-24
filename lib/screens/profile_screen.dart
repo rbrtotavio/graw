@@ -47,74 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-              FutureBuilder(
-                //TODO: Fazer funcionar
+              FutureBuilder<Profile?>(
                 future: _profileApp.getProfile(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    Profile profile = snapshot.data as Profile;
-                    return Flex(
-                      direction: Axis.vertical,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8.0),
-                          color: theme.colorAppbar,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      //"Nome de Usuário",
-                                      profile.name,
-                                      style: Utilities.styleTitle,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          "Seguindo: ",
-                                          style:
-                                              TextStyle(color: theme.colorBG),
-                                        ),
-                                        Text(
-                                          "201",
-                                          style: TextStyle(
-                                              color: theme.colorBG,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        VerticalDivider(
-                                          thickness: 2.0,
-                                          width: 8.0,
-                                          color: theme.colorBG,
-                                        ),
-                                        Text(
-                                          "Seguidores: ",
-                                          style:
-                                              TextStyle(color: theme.colorBG),
-                                        ),
-                                        Text(
-                                          "101",
-                                          style: TextStyle(
-                                              color: theme.colorBG,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
+                  if (snapshot.hasError) {
                     print('${snapshot.error}');
                   }
                   return Flex(
@@ -131,7 +67,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Nome de Usuário",
+                                    snapshot.hasData
+                                        ? snapshot.data!.name
+                                        : "Trazendo nome",
                                     style: Utilities.styleTitle,
                                   ),
                                   Row(
@@ -176,20 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
               ),
-              FutureBuilder<List<Review>>(
-                future: _profileApp.getUserReviews(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ReviewList(
-                      reviews: snapshot.data!,
-                      isProfileScreen: true,
-                    );
-                  } else if (snapshot.hasError) {
-                    print('${snapshot.error}');
-                  }
-                  return const CircularProgressIndicator();
-                },
-              ),
+              ReviewList(isProfileScreen: true)
             ],
           ),
         ));
