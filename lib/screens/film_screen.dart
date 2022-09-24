@@ -22,7 +22,7 @@ class _FilmScreenState extends State<FilmScreen> {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
     void _gotoReviewPage(BuildContext context) {
       Navigator.pushNamed(context, '/review_page', arguments: film)
-          .then((value) {
+          .whenComplete(() {
         setState(() {});
       });
     }
@@ -57,6 +57,7 @@ class _FilmScreenState extends State<FilmScreen> {
                               style: Utilities.styleTitle,
                             ),
                             FutureBuilder(
+                              future: _filmsApp.getDirector(film.filmId),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   return Text(
@@ -73,7 +74,6 @@ class _FilmScreenState extends State<FilmScreen> {
                                   style: TextStyle(color: theme.colorBG),
                                 );
                               },
-                              future: _filmsApp.getDirector(film.filmId),
                             ),
                           ],
                         ),

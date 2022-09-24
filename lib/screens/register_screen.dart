@@ -119,13 +119,16 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 50,
             ),
             TextButton(
-                onPressed: () {
-                  _authApp.signUp(
-                      _passwordController.text,
-                      _confirmpasswordController.text,
-                      _emailController.text,
-                      _nomeController.text);
-                  _gotoMainScreen(context);
+                onPressed: () async {
+                  _authApp
+                      .signUp(
+                          _passwordController.text,
+                          _confirmpasswordController.text,
+                          _emailController.text,
+                          _nomeController.text)
+                      .whenComplete(() {
+                    _gotoMainScreen(context);
+                  });
                 },
                 child: const Text(
                   "Cadastrar",
