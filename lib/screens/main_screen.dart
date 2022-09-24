@@ -55,12 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(widget.title),
-          ],
-        ),
+        title: Text(widget.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),

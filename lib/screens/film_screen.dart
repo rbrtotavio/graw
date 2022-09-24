@@ -4,6 +4,7 @@ import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/review.dart';
+import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
 
 class FilmScreen extends StatefulWidget {
@@ -23,6 +24,10 @@ class _FilmScreenState extends State<FilmScreen> {
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
+    void _gotoReviewPage(BuildContext context) {
+      Navigator.pushNamed(context, '/review_page', arguments: film);
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -79,6 +84,14 @@ class _FilmScreenState extends State<FilmScreen> {
                       ],
                     ),
                   ),
+                  Container(
+                    child: ElevatedButton(
+                      child: Text("Avaliar"),
+                      onPressed: () {
+                        _gotoReviewPage(context);
+                      },
+                    ),
+                  )
                 ],
               ),
             ),
