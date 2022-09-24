@@ -12,7 +12,7 @@ ThemeData appTheme = ThemeData(
         style: TextButton.styleFrom(
       primary: Colors.black,
     )),
-    appBarTheme: const AppBarTheme(color: colorAppbar),
+    appBarTheme: const AppBarTheme(color: colorAppbar, centerTitle: true),
     drawerTheme: const DrawerThemeData(backgroundColor: colorBG),
     scaffoldBackgroundColor: colorBG,
     textTheme: GoogleFonts.ralewayTextTheme(),
@@ -20,7 +20,7 @@ ThemeData appTheme = ThemeData(
     primarySwatch: Colors.blue);
 
 ThemeData darkTheme = ThemeData(
-    appBarTheme: const AppBarTheme(color: colorAppbar),
+    appBarTheme: const AppBarTheme(color: colorAppbar, centerTitle: true),
     buttonTheme: const ButtonThemeData(buttonColor: Colors.white),
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
