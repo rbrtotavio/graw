@@ -1,3 +1,4 @@
+import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
@@ -11,21 +12,11 @@ class ReviewPage extends StatefulWidget {
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-  final ProfileApp _filmsApp = ProfileApp();
+  final ProfileApp _profileApp = ProfileApp();
+  final FilmsApp _filmsApp = FilmsApp();
   String? _rating;
-  List<String> _optionsRating = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
-  ];
+  final List<String> _optionsRating =
+      List.generate(11, (index) => index.toString());
   final _reviewController = TextEditingController();
 
   void _gotoReturn(BuildContext context) {
@@ -41,7 +32,7 @@ class _ReviewPageState extends State<ReviewPage> {
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
@@ -95,7 +86,7 @@ class _ReviewPageState extends State<ReviewPage> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _filmsApp.reviewFilm(film.filmId, _reviewController.text,
+                  _profileApp.reviewFilm(film, _reviewController.text,
                       double.parse(_rating.toString()), null);
                   _gotoReturn(context);
                 });

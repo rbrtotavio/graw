@@ -27,9 +27,9 @@ class ReviewCard extends StatelessWidget {
               Row(
                 children: [
                   const Icon(
-                    Icons.movie,
+                    Icons.person,
+                    size: 70,
                     color: Colors.white,
-                    size: 30,
                   ),
                   const SizedBox(
                     width: 10,
@@ -39,7 +39,7 @@ class ReviewCard extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       child: Text(
                         review.rating.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
                             color: Colors.white),

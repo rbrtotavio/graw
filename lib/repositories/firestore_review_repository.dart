@@ -50,14 +50,23 @@ class FirestoreReviewRepository {
     return null;
   }
 
-  Future<String> reviewFilm(int filmId, String review, double rating,
-      DateTime reviewDate, String profileId, String reviewId) async {
+  Future<String> reviewFilm(
+      int filmId,
+      String filmName,
+      String review,
+      double rating,
+      DateTime reviewDate,
+      String profileId,
+      String profileName,
+      String reviewId) async {
     var userReview = <String, dynamic>{
       "ReviewDate": reviewDate,
       "Rating": rating,
       "Review": review,
       "ProfileId": profileId,
-      "FilmId": filmId
+      "ProfileName": profileName,
+      "FilmId": filmId,
+      "FilmName": filmName
     };
 
     return _db
