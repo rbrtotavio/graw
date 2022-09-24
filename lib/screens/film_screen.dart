@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cinegraw_app/components/review_list.dart';
+import 'package:cinegraw_app/screens/components/review_list.dart';
 import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';

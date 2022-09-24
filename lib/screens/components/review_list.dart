@@ -1,4 +1,4 @@
-import 'package:cinegraw_app/components/review_card.dart';
+import 'package:cinegraw_app/screens/components/review_card.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
 

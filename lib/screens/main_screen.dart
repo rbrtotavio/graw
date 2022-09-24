@@ -1,7 +1,7 @@
+import 'package:cinegraw_app/screens/components/carousel_sector.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cinegraw_app/applications/implementation/auth_app.dart';
-import '../components/carousel_sector.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);

@@ -32,4 +32,16 @@ class FirestoreProfileRepository {
 
     return null;
   }
+
+  Future<String> createProfile(User user) async {
+    var profile = <String, dynamic>{
+      "Bio": "future incrementation",
+      "BirthDate": DateTime.now(),
+      "UrlCover": "future incrementation"
+    };
+    return await _db
+        .doc(user.uid)
+        .set(profile)
+        .then((value) => "", onError: (error) => error.toString());
+  }
 }

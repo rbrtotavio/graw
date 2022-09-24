@@ -125,6 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       _confirmpasswordController.text,
                       _emailController.text,
                       _nomeController.text);
+                  _gotoMainScreen(context);
                 },
                 child: const Text(
                   "Cadastrar",

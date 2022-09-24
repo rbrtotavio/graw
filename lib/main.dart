@@ -1,4 +1,5 @@
-import 'package:cinegraw_app/screens/auth_page.dart';
+import 'package:cinegraw_app/config/firebase_options.dart';
+import 'package:cinegraw_app/screens/auth_screen.dart';
 import 'package:cinegraw_app/screens/film_Screen.dart';
 import 'package:cinegraw_app/screens/main_screen.dart';
 import 'package:cinegraw_app/screens/review_page.dart';
@@ -8,8 +9,6 @@ import 'package:cinegraw_app/screens/login_register.dart';
 import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
