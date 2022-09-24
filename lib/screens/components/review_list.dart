@@ -38,7 +38,7 @@ class ReviewList extends StatelessWidget {
                               Text(
                                 //"Ontem, às 22:00",
                                 reviews[index].reviewDate.toString(),
-                                style: TextStyle(color: colorBG),
+                                style: const TextStyle(color: colorBG),
                               ),
                               Flex(
                                 direction: Axis.horizontal,
