@@ -39,7 +39,6 @@ class FirebaseAuthRepository {
     await _db.signOut();
   }
 
-  //  TODO:corrigir bug: não pode ser usado com acesso estático
   String getDisplayName() {
     String name = _db.currentUser!.displayName.toString();
     return name;

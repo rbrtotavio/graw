@@ -62,7 +62,6 @@ class _LoginRegisterState extends State<LoginRegister> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        //decoration: TextDecoration.underline
                       ),
                     ),
                     const SizedBox(

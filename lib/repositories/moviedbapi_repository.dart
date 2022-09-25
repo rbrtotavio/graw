@@ -58,7 +58,6 @@ class MovieDBApiRepository {
         filmsApi.add(filmapi);
       }
     }
-    // TODO: TRATAR CASO STATUSCODE != 200
     return filmsApi;
   }
 
@@ -150,7 +149,6 @@ class MovieDBApiRepository {
         genresApi.add(genreApi);
       }
     }
-    // TODO: TRATAR CASO STATUSCODE != 200
     return genresApi;
   }
 
@@ -169,7 +167,6 @@ class MovieDBApiRepository {
         filmsApi.add(filmapi);
       }
     }
-    // TODO: TRATAR CASO STATUSCODE != 200
     return filmsApi;
   }
 
@@ -188,13 +185,11 @@ class MovieDBApiRepository {
         filmsApi.add(filmapi);
       }
     }
-    // TODO: TRATAR CASO STATUSCODE != 200
     return filmsApi;
   }
 
   Image getCardImage(String imgPath) {
     bool error = false;
-    // TODO: criar cardholder
     Image img = Image.network("${_imgUrl}original$imgPath");
 
     for (var size in _cardSizes) {
@@ -217,7 +212,6 @@ class MovieDBApiRepository {
 
   Image getCoverImage(String imgPath) {
     bool error = false;
-    // TODO: criar coverholder
     Image img = Image.network("${_imgUrl}original$imgPath");
 
     for (var size in _coverSizes) {

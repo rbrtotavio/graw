@@ -102,7 +102,6 @@ class _SearchFilmFiltersState extends State<SearchFilmFilters> {
               ),
               ReleaseFilters(
                   getFilter: (String release) => getReleaseFilter(release)),
-              // TODO: botao de limpar filtros
             ],
           )
         ],
