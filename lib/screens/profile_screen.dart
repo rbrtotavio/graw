@@ -73,38 +73,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                         : "Trazendo nome",
                                     style: Utilities.styleTitle,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text(
-                                        "Seguindo: ",
-                                        style: TextStyle(color: theme.colorBG),
-                                      ),
-                                      Text(
-                                        "201",
-                                        style: TextStyle(
-                                            color: theme.colorBG,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      VerticalDivider(
-                                        thickness: 2.0,
-                                        width: 8.0,
-                                        color: theme.colorBG,
-                                      ),
-                                      Text(
-                                        "Seguidores: ",
-                                        style: TextStyle(color: theme.colorBG),
-                                      ),
-                                      Text(
-                                        "101",
-                                        style: TextStyle(
-                                            color: theme.colorBG,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  )
                                 ],
                               ),
                             ),
