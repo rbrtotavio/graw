@@ -20,7 +20,6 @@ class ReviewActions extends StatefulWidget {
 
 class ReviewActionsState extends State<ReviewActions> {
   final ProfileApp _profileApp = ProfileApp();
-  final FilmsApp _filmsApp = FilmsApp();
 
   void _gotoReviewPage(BuildContext context) async {
     var args = ReviewPageArgs();

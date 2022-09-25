@@ -102,8 +102,16 @@ class _LoginRegisterState extends State<LoginRegister> {
               ),
               TextButton(
                   onPressed: () {
-                    _authApp.signIn(
-                        _emailController.text, _passwordController.text);
+                    _authApp
+                        .signIn(_emailController.text, _passwordController.text)
+                        .then((result) {
+                      if (result.isValid) {
+                        _gotoMainScreen(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(result.error)));
+                      }
+                    });
                   },
                   child: const Text(
                     "Entrar",

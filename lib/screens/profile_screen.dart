@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
               ),
-              ReviewList(isProfileScreen: true)
+              const ReviewList(isProfileScreen: true)
             ],
           ),
         ));

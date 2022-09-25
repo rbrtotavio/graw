@@ -15,16 +15,31 @@ class ProfileApp extends BaseApp {
   }
 
   Future<Result> reviewFilm(int filmId, String filmName, String review,
-      int rating, String? reviewId) async {
+      String rating, String? reviewId) async {
     var profile = await getProfile();
     if (profile == null) {
       return Result.Error("É necessario estar logado para realizar essa ação");
     }
 
+    if (rating.isEmpty) {
+      return Result.Error("Insira uma nota");
+    }
+
+    if (review.isEmpty) {
+      return Result.Error("Insira uma review");
+    }
+
     DateTime dataReview = DateTime.now();
     reviewId ??= const Uuid().v4();
-    var resultado = await firestoreReviewRepository.reviewFilm(filmId, filmName,
-        review, rating, dataReview, profile.idProfile, profile.name, reviewId);
+    var resultado = await firestoreReviewRepository.reviewFilm(
+        filmId,
+        filmName,
+        review,
+        int.parse(rating),
+        dataReview,
+        profile.idProfile,
+        profile.name,
+        reviewId);
 
     if (resultado.isNotEmpty) {
       return Result.Error(resultado);
@@ -41,7 +56,7 @@ class ProfileApp extends BaseApp {
     var resultado = await firestoreReviewRepository.deleteReview(reviewId);
 
     if (resultado.isNotEmpty) {
-      return Result.Error(resultado);
+      return Result.Error("Não foi possivel excluir sua review");
     }
     return Result.Success("");
   }
