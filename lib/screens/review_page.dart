@@ -35,79 +35,82 @@ class _ReviewPageState extends State<ReviewPage> {
       appBar: AppBar(
         title: Text('Review'),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                border: Border.all(width: 2, color: colorAppbar)),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const Text(
-                      'Sua nota:',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(
-                      width: 50,
-                      child: TextField(
-                        controller: _ratingController,
-                        maxLength: 2,
-                        maxLines: 1,
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          RatingInputFormatter()
-                        ],
-                        decoration: InputDecoration(
-                          counterText: "",
-                          contentPadding: EdgeInsets.all(10),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  border: Border.all(width: 2, color: colorAppbar)),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        'Sua nota:',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(
+                        width: 50,
+                        child: TextField(
+                          controller: _ratingController,
+                          maxLength: 2,
+                          maxLines: 1,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            RatingInputFormatter()
+                          ],
+                          decoration: InputDecoration(
+                            counterText: "",
+                            contentPadding: EdgeInsets.all(10),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  maxLines: 15,
-                  minLines: 1,
-                  controller: _reviewController,
-                  decoration: InputDecoration(
-                    hintText: 'Escreva sua review',
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    maxLines: 30,
+                    minLines: 1,
+                    maxLength: 512,
+                    controller: _reviewController,
+                    decoration: InputDecoration(
+                      hintText: 'Escreva sua review',
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                _profileApp
-                    .reviewFilm(
-                        reviewPageArgs.filmId,
-                        reviewPageArgs.filmName,
-                        _reviewController.text,
-                        int.parse(_ratingController.text),
-                        reviewId)
-                    .whenComplete((() => _gotoReturn(context)));
-              },
-              child: Text("Enviar"))
-        ],
+            ElevatedButton(
+                onPressed: () {
+                  _profileApp
+                      .reviewFilm(
+                          reviewPageArgs.filmId,
+                          reviewPageArgs.filmName,
+                          _reviewController.text.trim(),
+                          int.parse(_ratingController.text),
+                          reviewId)
+                      .whenComplete((() => _gotoReturn(context)));
+                },
+                child: Text("Enviar"))
+          ],
+        ),
       ),
     );
   }

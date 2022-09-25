@@ -57,10 +57,18 @@ class _FilmScreenState extends State<FilmScreen> {
                             AutoSizeText(
                               film.title,
                               maxFontSize: 24,
-                              minFontSize: 16,
-                              maxLines: 2,
+                              minFontSize: 12,
                               style: Utilities.styleTitle,
                             ),
+                            film.releaseDate != null
+                                ? AutoSizeText(
+                                    film.releaseDate!.year.toString(),
+                                    maxFontSize: 18,
+                                    minFontSize: 12,
+                                    maxLines: 2,
+                                    style: Utilities.styleTitle,
+                                  )
+                                : const SizedBox(),
                             FutureBuilder(
                               future: _filmsApp.getDirector(film.filmId),
                               builder: (context, snapshot) {
