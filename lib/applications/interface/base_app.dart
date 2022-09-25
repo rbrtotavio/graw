@@ -24,6 +24,6 @@ abstract class BaseApp {
     if (_user == null) {
       return null;
     }
-    return await firestoreProfileRepository.getByUser(_user!);
+    return await firestoreProfileRepository.getByProfileId(_user!.uid);
   }
 }

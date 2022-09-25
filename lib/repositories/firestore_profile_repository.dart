@@ -23,21 +23,22 @@ class FirestoreProfileRepository {
     }
   }
 
-  Future<Profile?> getByUser(User user) async {
-    var profile = await _db.doc(user.uid).get();
+  Future<Profile?> getByProfileId(String profileId) async {
+    var profile = await _db.doc(profileId).get();
     if (profile.exists) {
       return Profile.FromFirebase(
-          profile.data()! as Map<String, dynamic>, user);
+          profile.data()! as Map<String, dynamic>, profileId);
     }
 
     return null;
   }
 
-  Future<String> createProfile(User user) async {
+  Future<String> createProfile(User user, String name) async {
     var profile = <String, dynamic>{
       "Bio": "future incrementation",
       "BirthDate": DateTime.now(),
-      "UrlCover": "future incrementation"
+      "UrlCover": "future incrementation",
+      "Name": name
     };
     return await _db.doc(user.uid).set(profile).then((value) => "",
         onError: (error) =>

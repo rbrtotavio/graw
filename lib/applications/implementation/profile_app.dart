@@ -1,4 +1,5 @@
 import 'package:cinegraw_app/applications/interface/base_app.dart';
+import 'package:cinegraw_app/models/profile.dart';
 import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:uuid/uuid.dart';
@@ -6,12 +7,20 @@ import 'package:uuid/uuid.dart';
 class ProfileApp extends BaseApp {
   ProfileApp();
 
+  Future<Profile?> getbyId(String profileId) async {
+    return await firestoreProfileRepository.getByProfileId(profileId);
+  }
+
   Future<List<Review>> getUserReviews() async {
     var profile = await getProfile();
     if (profile == null) {
       return <Review>[];
     }
     return await firestoreReviewRepository.getReviewsByUser(profile.idProfile);
+  }
+
+  Future<List<Review>> getUserReviewsByProfileId(String profileId) async {
+    return await firestoreReviewRepository.getReviewsByUser(profileId);
   }
 
   Future<Result> reviewFilm(int filmId, String filmName, String review,

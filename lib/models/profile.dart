@@ -15,10 +15,10 @@ class Profile {
     required this.birthDate,
   });
 
-  factory Profile.FromFirebase(Map<String, dynamic> json, User user) {
+  factory Profile.FromFirebase(Map<String, dynamic> json, String profileId) {
     return Profile(
-      idProfile: user.uid,
-      name: user.displayName!,
+      idProfile: profileId,
+      name: json["Name"],
       bio: json["Bio"],
       urlCover: json["UrlCover"],
       birthDate: json["BirthDate"].toDate(),

@@ -6,11 +6,13 @@ import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
 
 class ReviewList extends StatefulWidget {
-  const ReviewList({Key? key, required this.isProfileScreen, this.filmId})
+  const ReviewList(
+      {Key? key, required this.isProfileScreen, this.filmId, this.profileId})
       : super(key: key);
 
   final bool isProfileScreen;
   final int? filmId;
+  final String? profileId;
 
   @override
   State<ReviewList> createState() => _ReviewListState();
@@ -23,12 +25,16 @@ class _ReviewListState extends State<ReviewList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Review>>(
-      future: widget.isProfileScreen
-          ? _profileApp.getUserReviews()
-          : _filmsApp.getFilmReviews(widget.filmId!),
+      future: !widget.isProfileScreen
+          ? _filmsApp.getFilmReviews(widget.filmId!)
+          : widget.profileId == null
+              ? _profileApp.getUserReviews()
+              : _profileApp.getUserReviewsByProfileId(widget.profileId!),
       builder: (context, ssReviews) {
         if (ssReviews.hasError) {
-          print(ssReviews.error);
+          return const Center(
+            child: Text("Não foi possivel obter as reviews :("),
+          );
         }
         if (ssReviews.hasData && ssReviews.data!.isNotEmpty) {
           return Container(

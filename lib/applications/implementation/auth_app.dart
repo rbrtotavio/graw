@@ -15,16 +15,19 @@ class AuthApp extends BaseApp {
 
   Future<Result> signUp(String password, String confirmpassword, String email,
       String name) async {
+    if (password.trim() != confirmpassword.trim()) {
+      return Result.Error("Insira a mesma senha nos campos de senha");
+    }
+
     try {
       var user =
           await firebaseAuthRepository.signUp(password, confirmpassword, email);
       if (user == null || user.user == null) {
         return Result.Error("Não foi possivel cadastrar seu usuario");
       }
-      await user.user!.updateDisplayName(name);
 
       var profileCreation =
-          await firestoreProfileRepository.createProfile(user.user!);
+          await firestoreProfileRepository.createProfile(user.user!, name);
       if (profileCreation.isNotEmpty) {
         user.user!.delete();
         return Result.Error(profileCreation);

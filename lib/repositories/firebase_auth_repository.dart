@@ -31,24 +31,12 @@ class FirebaseAuthRepository {
   //função para se registrar no app
   Future<UserCredential?> signUp(
       String password, String confirmpassword, String email) async {
-    if (_verifyPassword(password, confirmpassword)) {
-      return await _db.createUserWithEmailAndPassword(
-          email: email.trim(), password: password.trim());
-    }
-    return null;
+    return await _db.createUserWithEmailAndPassword(
+        email: email.trim(), password: password.trim());
   }
 
   void signOut() async {
     await _db.signOut();
-  }
-
-  //função de validação que verifica se as senhas são iguais
-  bool _verifyPassword(String password, String confirmpassword) {
-    if (password.trim() == confirmpassword.trim()) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   //  TODO:corrigir bug: não pode ser usado com acesso estático

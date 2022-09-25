@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:cinegraw_app/utility/appthemes.dart' as theme;
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key, this.profile}) : super(key: key);
+  final Profile? profile;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -46,7 +47,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               FutureBuilder<Profile?>(
-                future: _profileApp.getProfile(),
+                future: widget.profile == null
+                    ? _profileApp.getProfile()
+                    : _profileApp.getbyId(widget.profile!.idProfile),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     print('${snapshot.error}');
@@ -112,7 +115,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
               ),
-              const ReviewList(isProfileScreen: true)
+              ReviewList(
+                isProfileScreen: true,
+                profileId: widget.profile?.idProfile,
+              )
             ],
           ),
         ));
