@@ -33,6 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/');
   }
 
+  void _gotoQRCodeScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/qrcode_page');
+  }
+
   void changeWidgets() {
     setState(() {
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -69,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               color: colorTheme,
               height: 200,
               alignment: Alignment.bottomLeft,
@@ -80,7 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {},
               ),
             ),
-            const SizedBox(height: 50),
             Align(
                 alignment: Alignment.centerLeft,
                 child: userState
@@ -102,7 +105,28 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Login/cadastro",
                           style: TextStyle(fontSize: 27),
                         ))),
-            const SizedBox(height: 40),
+            const Divider(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: userState
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            _gotoQRCodeScreen(context);
+                            changeWidgets();
+                          },
+                          child: const Text(
+                            "Compartilhar",
+                            style: TextStyle(fontSize: 27),
+                          ),
+                        ),
+                        const Divider(),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
+            ),
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
@@ -114,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(fontSize: 27),
                   )),
             ),
-            const SizedBox(height: 40),
+            const Divider(),
             userState
                 ? Align(
                     alignment: Alignment.centerLeft,
@@ -131,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 27),
                         )),
                   )
-                : const SizedBox(height: 40),
+                : const SizedBox(),
           ],
         ),
       ),

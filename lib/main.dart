@@ -2,6 +2,7 @@ import 'package:cinegraw_app/config/firebase_options.dart';
 import 'package:cinegraw_app/screens/auth_screen.dart';
 import 'package:cinegraw_app/screens/film_Screen.dart';
 import 'package:cinegraw_app/screens/main_screen.dart';
+import 'package:cinegraw_app/screens/qrcode_screen.dart';
 import 'package:cinegraw_app/screens/review_page.dart';
 import 'package:cinegraw_app/screens/search_film_screen.dart';
 import 'package:cinegraw_app/screens/config_screen.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         '/login_register': ((context) => const LoginRegister()),
         '/auth_page': ((context) => const LoginAuth()),
         '/film': (context) => const FilmScreen(),
-        '/review_page': (context) => const ReviewPage()
+        '/review_page': (context) => const ReviewPage(),
+        '/qrcode_page': (context) => const QRCodeScreen()
       },
     );
   }
