@@ -45,7 +45,9 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
                 ),
               ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                readQRCode();
+              },
               icon: const Icon(Icons.qr_code),
               label: const Text('Validar'),
               style: ElevatedButton.styleFrom(primary: colorAppbar),
