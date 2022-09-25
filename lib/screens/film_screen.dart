@@ -96,22 +96,6 @@ class _FilmScreenState extends State<FilmScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "GRAW",
-                              style: Utilities.styleRater,
-                            ),
-                            Text(
-                              film.average.toString(),
-                              style: Utilities.styleRating,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
                               "TMDB",
                               style: Utilities.styleRater,
                             ),

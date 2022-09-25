@@ -82,40 +82,6 @@ class _ConfigPageState extends State<ConfigPage> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "idiomas",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Acessibilidade",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      "Tamanho da fonte",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                )
               ],
             ),
           )
