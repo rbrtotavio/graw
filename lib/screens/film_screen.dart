@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
+import 'package:cinegraw_app/models/review_page_args.dart';
 import 'package:cinegraw_app/screens/components/review_list.dart';
 import 'package:cinegraw_app/config/utilities.dart';
 import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
-import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
 import 'package:cinegraw_app/utility/appthemes.dart' as theme;
 
@@ -23,7 +23,10 @@ class _FilmScreenState extends State<FilmScreen> {
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
     void _gotoReviewPage(BuildContext context) {
-      Navigator.pushNamed(context, '/review_page', arguments: film)
+      var args = ReviewPageArgs();
+      args.filmId = film.filmId;
+      args.filmName = film.title;
+      Navigator.pushNamed(context, '/review_page', arguments: args)
           .whenComplete(() {
         setState(() {});
       });
@@ -54,10 +57,18 @@ class _FilmScreenState extends State<FilmScreen> {
                             AutoSizeText(
                               film.title,
                               maxFontSize: 24,
-                              minFontSize: 16,
-                              maxLines: 2,
+                              minFontSize: 12,
                               style: Utilities.styleTitle,
                             ),
+                            film.releaseDate != null
+                                ? AutoSizeText(
+                                    film.releaseDate!.year.toString(),
+                                    maxFontSize: 18,
+                                    minFontSize: 12,
+                                    maxLines: 2,
+                                    style: Utilities.styleTitle,
+                                  )
+                                : const SizedBox(),
                             FutureBuilder(
                               future: _filmsApp.getDirector(film.filmId),
                               builder: (context, snapshot) {
@@ -89,7 +100,7 @@ class _FilmScreenState extends State<FilmScreen> {
                               style: Utilities.styleRater,
                             ),
                             Text(
-                              "${film.average.toString()}/10",
+                              film.average.toString(),
                               style: Utilities.styleRating,
                             ),
                           ],
@@ -105,7 +116,7 @@ class _FilmScreenState extends State<FilmScreen> {
                               style: Utilities.styleRater,
                             ),
                             Text(
-                              "${film.average.toString()}/10",
+                              film.average.toString(),
                               style: Utilities.styleRating,
                             ),
                           ],

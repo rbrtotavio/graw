@@ -1,5 +1,4 @@
 import 'package:cinegraw_app/applications/interface/base_app.dart';
-import 'package:cinegraw_app/models/movieDB/film_movieDB.dart';
 import 'package:cinegraw_app/models/result.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:uuid/uuid.dart';
@@ -15,8 +14,8 @@ class ProfileApp extends BaseApp {
     return await firestoreReviewRepository.getReviewsByUser(profile.idProfile);
   }
 
-  Future<Result> reviewFilm(
-      FilmMovieDB film, String review, double rating, String? reviewId) async {
+  Future<Result> reviewFilm(int filmId, String filmName, String review,
+      int rating, String? reviewId) async {
     var profile = await getProfile();
     if (profile == null) {
       return Result.Error("É necessario estar logado para realizar essa ação");
@@ -24,15 +23,8 @@ class ProfileApp extends BaseApp {
 
     DateTime dataReview = DateTime.now();
     reviewId ??= const Uuid().v4();
-    var resultado = await firestoreReviewRepository.reviewFilm(
-        film.filmId,
-        film.title,
-        review,
-        rating,
-        dataReview,
-        profile.idProfile,
-        profile.name,
-        reviewId);
+    var resultado = await firestoreReviewRepository.reviewFilm(filmId, filmName,
+        review, rating, dataReview, profile.idProfile, profile.name, reviewId);
 
     if (resultado.isNotEmpty) {
       return Result.Error(resultado);
