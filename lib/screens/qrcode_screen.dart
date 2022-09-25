@@ -30,7 +30,7 @@ class _QRCodeScreenState extends State<QRCodeScreen> {
       appBar: AppBar(
         title: const Text('QR CODE'),
       ),
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
