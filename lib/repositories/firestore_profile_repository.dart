@@ -39,9 +39,8 @@ class FirestoreProfileRepository {
       "BirthDate": DateTime.now(),
       "UrlCover": "future incrementation"
     };
-    return await _db
-        .doc(user.uid)
-        .set(profile)
-        .then((value) => "", onError: (error) => error.toString());
+    return await _db.doc(user.uid).set(profile).then((value) => "",
+        onError: (error) =>
+            "Não foi possivel finalizar a criação do seu perfil");
   }
 }

@@ -88,46 +88,58 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 70,
             ),
             TextFormField(
+              maxLength: 30,
               controller: _nomeController,
-              decoration: const InputDecoration(labelText: 'Nome'),
+              decoration:
+                  const InputDecoration(labelText: 'Nome', counterText: ""),
             ),
             const SizedBox(
               height: 50,
             ),
             TextFormField(
+              maxLength: 100,
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'E-mail válido'),
+              decoration: const InputDecoration(
+                  labelText: 'E-mail válido', counterText: ""),
             ),
             const SizedBox(
               height: 50,
             ),
             TextFormField(
+              maxLength: 30,
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Senha'),
+              decoration:
+                  const InputDecoration(labelText: 'Senha', counterText: ""),
               obscureText: true,
             ),
             const SizedBox(
               height: 50,
             ),
             TextFormField(
+              maxLength: 30,
               controller: _confirmpasswordController,
-              decoration:
-                  const InputDecoration(labelText: 'Confirma sua senha'),
+              decoration: const InputDecoration(
+                  labelText: 'Confirma sua senha', counterText: ""),
               obscureText: true,
             ),
             const SizedBox(
               height: 50,
             ),
             TextButton(
-                onPressed: () async {
+                onPressed: () {
                   _authApp
                       .signUp(
                           _passwordController.text,
                           _confirmpasswordController.text,
                           _emailController.text,
                           _nomeController.text)
-                      .whenComplete(() {
-                    _gotoMainScreen(context);
+                      .then((result) {
+                    if (result.isValid) {
+                      _gotoMainScreen(context);
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(result.error)));
+                    }
                   });
                 },
                 child: const Text(

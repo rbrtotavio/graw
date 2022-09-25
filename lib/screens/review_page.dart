@@ -104,9 +104,16 @@ class _ReviewPageState extends State<ReviewPage> {
                           reviewPageArgs.filmId,
                           reviewPageArgs.filmName,
                           _reviewController.text.trim(),
-                          int.parse(_ratingController.text),
+                          _ratingController.text,
                           reviewId)
-                      .whenComplete((() => _gotoReturn(context)));
+                      .then((result) {
+                    if (result.isValid) {
+                      _gotoReturn(context);
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(result.error)));
+                    }
+                  });
                 },
                 child: Text("Enviar"))
           ],
