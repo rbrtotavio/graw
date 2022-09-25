@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-//TODO: resolver erro do expanded
 class ConfigPage extends StatefulWidget {
-  const ConfigPage({Key? key}) : super(key: key);
+  const ConfigPage({Key? key, required this.switchTheme, required this.isDark})
+      : super(key: key);
+  final void Function(bool isDark) switchTheme;
+  final bool isDark;
 
   @override
   State<ConfigPage> createState() => _ConfigPageState();
@@ -14,10 +16,10 @@ class _ConfigPageState extends State<ConfigPage> {
     Navigator.pop(context);
   }
 
-  bool switchButton = false;
   var idiomas = ["português", 'inglês', "espanhol"];
   @override
   Widget build(BuildContext context) {
+    bool switchButton = widget.isDark;
     return Scaffold(
       body: Column(
         children: [
@@ -72,6 +74,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       onChanged: (value) {
                         setState(() {
                           switchButton = value;
+                          widget.switchTheme(switchButton);
                         });
                       },
                       activeTrackColor: colorTheme,

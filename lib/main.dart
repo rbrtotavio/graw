@@ -19,21 +19,37 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final colorAppbar = const Color(0xFF006D77);
   final colorBG = const Color(0xFFEDF6F9);
-  const MyApp({Key? key}) : super(key: key);
+  bool themeDark = false;
+  void updateTheme(bool isDark) {
+    setState(() {
+      themeDark = isDark;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme,
+      darkTheme: themeDark ? darkTheme : null,
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: "GRAW"),
         '/buscar': (context) => const SearchFilmScreen(title: "Buscar filme"),
-        '/config': (context) => const ConfigPage(),
+        '/config': (context) => ConfigPage(
+              switchTheme: updateTheme,
+              isDark: themeDark,
+            ),
         '/login_register': ((context) => const LoginRegister()),
         '/auth_page': ((context) => LoginAuth()),
         '/film': (context) => const FilmScreen(),

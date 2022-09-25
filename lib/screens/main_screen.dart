@@ -150,9 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const Text(
                           "Sair",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 26, 26, 26),
-                              fontSize: 27),
+                          style: TextStyle(fontSize: 27),
                         )),
                   )
                 : const SizedBox(),
