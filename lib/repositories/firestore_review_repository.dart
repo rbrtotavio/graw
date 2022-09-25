@@ -54,7 +54,7 @@ class FirestoreReviewRepository {
       int filmId,
       String filmName,
       String review,
-      double rating,
+      int rating,
       DateTime reviewDate,
       String profileId,
       String profileName,

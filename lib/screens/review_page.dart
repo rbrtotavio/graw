@@ -1,8 +1,9 @@
-import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
+import 'package:cinegraw_app/models/review_page_args.dart';
 import 'package:cinegraw_app/utility/appthemes.dart';
+import 'package:cinegraw_app/utility/ratingInputFormatter.dart';
 import 'package:flutter/material.dart';
-import '../models/movieDB/film_movieDB.dart';
+import 'package:flutter/services.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key}) : super(key: key);
@@ -13,19 +14,23 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPageState extends State<ReviewPage> {
   final ProfileApp _profileApp = ProfileApp();
-  final FilmsApp _filmsApp = FilmsApp();
-  String? _rating;
-  final List<String> _optionsRating =
-      List.generate(11, (index) => index.toString());
   final _reviewController = TextEditingController();
-
+  final _ratingController = TextEditingController();
+  String? reviewId;
   void _gotoReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final film = ModalRoute.of(context)!.settings.arguments as FilmMovieDB;
+    final reviewPageArgs =
+        ModalRoute.of(context)!.settings.arguments as ReviewPageArgs;
+    if (reviewPageArgs.review != null) {
+      _reviewController.text = reviewPageArgs.review!.review;
+      _ratingController.text = reviewPageArgs.review!.rating.toString();
+      reviewId = reviewPageArgs.review!.reviewId;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Review'),
@@ -50,20 +55,25 @@ class _ReviewPageState extends State<ReviewPage> {
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
-                      width: 30,
-                    ),
-                    Container(
-                      child: DropdownButton<String>(
-                          value: _rating,
-                          items: _optionsRating.map((item) {
-                            return DropdownMenuItem<String>(
-                                value: item, child: Text(item));
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _rating = value;
-                            });
-                          }),
+                      width: 50,
+                      child: TextField(
+                        controller: _ratingController,
+                        maxLength: 2,
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          RatingInputFormatter()
+                        ],
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: EdgeInsets.all(10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32.0),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -75,21 +85,26 @@ class _ReviewPageState extends State<ReviewPage> {
                   minLines: 1,
                   controller: _reviewController,
                   decoration: InputDecoration(
-                      hintText: 'Escreva sua review',
-                      contentPadding: EdgeInsets.all(10),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0))),
+                    hintText: 'Escreva sua review',
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
           ElevatedButton(
               onPressed: () {
-                setState(() {
-                  _profileApp.reviewFilm(film, _reviewController.text,
-                      double.parse(_rating.toString()), null);
-                  _gotoReturn(context);
-                });
+                _profileApp
+                    .reviewFilm(
+                        reviewPageArgs.filmId,
+                        reviewPageArgs.filmName,
+                        _reviewController.text,
+                        int.parse(_ratingController.text),
+                        reviewId)
+                    .whenComplete((() => _gotoReturn(context)));
               },
               child: Text("Enviar"))
         ],

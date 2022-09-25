@@ -1,36 +1,43 @@
 import 'package:cinegraw_app/applications/implementation/films_app.dart';
 import 'package:cinegraw_app/applications/implementation/profile_app.dart';
+import 'package:cinegraw_app/screens/components/review_actions.dart';
 import 'package:cinegraw_app/utility/appthemes.dart';
 import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
 
-class ReviewList extends StatelessWidget {
-  ReviewList({Key? key, required this.isProfileScreen, this.filmId})
+class ReviewList extends StatefulWidget {
+  const ReviewList({Key? key, required this.isProfileScreen, this.filmId})
       : super(key: key);
 
   final bool isProfileScreen;
+  final int? filmId;
+
+  @override
+  State<ReviewList> createState() => _ReviewListState();
+}
+
+class _ReviewListState extends State<ReviewList> {
   final ProfileApp _profileApp = ProfileApp();
   final FilmsApp _filmsApp = FilmsApp();
-  final int? filmId;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Review>>(
-      future: isProfileScreen
+      future: widget.isProfileScreen
           ? _profileApp.getUserReviews()
-          : _filmsApp.getFilmReviews(filmId!),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          print(snapshot.error);
+          : _filmsApp.getFilmReviews(widget.filmId!),
+      builder: (context, ssReviews) {
+        if (ssReviews.hasError) {
+          print(ssReviews.error);
         }
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+        if (ssReviews.hasData && ssReviews.data!.isNotEmpty) {
           return Container(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 Column(
                   children: List.generate(
-                    snapshot.data!.length,
+                    ssReviews.data!.length,
                     (index) {
                       return Column(
                         children: [
@@ -48,27 +55,14 @@ class ReviewList extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      snapshot.data![index].reviewDate
+                                      ssReviews.data![index].reviewDate
                                           .toString(),
                                       style: TextStyle(color: colorBG),
                                     ),
-                                    Flex(
-                                      direction: Axis.horizontal,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        IconButton(
-                                            padding: const EdgeInsets.all(8.0),
-                                            onPressed: () {},
-                                            icon: const Icon(Icons.edit)),
-                                        IconButton(
-                                            padding: const EdgeInsets.all(8.0),
-                                            onPressed: () {
-                                              _profileApp.deleteReview(snapshot
-                                                  .data![index].reviewId);
-                                            },
-                                            icon: const Icon(Icons.delete))
-                                      ],
-                                    ),
+                                    ReviewActions(
+                                      review: ssReviews.data![index],
+                                      updateReviews: () => setState(() {}),
+                                    )
                                   ],
                                 ),
                                 const Divider(
@@ -85,9 +79,10 @@ class ReviewList extends StatelessWidget {
                                       margin: const EdgeInsets.all(8),
                                       padding: const EdgeInsets.all(8),
                                       child: Text(
-                                        isProfileScreen
-                                            ? snapshot.data![index].filmName
-                                            : snapshot.data![index].profileName,
+                                        widget.isProfileScreen
+                                            ? ssReviews.data![index].filmName
+                                            : ssReviews
+                                                .data![index].profileName,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 20,
@@ -103,7 +98,7 @@ class ReviewList extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                              snapshot.data![index].rating
+                                              ssReviews.data![index].rating
                                                   .toString(),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w700,
@@ -117,7 +112,7 @@ class ReviewList extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                  snapshot.data![index].review,
+                                  ssReviews.data![index].review,
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
@@ -137,7 +132,7 @@ class ReviewList extends StatelessWidget {
           );
         }
         return Center(
-          child: isProfileScreen
+          child: widget.isProfileScreen
               ? const Text("Faça uma review e ela aparecá aqui :)")
               : const Text("Esse filme ainda não possui uma review :("),
         );

@@ -2,8 +2,6 @@ import 'package:cinegraw_app/applications/implementation/profile_app.dart';
 import 'package:cinegraw_app/models/profile.dart';
 import 'package:cinegraw_app/screens/components/review_list.dart';
 import 'package:cinegraw_app/config/utilities.dart';
-import 'package:cinegraw_app/models/profile.dart';
-import 'package:cinegraw_app/models/review.dart';
 import 'package:flutter/material.dart';
 import 'package:cinegraw_app/utility/appthemes.dart' as theme;
 

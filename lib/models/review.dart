@@ -3,7 +3,7 @@ class Review {
   final int filmId;
   final String profileId;
   String review;
-  double rating;
+  int rating;
   DateTime reviewDate;
   String filmName;
   String profileName;
