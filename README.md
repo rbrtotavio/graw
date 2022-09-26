@@ -4,13 +4,8 @@ A Flutter project for the CineGRAW Mobile Application
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The CineGraw app is a review app in which the main mechanics of interaction between users are
+their reviews and analyzes of the most diverse cinematographic contents, with the aim of sharing and
+disseminate knowledge of several films and/or series from a variety of genres, from classic to modern.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To watch presentation video [click here (PT-BR)](https://youtu.be/XskX2gZWTiY)
